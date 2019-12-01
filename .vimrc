@@ -1,8 +1,5 @@
 let mapleader = " "
 
-set backupdir=.backup/,~/.backup/,/tmp//
-set directory=.swp/,~/.swp/,/tmp//
-set undodir=.undo/,~/.undo/,/tmp//
 
 set undofile
 
@@ -35,6 +32,8 @@ packadd! matchit
 colorscheme solarized
 
 " General settings
+nnoremap <CR>s <Esc>:w
+inoremap <CR>s <Esc>:wi
 nnoremap <CR> o<ESC>k
 nnoremap <Bs> O<ESC>j
 nnoremap <Up> ddkP
