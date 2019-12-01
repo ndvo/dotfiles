@@ -1,22 +1,29 @@
 
 " Chords
 "" Especiais
-Arpeggio inoremap c<space> ção
-Arpeggio inoremap t<space> mente
-Arpeggio inoremap d<space> dade
-Arpeggio inoremap n<space> ndo
-Arpeggio inoremap ql<space> qual
+Arpeggio inoremap ca<space> ção
+Arpeggio inoremap cs<space> ções
+Arpeggio inoremap de<space> dade
+Arpeggio inoremap fo<space> falso 
+Arpeggio inoremap nd<space> ndo
+Arpeggio inoremap qe<space> o que  
 Arpeggio inoremap qe<space> que 
+Arpeggio inoremap ql<space> qual
+Arpeggio inoremap qm<space> quem  
+Arpeggio inoremap qo<space> quando  
+Arpeggio inoremap ta<space> está 
+Arpeggio inoremap te<space> mente
+Arpeggio inoremap ve<space> verdade 
 
 
 "" Cardinais
-Arpeggio inoremap 1<space> primeir
-Arpeggio inoremap 2<space> segund
-Arpeggio inoremap 3<space> terceir
-Arpeggio inoremap 4<space> quart
-Arpeggio inoremap 5<space> quint
-Arpeggio inoremap 6<space> sext
-Arpeggio inoremap 7<space> sétim
-Arpeggio inoremap 8<space> oitav
-Arpeggio inoremap 9<space> non
+Arpeggio inoremap 1o<space> primeir
+Arpeggio inoremap 2o<space> segund
+Arpeggio inoremap 3o<space> terceir
+Arpeggio inoremap 4o<space> quart
+Arpeggio inoremap 5o<space> quint
+Arpeggio inoremap 6o<space> sext
+Arpeggio inoremap 7o<space> sétim
+Arpeggio inoremap 8o<space> oitav
+Arpeggio inoremap 9o<space> non
 Arpeggio inoremap 10<space> décim
