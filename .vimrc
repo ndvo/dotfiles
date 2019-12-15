@@ -36,8 +36,6 @@ nnoremap <CR>s <Esc>:w
 inoremap <CR>s <Esc>:wi
 nnoremap <CR> o<ESC>k
 nnoremap <Bs> O<ESC>j
-nnoremap <Up> ddkP
-nnoremap <Down> ddp
 " Easy Tabs
 nnoremap <Right> gt
 nnoremap <Left> gT
