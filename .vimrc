@@ -1,4 +1,5 @@
 let mapleader = " "
+let maplocaleader = "\\"
 
 
 set undofile
@@ -20,30 +21,40 @@ filetype plugin indent on
 "au InsertEnter * let updaterestore=&updatetime | set updatetime=2000
 "au InsertLeave * let &updatetime=updaterestore
 
+" Line numbers
 set number
 set relativenumber
+
 set autoindent
 set smartindent
 set showcmd
-set scrolloff=10
+
+" Show lines above and bellow current line
+set scrolloff=15
 set background=dark
 set backspace=eol,start,indent
 packadd! matchit
 colorscheme solarized
 
 " General settings
-nnoremap <CR>s <Esc>:w
-inoremap <CR>s <Esc>:wi
-nnoremap <CR> o<ESC>k
-nnoremap <Bs> O<ESC>j
+nnoremap <leader>ve :vsplit $MYVIMRC<cr>
+nnoremap <leader>vs :source $MYVIMRC<cr>
+
 " Easy Tabs
 nnoremap <Right> gt
 nnoremap <Left> gT
+
 " Easy Buffers
 set hidden
 nnoremap <PageUp> :bprevious<CR>
 nnoremap <PageDown> :bnext<CR>
 
+" Surround
+vnoremap <leader>s" <esc>`<i"<esc>`>la"
+vnoremap <leader>s' <esc>`<i'<esc>`>la'
+" Replace surround
+vnoremap <leader>r" <esc>`<r"<esc>`>hr"
+vnoremap <leader>r' <esc>`<hr'<esc>`>lr'
 
 
 " Python files
