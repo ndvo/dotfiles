@@ -1,4 +1,5 @@
 " Set leaders
+" Vamos ver o que da
 let mapleader = " "
 let maplocaleader = "\\"
 
@@ -18,7 +19,7 @@ set nocompatible
 filetype plugin indent on
 
 " NativoBr mapping to normal mode
-:inoremap lh <esc>
+:inoremap <leader><leader> <esc>
 
 " Line numbers
 set number
@@ -136,4 +137,5 @@ augroup END
 
 augroup customNerdTree
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+	autocmd FileType * nnoremap <C-n> :NERDTreeToggle<cr>
 augroup END
