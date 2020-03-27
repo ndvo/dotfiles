@@ -18,7 +18,6 @@ set nocompatible
 
 filetype plugin indent on
 
-" NativoBr mapping to normal mode
 :inoremap <leader><leader> <esc>
 
 " Line numbers
@@ -37,17 +36,19 @@ set backspace=eol,start,indent
 packadd! matchit
 colorscheme solarized
 
-augroup customJS
+" Vimscript file settings ------------------- {{{
+augroup customVim
 	autocmd!
-
-	autocmd FileType javascript,js onoremap if :<c-u>normal! ?function<cr>f{vi{
-	autocmd FileType javascript,js onoremap af :<c-u>normal! ?function<cr>f{va{
+	autocmd FileType vim set foldlevelstart=0
+	autocmd FileType vim setlocal foldmethod=marker
 augroup END
+" }}}
 
+
+" General settings -------------------{{{
 augroup customGeneralSettings
 	autocmd!
 
-	" General settings
 	autocmd FileType * nnoremap <leader>ve :vsplit $MYVIMRC<cr>
 	autocmd FileType * nnoremap <leader>vs :source $MYVIMRC<cr>
 
@@ -66,51 +67,76 @@ augroup customGeneralSettings
 	" Replace surround
 	autocmd FileType * vnoremap <leader>r" <esc>`<r"<esc>`>hr"
 	autocmd FileType * vnoremap <leader>r' <esc>`<hr'<esc>`>lr'
-
 augroup END
+" }}}
 
+" Tabstop -------------- {{{
 augroup customStartup
 	autocmd!
 	
-
-	" Python files
+	" 4 spaces languages
 	autocmd FileType python,java set tabstop=4|set shiftwidth=4|set noexpandtab
 	au BufEnter *.py,*java set ai sw=4 ts=4  et 
+  
+	" 2 spaces languages
+	autocmd FileType php,html,js,ts,shell,dot,awkr,go set tabstop=2|set shiftwidth=2|set noexpandtab
+	au BufEnter *.php,*.html,*.js,*.ts,*.sh,*.dot,*.awk,*.go set ai sw=2 ts=2 et
+augroup END
+" }}}
 
-	" PHP files
-	autocmd FileType php,html,js,ts,shell,dot,awkr set tabstop=2|set shiftwidth=2|set noexpandtab
-	au BufEnter *.php,*.html,*.js,*.ts,*.sh,*.dot,*.awk set ai sw=2 ts=2 et
-
-	" Graphviz dot files
-	autocmd FileType dot nnoremap <buffer> <leader>cl osubgraph cluster_NOME{<CR>}<ESC>^kfN
-
-	" Go files
-	autocmd FileType go set tabstop=2|set shiftwidth=2|set noexpandtab
-	au BufEnter *.go set ai sw=2 ts=2 et
-	autocmd FileType dot map <buffer> <leader>cl osubgraph cluster_NOME{<CR>}<ESC>^k
-
-	" Javascript
-	autocmd FileType javascript  nnoremap <leader>dg yiWoconsole.debug()<esc>P
-
-	" Importing libraries
+" Importing libraries ----------- {{{
+augroup customImport
 	autocmd FileType go nnoremap <buffer> <leader>imp Oimport (<CR>)<ESC>hi""<ESC>h
 	autocmd FileType ts nnoremap <buffer> <leader>imp  Oimport {  } from '';<ESC>F{lli
+augroup END
+" }}}
 
+" Graphviz dot files --------------- {{{
+augroup custoDotFiles
+	autocmd FileType dot nnoremap <buffer> <leader>cl osubgraph cluster_NOME{<CR>}<ESC>^kfN
+augroup END
+" }}}
 
-	" Creating functions
+" Javascript --------------- {{{
+augroup customJS
+	autocmd!
+  " operation inside previous (including current) function
+	autocmd FileType * onoremap if :<c-u>execute "normal! ?^\[ \t\]*function\rf{:nohlsearch\rvi{"<cr>
+  " operation inside next and previous parenthesis and brackets
+	autocmd FileType * onoremap i( :<c-u>execute "normal! ?(\rvi)"<cr>
+	autocmd FileType * onoremap i) :<c-u>execute "normal! /(\rvi)"<cr>
+	autocmd FileType * onoremap i[ :<c-u>execute "normal! ?[\rvi]"<cr>
+	autocmd FileType * onoremap i] :<c-u>execute "normal! /[\rvi]"<cr>
+  " console.debugs the Word under cursor
+	autocmd FileType javascript  nnoremap <leader>dg yiWoconsole.debug()<esc>P
+augroup END
+" }}}
+
+" Creating functions ------------ {{{
+augroup customFunctions
+  " Declare function
 	autocmd FileType go nnoremap <buffer> <leader>f ofunc (r *Receiver) name (p Parameter) (r Return){<CR>}<ESC>k^f(l
 	autocmd FileType python nnoremap <buffer> <leader>f odef name(parameter):<CR>pass<ESC>k^fn
 	autocmd FileType javascript,js nnoremap <buffer> <leader>f ofunction name(parameter){<CR>}<ESC>kf l
 	autocmd FileType php nnoremap <buffer> <leader>f ofunction <C-R>=expand("%:t:r")<CR>_Name($parameter){<CR>}<ESC>k$F_l
-	" Abbreviations
+	" Abbreviation for return
 	autocmd FileType go,php,python,java,js,typescript,javascript nnoremap <buffer> <leader>r oreturn 
+" }}}
 
-	" Creating if empty
+" If empty ----------------- {{{
+augroup custom ifEmpty
+  " Create if empty then
 	autocmd FileType php nnoremap <buffer> <leader>ifem iif (empty()){<CR>}<ESC>k^f(f(a
+  " Create equals if x not empty
 	autocmd FileType php nnoremap <buffer> <leader>toem ^f=wyt;iempty(<ESC>pa) ? "" : <ESC>
+
+	autocmd FileType java nnoremap <buffer> <leader>ifem iif (PLACEHOLDER == null){<CR>}<ESC>k^fPciw
+	autocmd FileType java nnoremap <buffer> <leader>toem ^f=wyt;Pa == null ? "" : 
 augroup END
+" }}}
 
 
+" Markup ----------------- {{{
 augroup customMarkup
 	" HTML Files
 	"
@@ -134,6 +160,7 @@ augroup customMarkup
 	autocmd FileType html map <buffer> <leader>stsec I<section><ESC>A</section><ESC>
 	autocmd FileType html map <buffer> <leader>stli I<li><ESC>A</li><ESC>
 augroup END
+" }}}
 
 augroup customNerdTree
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
