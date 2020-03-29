@@ -102,13 +102,9 @@ augroup customJS
 	autocmd!
   " operation inside previous (including current) function
 	autocmd FileType * onoremap if :<c-u>execute "normal! ?^\[ \t\]*function\rf{:nohlsearch\rvi{"<cr>
-  " operation inside next and previous parenthesis and brackets
-	autocmd FileType * onoremap i( :<c-u>execute "normal! ?(\rvi)"<cr>
-	autocmd FileType * onoremap i) :<c-u>execute "normal! /(\rvi)"<cr>
-	autocmd FileType * onoremap i[ :<c-u>execute "normal! ?[\rvi]"<cr>
-	autocmd FileType * onoremap i] :<c-u>execute "normal! /[\rvi]"<cr>
   " console.debugs the Word under cursor
 	autocmd FileType javascript  nnoremap <leader>dg yiWoconsole.debug()<esc>P
+	autocmd FileType typescript  nnoremap <leader>dg yiWoconsole.debug()<esc>P
 augroup END
 " }}}
 
