@@ -1,7 +1,19 @@
+set hidden
 " Set leaders
 " Vamos ver o que da
 let mapleader = " "
 let maplocaleader = "\\"
+
+" ALE ------------ {{{
+" Completion
+let g:ale_completion_enabled = 1
+let g:ale_completion_tsserver_autoimport = 1
+set omnifunc=ale#completion#OmniFunc
+" Run linting only on file save and file enter
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+" }}}
+
 
 " Preserve undo history 
 set undofile
@@ -57,7 +69,6 @@ augroup customGeneralSettings
 	autocmd FileType * nnoremap <Left> gT
 
 	" Easy Buffers
-	autocmd FileType * set hidden
 	autocmd FileType * nnoremap <PageUp> :bprevious<CR>
 	autocmd FileType * nnoremap <PageDown> :bnext<CR>
 
