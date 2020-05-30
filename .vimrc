@@ -48,7 +48,7 @@ set smartindent
 set showcmd
 
 " Show lines above and bellow current line
-set scrolloff=15
+set scrolloff=5
 set background=dark
 set backspace=eol,start,indent
 
