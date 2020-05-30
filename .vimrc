@@ -123,6 +123,7 @@ augroup customJS
   " console.debugs the Word under cursor
 	autocmd FileType javascript  nnoremap <leader>dg yiWoconsole.debug()<esc>P
 	autocmd FileType typescript  nnoremap <leader>dg yiWoconsole.debug()<esc>P
+
 augroup END
 " }}}
 
@@ -155,24 +156,24 @@ augroup customMarkup
 	" HTML Files
 	"
 	" Break up a tag
-	autocmd FileType html let @b='cit'
+	autocmd FileType html nnoremap <buffer> <leader>brt cit<CR><CR><ESC><UP>PVat=
 
 	" Creating lists
 	" 	unordered
-	autocmd FileType tex,latex map <buffer> <leader>lu o\begin{itemize}<CR>\item<CR>\end{itemize}<ESC>k
-	autocmd FileType html map <buffer> <leader>lu o<ul><CR><li></li><CR></ul><ESC>k
+	autocmd FileType tex,latex nnoremap <buffer> <leader>lu o\begin{itemize}<CR>\item<CR>\end{itemize}<ESC>k
+	autocmd FileType html nnoremap <buffer> <leader>lu o<ul><CR><li></li><CR></ul><ESC>k
 	" 	ordered
-	autocmd FileType tex,latex map <buffer> <leader>lo o\begin{enumerate}<CR>\item<CR>\end{enumerate}<ESC>k
+	autocmd FileType tex,latex nnoremap <buffer> <leader>lo o\begin{enumerate}<CR>\item<CR>\end{enumerate}<ESC>k
 	autocmd FileType html map <buffer> <leader>lo o<ol><CR><li></li><CR></ol><ESC>k
 
 	" Surrounding with tags
-	autocmd FileType html map <buffer> <leader>stp I<p><ESC>A</p><ESC>
-	autocmd FileType html map <buffer> <leader>stdt I<dt><ESC>A</dt><ESC>
-	autocmd FileType html map <buffer> <leader>stdd I<dd><ESC>A</dd><ESC>
-	autocmd FileType html map <buffer> <leader>stdiv I<div><ESC>A</div><ESC>
-	autocmd FileType html map <buffer> <leader>start I<article><ESC>A</article><ESC>
-	autocmd FileType html map <buffer> <leader>stsec I<section><ESC>A</section><ESC>
-	autocmd FileType html map <buffer> <leader>stli I<li><ESC>A</li><ESC>
+	autocmd FileType html nnoremap <buffer> <leader>stp I<p><ESC>A</p><ESC>
+	autocmd FileType html nnoremap <buffer> <leader>stdt I<dt><ESC>A</dt><ESC>
+	autocmd FileType html nnoremap <buffer> <leader>stdd I<dd><ESC>A</dd><ESC>
+	autocmd FileType html nnoremap <buffer> <leader>stdiv I<div><ESC>A</div><ESC>
+	autocmd FileType html nnoremap <buffer> <leader>start I<article><ESC>A</article><ESC>
+	autocmd FileType html nnoremap <buffer> <leader>stsec I<section><ESC>A</section><ESC>
+	autocmd FileType html nnoremap <buffer> <leader>stli I<li><ESC>A</li><ESC>
 augroup END
 " }}}
 
@@ -180,3 +181,5 @@ augroup customNerdTree
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 	autocmd FileType * nnoremap <C-n> :NERDTreeToggle<cr>
 augroup END
+
+
