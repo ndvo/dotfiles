@@ -1,4 +1,5 @@
 set hidden
+set visualbell
 " Set leaders
 " Vamos ver o que da
 let mapleader = " "
