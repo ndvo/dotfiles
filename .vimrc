@@ -60,7 +60,6 @@ set background=dark
 set backspace=eol,start,indent
 
 packadd! matchit
-colorscheme solarized
 
 " Vimscript file settings ------------------- {{{
 augroup customVim
@@ -187,3 +186,7 @@ augroup customNerdTree
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 	autocmd FileType * nnoremap <C-n> :NERDTreeToggle<cr>
 augroup END
+
+packadd! dracula
+colorscheme dracula
+"colorscheme solarized
