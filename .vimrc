@@ -98,8 +98,8 @@ augroup customStartup
 	au BufEnter *.py,*java set ai sw=4 ts=4  et 
   
 	" 2 spaces languages
-	autocmd FileType php,html,js,ts,shell,dot,awkr,go set tabstop=2|set shiftwidth=2|set noexpandtab
-	au BufEnter *.php,*.html,*.js,*.ts,*.sh,*.dot,*.awk,*.go set ai sw=2 ts=2 et
+	autocmd FileType njk,sql,cpp,php,html,js,ts,shell,dot,awkr set tabstop=2|set shiftwidth=2|set noexpandtab
+	au BufEnter *.njk,*.sql,*.cpp,*.c++,*.php,*.html,*.js,*.ts,*.sh,*.dot,*.awk set ai sw=2 ts=2 et
 augroup END
 " }}}
 
