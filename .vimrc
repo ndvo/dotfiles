@@ -16,6 +16,7 @@ let maplocaleader = "\\"
 let g:ale_completion_enabled = 1
 let g:ale_completion_tsserver_autoimport = 1
 set omnifunc=ale#completion#OmniFunc
+"set omnifunc=syntaxcomplete#Complete
 " Run linting only on file save and file enter
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
