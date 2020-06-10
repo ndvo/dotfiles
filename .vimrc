@@ -172,13 +172,14 @@ augroup customMarkup
 	autocmd FileType html map <buffer> <leader>lo o<ol><CR><li></li><CR></ol><ESC>k
 
 	" Surrounding with tags
-	autocmd FileType html map <buffer> <leader>stp I<p><ESC>A</p><ESC>
-	autocmd FileType html map <buffer> <leader>stdt I<dt><ESC>A</dt><ESC>
-	autocmd FileType html map <buffer> <leader>stdd I<dd><ESC>A</dd><ESC>
-	autocmd FileType html map <buffer> <leader>stdiv I<div><ESC>A</div><ESC>
-	autocmd FileType html map <buffer> <leader>start I<article><ESC>A</article><ESC>
-	autocmd FileType html map <buffer> <leader>stsec I<section><ESC>A</section><ESC>
-	autocmd FileType html map <buffer> <leader>stli I<li><ESC>A</li><ESC>
+	autocmd FileType html nnoremap <buffer> <leader>stp :call SurroundLineWithTag('p')<cr>;
+	autocmd FileType html nnoremap <buffer> <leader>stdt :call SurroundLineWithTag('dt')<cr>;
+	autocmd FileType html nnoremap <buffer> <leader>stdd :call SurroundLineWithTag('dd')<cr>;
+	autocmd FileType html nnoremap <buffer> <leader>stdiv :call SurroundLineWithTag('div')<cr>;
+	autocmd FileType html nnoremap <buffer> <leader>start :call SurroundLineWithTag('article')<cr>;
+	autocmd FileType html nnoremap <buffer> <leader>stsec :call SurroundLineWithTag('section')<cr>;
+	autocmd FileType html nnoremap <buffer> <leader>stli :call SurroundLineWithTag('li')<cr>;
+	autocmd FileType html nnoremap <buffer> <leader>sth1 :call SurroundLineWithTag('h1')<cr>;
 augroup END
 " }}}
 
@@ -186,6 +187,24 @@ augroup customNerdTree
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 	autocmd FileType * nnoremap <C-n> :NERDTreeToggle<cr>
 augroup END
+
+function! SurroundLineWithTag(tag)
+  execute "normal! I<" . a:tag . ">"
+  execute "normal! A</" . a:tag .">"
+endfunction
+
+function! MoveEm(position)
+  let saved_cursor = getpos(".")
+  let previous_blank_line = search('^$', 'bn')
+  let target_line = previous_blank_line + a:position -1
+  execute 'move ' . target_line
+  call setpos('.', saved_cursor)
+endfunction
+
+for position in range(1, 9)
+  execute 'nnoremap m' . position . ' :call MoveEm('. position . ')<cr>'
+endfor
+
 
 packadd! dracula
 colorscheme dracula
