@@ -4,6 +4,13 @@ set hidden
 let mapleader = " "
 let maplocaleader = "\\"
 
+" Basic remappings {{{--------
+" Easier Omnicomplete Ctrl x
+:inoremap <C-Space> <C-x>
+
+" }}}
+
+
 " ALE ------------ {{{
 " Completion
 let g:ale_completion_enabled = 1
