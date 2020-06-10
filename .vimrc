@@ -23,6 +23,11 @@ let g:ale_lint_on_insert_leave = 0
 " }}}
 
 
+
+set textwidth=80
+set colorcolumn=+10
+set cursorline
+
 " Preserve undo history 
 set undofile
 
@@ -32,6 +37,7 @@ silent! helptags ALL  " Load help files for all plugins.
 if &t_Co > 2 || has("gui_running")
   syntax on
 endif
+set t_Co=256
 
 set mouse=a
 set nocompatible
