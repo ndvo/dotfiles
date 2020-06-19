@@ -1,7 +1,6 @@
 set hidden
 set visualbell
 " Set leaders
-" Vamos ver o que da
 let mapleader = " "
 let maplocaleader = "\\"
 
@@ -28,9 +27,12 @@ let g:ale_fixers = {
 
 
 
-set textwidth=80
+set wrap
+set linebreak
+set textwidth=60
 set colorcolumn=+10
 set cursorline
+set formatoptions-=t
 
 " Preserve undo history 
 set undofile
@@ -182,6 +184,7 @@ augroup customMarkup
 	autocmd FileType html nnoremap <buffer> <leader>stp :call SurroundLineWithTag('p')<cr>;
 	autocmd FileType html nnoremap <buffer> <leader>stdt :call SurroundLineWithTag('dt')<cr>;
 	autocmd FileType html nnoremap <buffer> <leader>stdd :call SurroundLineWithTag('dd')<cr>;
+	autocmd FileType html nnoremap <buffer> <leader>sttd :call SurroundLineWithTag('td')<cr>;
 	autocmd FileType html nnoremap <buffer> <leader>stdiv :call SurroundLineWithTag('div')<cr>;
 	autocmd FileType html nnoremap <buffer> <leader>start :call SurroundLineWithTag('article')<cr>;
 	autocmd FileType html nnoremap <buffer> <leader>stsec :call SurroundLineWithTag('section')<cr>;
