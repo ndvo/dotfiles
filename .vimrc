@@ -1,6 +1,7 @@
 set hidden
-
+set visualbell
 " Set leaders
+" Vamos ver o que da
 let mapleader = " "
 let maplocaleader = "\\"
 
@@ -18,8 +19,11 @@ let g:ale_completion_tsserver_autoimport = 1
 set omnifunc=ale#completion#OmniFunc
 "set omnifunc=syntaxcomplete#Complete
 " Run linting only on file save and file enter
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
+"let g:ale_lint_on_text_changed = 'never'
+"let g:ale_lint_on_insert_leave = 0
+let g:ale_fixers = {
+      \  'javascript': [ 'standard' ]
+      \}
 " }}}
 
 
@@ -37,6 +41,7 @@ silent! helptags ALL  " Load help files for all plugins.
 if &t_Co > 2 || has("gui_running")
   syntax on
 endif
+
 set t_Co=256
 
 set mouse=a
@@ -60,6 +65,7 @@ set background=dark
 set backspace=eol,start,indent
 
 packadd! matchit
+colorscheme solarized
 
 " Vimscript file settings ------------------- {{{
 augroup customVim
@@ -129,6 +135,7 @@ augroup customJS
   " console.debugs the Word under cursor
 	autocmd FileType javascript  nnoremap <leader>dg yiWoconsole.debug()<esc>P
 	autocmd FileType typescript  nnoremap <leader>dg yiWoconsole.debug()<esc>P
+
 augroup END
 " }}}
 
@@ -161,14 +168,14 @@ augroup customMarkup
 	" HTML Files
 	"
 	" Break up a tag
-	autocmd FileType html let @b='cit'
+	autocmd FileType html nnoremap <buffer> <leader>brt cit<CR><CR><ESC><UP>PVat=
 
 	" Creating lists
 	" 	unordered
-	autocmd FileType tex,latex map <buffer> <leader>lu o\begin{itemize}<CR>\item<CR>\end{itemize}<ESC>k
-	autocmd FileType html map <buffer> <leader>lu o<ul><CR><li></li><CR></ul><ESC>k
+	autocmd FileType tex,latex nnoremap <buffer> <leader>lu o\begin{itemize}<CR>\item<CR>\end{itemize}<ESC>k
+	autocmd FileType html nnoremap <buffer> <leader>lu o<ul><CR><li></li><CR></ul><ESC>k
 	" 	ordered
-	autocmd FileType tex,latex map <buffer> <leader>lo o\begin{enumerate}<CR>\item<CR>\end{enumerate}<ESC>k
+	autocmd FileType tex,latex nnoremap <buffer> <leader>lo o\begin{enumerate}<CR>\item<CR>\end{enumerate}<ESC>k
 	autocmd FileType html map <buffer> <leader>lo o<ol><CR><li></li><CR></ol><ESC>k
 
 	" Surrounding with tags
@@ -188,24 +195,4 @@ augroup customNerdTree
 	autocmd FileType * nnoremap <C-n> :NERDTreeToggle<cr>
 augroup END
 
-function! SurroundLineWithTag(tag)
-  execute "normal! I<" . a:tag . ">"
-  execute "normal! A</" . a:tag .">"
-endfunction
 
-function! MoveEm(position)
-  let saved_cursor = getpos(".")
-  let previous_blank_line = search('^$', 'bn')
-  let target_line = previous_blank_line + a:position -1
-  execute 'move ' . target_line
-  call setpos('.', saved_cursor)
-endfunction
-
-for position in range(1, 9)
-  execute 'nnoremap m' . position . ' :call MoveEm('. position . ')<cr>'
-endfor
-
-
-packadd! dracula
-colorscheme dracula
-"colorscheme solarized
