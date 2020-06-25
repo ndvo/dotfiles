@@ -1,0 +1,65 @@
+How can I network two Ubuntu computers, so that they can "see" each other at an IP address?
+
+command line example cause it is so quick and simple.
+
+On newer version of Linux the network card names have changed. wlp2s0, enp1s0. Look for something with similar names to en being ethernet / wl being wireless.
+
+$ ip a l
+2: enp1s0: 
+3: wlp2s0: 
+You would need to update the below command to use different dev enp1s0 etc.
+
+On computer A
+
+sudo ip ad add 10.0.0.10/24 dev eth0
+
+On computer B
+
+sudo ip ad add 10.0.0.20/24 dev eth0
+
+To test from A to B
+
+ping 10.0.0.20
+
+To test from B to A
+
+ping 10.0.0.10
+
+Provided that a cable is connecting the two computers and the network interface on both of them is enabled and called eth0 this should work. The rest of this post is to help trouble shoot if there are problems.
+
+10.0.0.xx is the ip address of the computers. /24 tells the computers that the last 8 bits of the 32 bit ip address can change. It is similar to saying netmask 255.255.255.0. This set ups the routes that the computer / network has available to it.
+
+you should see some thing similar to this using
+
+ip route
+10.0.0.0/24 dev eth0 proto kernel scope link src 10.0.0.20
+
+If you don't see some thing like above in the route table but see some thing like this when you use ip ad. You need add the address again using /24 subnet syntax.
+
+ip ad
+inet 172.16.1.40/32 scope global eth0
+
+Notice the /32 which effectively is saying that is the only computer that exists on a network of one computer. Which is its self. Net mask 255.255.255.255. Hence no routes and the network does not work.
+
+To find out which network interfaces you have and which are working
+
+# ip ad
+1: lo:  mtu 16436 qdisc noqueue 
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0:  mtu 1500 qdisc pfifo_fast qlen 1000
+    link/ether 46:fd:51:f9:f5:2e brd ff:ff:ff:ff:ff:ff
+    inet 172.16.0.186/24 brd 172.16.0.255 scope global eth0
+    inet 172.16.1.10/24 scope global eth0
+    inet 172.16.1.40/32 scope global eth0
+    inet6 fe80::44fd:51ff:fef9:f52e/64 scope link 
+       valid_lft forever preferred_lft forever
+3: eth1:  mtu 1500 qdisc noop qlen 1000
+    link/ether 72:3f:92:eb:a4:cc brd ff:ff:ff:ff:ff:ff
+If you need to delete an ip address cause you made a mistake
+
+ip ad del 10.0.0.40/32 dev eth0 ip ad del 10.0.0.40/24 dev eth0
+
+This will remove the routes as well as the ip address.
