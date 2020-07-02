@@ -7,7 +7,10 @@ let maplocaleader = "\\"
 " Basic remappings {{{--------
 " Easier Omnicomplete Ctrl x
 :inoremap <C-Space> <C-x>
-
+" Easy save
+nnoremap <F2> :w<cr>
+" Easy ALE
+nnoremap <F3> :ALE
 " }}}
 
 
@@ -21,12 +24,18 @@ set omnifunc=ale#completion#OmniFunc
 " Run linting only on fie save and file enter
 "let g:ale_lint_on_text_changed = 'never'
 "let g:ale_lint_on_insert_leave = 0
-"let g:ale_fixers = {
-"      \  'javascript': [ 'standard' ]
-"      \}
-" }}}
+let g:ale_linters = {
+      \  'typescript': ['eslint', 'tsserver'],
+      \  'javascript': [ 'standard' ] 
+      \}
+ "}}}
+let g:ale_fixers = {
+      \  'typescript': ['eslint', 'tslint', 'typecheck', 'remove_trailing_lines', 'trim_whitespace'],
+      \  'javascript': [ 'standard' ] 
+      \}
+ "}}}
 
-
+inoremap ć ç
 
 set wrap
 set linebreak
@@ -198,3 +207,5 @@ augroup customNerdTree
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 	autocmd FileType * nnoremap <C-n> :NERDTreeToggle<cr>
 augroup END
+
+set rtp+=~/app/tabnine-vim
