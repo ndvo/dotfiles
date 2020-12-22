@@ -172,13 +172,16 @@ augroup END
 " Creating functions ------------ {{{
 augroup customFunctions
   " Declare function
-	autocmd FileType go nnoremap <buffer> <leader>f ofunc (r *Receiver) name (p Parameter) (r Return){<CR>}<ESC>k^f(l
-	autocmd FileType python nnoremap <buffer> <leader>f odef name(parameter):<CR>pass<ESC>k^fn
-	autocmd FileType javascript,js nnoremap <buffer> <leader>f ofunction name(parameter){<CR>}<ESC>kf l
-	autocmd FileType php nnoremap <buffer> <leader>f ofunction <C-R>=expand("%:t:r")<CR>_Name($parameter){<CR>}<ESC>k$F_l
-	" Abbreviation for return
-	autocmd FileType go,php,python,java,js,typescript,javascript nnoremap <buffer> <leader>r oreturn 
-" }}}
+  autocmd FileType go nnoremap <buffer> <leader>f ofunc (r *Receiver) name (p Parameter) (r Return){<CR>}<ESC>k^f(l
+  autocmd FileType python nnoremap <buffer> <leader>f odef name(parameter):<CR>pass<ESC>k^fn
+  autocmd FileType javascript,js nnoremap <buffer> <leader>f ofunction name(parameter){<CR>}<ESC>kf l
+  autocmd FileType javascript,js nnoremap <buffer> <leader>F oconst name = (parameter) => {<CR>}<ESC>kf l
+  autocmd FileType javascript,js nnoremap <buffer> <leader>l  function (parameter){ }<ESC>F(l
+  autocmd FileType javascript,js nnoremap <buffer> <leader>L  i (parameter) => { }<ESC>F(l
+  autocmd FileType php nnoremap <buffer> <leader>f ofunction <C-R>=expand("%:t:r")<CR>_Name($parameter){<CR>}<ESC>k$F_l
+  " Abbreviation for return
+  autocmd FileType go,php,python,java,js,typescript,javascript nnoremap <buffer> <leader>r oreturn 
+  " }}}
 
 " If empty ----------------- {{{
 augroup custom ifEmpty
