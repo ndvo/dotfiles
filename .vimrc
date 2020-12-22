@@ -104,50 +104,46 @@ augroup END
 
 " General settings -------------------{{{
 augroup customGeneralSettings
-	autocmd!
-
-	autocmd FileType * nnoremap <leader>ve :vsplit $MYVIMRC<cr>
-	autocmd FileType * nnoremap <leader>vs :source $MYVIMRC<cr>
-
-	" Easy Tabs
-	autocmd FileType * nnoremap <Right> gt
-	autocmd FileType * nnoremap <Left> gT
-
-	" Easy Buffers
-	autocmd FileType * nnoremap <PageUp> :bprevious<CR>
-	autocmd FileType * nnoremap <PageDown> :bnext<CR>
-
-	" Surround
-	autocmd FileType * vnoremap <leader>s" <esc>`<i"<esc>`>la"
-	autocmd FileType * vnoremap <leader>s' <esc>`<i'<esc>`>la'
-	" Replace surround
-	autocmd FileType * vnoremap <leader>r" <esc>`<r"<esc>`>hr"
-	autocmd FileType * vnoremap <leader>r' <esc>`<hr'<esc>`>lr'
+  autocmd!
+  " Edit/load vimrc
+  autocmd FileType * nnoremap <leader>ve :vsplit $MYVIMRC<cr>
+  autocmd FileType * nnoremap <leader>vs :source $MYVIMRC<cr>
+  " Easy Tabs
+  autocmd FileType * nnoremap <Right> gt
+  autocmd FileType * nnoremap <Left> gT
+  " Easy Buffers
+  autocmd FileType * nnoremap <PageUp> :bprevious<CR>
+  autocmd FileType * nnoremap <PageDown> :bnext<CR>
+  " Surround
+  autocmd FileType * vnoremap <leader>s" <esc>`<i"<esc>`>la"
+  autocmd FileType * vnoremap <leader>s' <esc>`<i'<esc>`>la'
+  " Replace surround
+  autocmd FileType * vnoremap <leader>r" <esc>`<r"<esc>`>hr"
+  autocmd FileType * vnoremap <leader>r' <esc>`<hr'<esc>`>lr'
 augroup END
 " }}}
 
 " Tabstop -------------- {{{
+" General tabstop settings
+set autoindent
 set tabstop=2
 set shiftwidth=2
 set expandtab
 augroup customStartup
-	autocmd!
-
-	
-	" 4 spaces languages
-	autocmd FileType python,java set tabstop=4|set shiftwidth=4|set noexpandtab
-	au BufEnter *.py,*java set ai sw=4 ts=4  et 
-  
-	" 2 spaces languages
-	autocmd FileType njk,sql,cpp,php,html,js,ts,shell,dot,awkr set tabstop=2|set shiftwidth=2|set noexpandtab
-	au BufEnter *.njk,*.sql,*.cpp,*.c++,*.php,*.html,*.js,*.ts,*.sh,*.dot,*.awk set ai sw=2 ts=2 et
+  autocmd!
+  " 4 spaces languages
+  autocmd FileType python,java set tabstop=4|set shiftwidth=4|set noexpandtab
+  au BufEnter *.py,*java set ai sw=4 ts=4  et 
+  " 2 spaces languages
+  autocmd FileType njk,sql,cpp,php,html,js,ts,shell,dot,awkr set tabstop=2|set shiftwidth=2|set noexpandtab
+  au BufEnter *.njk,*.sql,*.cpp,*.c++,*.php,*.html,*.js,*.ts,*.sh,*.dot,*.awk set ai sw=2 ts=2 et
 augroup END
 " }}}
 
 " Importing libraries ----------- {{{
 augroup customImport
-	autocmd FileType go nnoremap <buffer> <leader>imp Oimport (<CR>)<ESC>hi""<ESC>h
-	autocmd FileType ts nnoremap <buffer> <leader>imp  Oimport {  } from '';<ESC>F{lli
+  autocmd FileType go nnoremap <buffer> <leader>imp Oimport (<CR>)<ESC>hi""<ESC>h
+  autocmd FileType ts nnoremap <buffer> <leader>imp Oimport {  } from '';<ESC>F{lli
 augroup END
 " }}}
 
@@ -174,6 +170,7 @@ augroup customFunctions
   " Declare function
   autocmd FileType go nnoremap <buffer> <leader>f ofunc (r *Receiver) name (p Parameter) (r Return){<CR>}<ESC>k^f(l
   autocmd FileType python nnoremap <buffer> <leader>f odef name(parameter):<CR>pass<ESC>k^fn
+  autocmd FileType python nnoremap <buffer> <leader>l  lambda x: x<ESC>
   autocmd FileType javascript,js nnoremap <buffer> <leader>f ofunction name(parameter){<CR>}<ESC>kf l
   autocmd FileType javascript,js nnoremap <buffer> <leader>F oconst name = (parameter) => {<CR>}<ESC>kf l
   autocmd FileType javascript,js nnoremap <buffer> <leader>l  function (parameter){ }<ESC>F(l
@@ -181,58 +178,53 @@ augroup customFunctions
   autocmd FileType php nnoremap <buffer> <leader>f ofunction <C-R>=expand("%:t:r")<CR>_Name($parameter){<CR>}<ESC>k$F_l
   " Abbreviation for return
   autocmd FileType go,php,python,java,js,typescript,javascript nnoremap <buffer> <leader>r oreturn 
-  " }}}
+augroup END
+" }}}
 
 " If empty ----------------- {{{
 augroup custom ifEmpty
   " Create if empty then
-	autocmd FileType php nnoremap <buffer> <leader>ifem iif (empty()){<CR>}<ESC>k^f(f(a
+  autocmd FileType php nnoremap <buffer> <leader>ifem iif (empty()){<CR>}<ESC>k^f(f(a
   " Create equals if x not empty
-	autocmd FileType php nnoremap <buffer> <leader>toem ^f=wyt;iempty(<ESC>pa) ? "" : <ESC>
+  autocmd FileType php nnoremap <buffer> <leader>toem ^f=wyt;iempty(<ESC>pa) ? "" : <ESC>
 
-	autocmd FileType java nnoremap <buffer> <leader>ifem iif (PLACEHOLDER == null){<CR>}<ESC>k^fPciw
-	autocmd FileType java nnoremap <buffer> <leader>toem ^f=wyt;Pa == null ? "" : 
+  autocmd FileType java nnoremap <buffer> <leader>ifem iif (PLACEHOLDER == null){<CR>}<ESC>k^fPciw
+  autocmd FileType java nnoremap <buffer> <leader>toem ^f=wyt;Pa == null ? "" : 
 augroup END
 " }}}
 
 
 " Markup ----------------- {{{
 augroup customMarkup
-	" HTML Files
-	"
-	" Break up a tag
-	autocmd FileType html nnoremap <buffer> <leader>brt cit<CR><CR><ESC><UP>PVat=
-
-	" Creating lists
-	" 	unordered
-	autocmd FileType tex,latex nnoremap <buffer> <leader>lu o\begin{itemize}<CR>\item<CR>\end{itemize}<ESC>k
-	autocmd FileType html nnoremap <buffer> <leader>lu o<ul><CR><li></li><CR></ul><ESC>k
-	" 	ordered
-	autocmd FileType tex,latex nnoremap <buffer> <leader>lo o\begin{enumerate}<CR>\item<CR>\end{enumerate}<ESC>k
-	autocmd FileType html map <buffer> <leader>lo o<ol><CR><li></li><CR></ol><ESC>k
-
-	" Surrounding with tags
-	autocmd FileType html nnoremap <buffer> <leader>stp :call SurroundLineWithTag('p')<cr>;
-	autocmd FileType html nnoremap <buffer> <leader>stdt :call SurroundLineWithTag('dt')<cr>;
-	autocmd FileType html nnoremap <buffer> <leader>stdd :call SurroundLineWithTag('dd')<cr>;
-	autocmd FileType html nnoremap <buffer> <leader>sttd :call SurroundLineWithTag('td')<cr>;
-	autocmd FileType html nnoremap <buffer> <leader>stdiv :call SurroundLineWithTag('div')<cr>;
-	autocmd FileType html nnoremap <buffer> <leader>start :call SurroundLineWithTag('article')<cr>;
-	autocmd FileType html nnoremap <buffer> <leader>stsec :call SurroundLineWithTag('section')<cr>;
-	autocmd FileType html nnoremap <buffer> <leader>stli :call SurroundLineWithTag('li')<cr>;
-	autocmd FileType html nnoremap <buffer> <leader>sth1 :call SurroundLineWithTag('h1')<cr>;
+  " HTML Files
+  " Break up a tag
+  autocmd FileType html nnoremap <buffer> <leader>brt cit<CR><CR><ESC><UP>PVat=
+  " Creating lists
+  " - unordered
+  autocmd FileType tex,latex nnoremap <buffer> <leader>lu o\begin{itemize}<CR>\item<CR>\end{itemize}<ESC>k
+  autocmd FileType html nnoremap <buffer> <leader>lu o<ul><CR><li></li><CR></ul><ESC>k
+  " - ordered
+  autocmd FileType tex,latex nnoremap <buffer> <leader>lo o\begin{enumerate}<CR>\item<CR>\end{enumerate}<ESC>k
+  autocmd FileType html map <buffer> <leader>lo o<ol><CR><li></li><CR></ol><ESC>k
+  " Surrounding with tags
+  autocmd FileType html nnoremap <buffer> <leader>stp :call SurroundLineWithTag('p')<cr>;
+  autocmd FileType html nnoremap <buffer> <leader>stdt :call SurroundLineWithTag('dt')<cr>;
+  autocmd FileType html nnoremap <buffer> <leader>stdd :call SurroundLineWithTag('dd')<cr>;
+  autocmd FileType html nnoremap <buffer> <leader>sttd :call SurroundLineWithTag('td')<cr>;
+  autocmd FileType html nnoremap <buffer> <leader>stdiv :call SurroundLineWithTag('div')<cr>;
+  autocmd FileType html nnoremap <buffer> <leader>start :call SurroundLineWithTag('article')<cr>;
+  autocmd FileType html nnoremap <buffer> <leader>stsec :call SurroundLineWithTag('section')<cr>;
+  autocmd FileType html nnoremap <buffer> <leader>stli :call SurroundLineWithTag('li')<cr>;
+  autocmd FileType html nnoremap <buffer> <leader>sth1 :call SurroundLineWithTag('h1')<cr>;
 augroup END
 " }}}
 
 augroup customNerdTree
-	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-	autocmd FileType * nnoremap <C-n> :NERDTreeToggle<cr>
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+  autocmd FileType * nnoremap <C-n> :NERDTreeToggle<cr>
 augroup END
 
-
 au BufNewFile,BufRead *.njk,*.html,*.htm,*.shtml,*.stm set ft=jinja
-
-
 
 function! HTMLEncode()
 perl << EOF
