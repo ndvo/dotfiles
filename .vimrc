@@ -127,8 +127,12 @@ augroup END
 " }}}
 
 " Tabstop -------------- {{{
+set tabstop=2
+set shiftwidth=2
+set expandtab
 augroup customStartup
 	autocmd!
+
 	
 	" 4 spaces languages
 	autocmd FileType python,java set tabstop=4|set shiftwidth=4|set noexpandtab
@@ -222,6 +226,33 @@ augroup customNerdTree
 	autocmd FileType * nnoremap <C-n> :NERDTreeToggle<cr>
 augroup END
 
+
+au BufNewFile,BufRead *.njk,*.html,*.htm,*.shtml,*.stm set ft=jinja
+
+
+
+function! HTMLEncode()
+perl << EOF
+ use HTML::Entities;
+ @pos = $curwin->Cursor();
+ $line = $curbuf->Get($pos[0]);
+ $encvalue = encode_entities($line);
+ $curbuf->Set($pos[0],$encvalue)
+EOF
+endfunction
+
+function! HTMLDecode()
+perl << EOF
+ use HTML::Entities;
+ @pos = $curwin->Cursor();
+ $line = $curbuf->Get($pos[0]);
+ $encvalue = decode_entities($line);
+ $curbuf->Set($pos[0],$encvalue)
+EOF
+endfunction
+
+nnoremap <Leader>h :call HTMLEncode()<CR>
+nnoremap <Leader>H :call HTMLDecode()<CR>
 
 set termguicolors
 colorscheme nord
