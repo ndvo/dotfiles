@@ -31,14 +31,23 @@ set omnifunc=ale#completion#OmniFunc
 " Run linting only on fie save and file enter
 "let g:ale_lint_on_text_changed = 'never'
 "let g:ale_lint_on_insert_leave = 0
+"
 let g:ale_linters = {
       \  'typescript': ['eslint', 'tsserver'],
       \  'javascript': [ 'standard' ] 
       \}
  "}}}
+ 
 let g:ale_fixers = {
-      \  'typescript': ['eslint', 'tslint', 'typecheck', 'remove_trailing_lines', 'trim_whitespace'],
-      \  'javascript': [ 'standard' ] 
+      \  'typescript': ['eslint', 'tslint', 'typecheck', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
+      \  'javascript': [ 'standard', 'prettier' ], 
+      \  'c': ['gcc'],
+      \  'c++': ['g++']
+      \}
+
+let g:ale_linter_aliases = {
+      \ 'jsx': ['css', 'javascript'],
+      \ 'mdx': ['css', 'javascript'],
       \}
  "}}}
 
