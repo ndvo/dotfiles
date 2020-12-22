@@ -1,5 +1,6 @@
 set hidden
 set visualbell
+set list
 " Set leaders
 let mapleader = " "
 let maplocaleader = "\\"
