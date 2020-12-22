@@ -92,7 +92,6 @@ set background=dark
 set backspace=eol,start,indent
 
 packadd! matchit
-colorscheme solarized
 
 " Vimscript file settings ------------------- {{{
 augroup customVim
@@ -223,4 +222,8 @@ augroup customNerdTree
 	autocmd FileType * nnoremap <C-n> :NERDTreeToggle<cr>
 augroup END
 
-set rtp+=~/app/tabnine-vim
+
+set termguicolors
+colorscheme nord
+
+"set rtp+=~/apps/tabnine-vim/
