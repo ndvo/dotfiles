@@ -8,10 +8,16 @@ let maplocaleader = "\\"
 " Basic remappings {{{--------
 " Easier Omnicomplete Ctrl x
 :inoremap <C-Space> <C-x>
-" Easy save
-nnoremap <F2> :w<cr>
 " Easy ALE
 nnoremap <F3> :ALE
+" Easy save
+nnoremap <F2> :w
+inoremap <F2> <ESC>:w
+nnoremap <F4> :wa
+inoremap <F4> <ESC>:wa
+" Right hand Esc
+inoremap <F12> <ESC>
+
 " }}}
 
 
