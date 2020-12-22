@@ -78,8 +78,6 @@ set nocompatible
 
 filetype plugin indent on
 
-:inoremap <leader><leader> <esc>
-
 " Line numbers
 set number
 set relativenumber
