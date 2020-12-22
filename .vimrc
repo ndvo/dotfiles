@@ -53,17 +53,18 @@ let g:ale_linter_aliases = {
 
 inoremap ć ç
 
-set wrap
-set linebreak
-set textwidth=60
-set colorcolumn=+10
+set nowrap
+set colorcolumn=80
 set cursorline
 set formatoptions-=t
+
+set wildmode=longest,list   "Complete longest string, then list alternatives
 
 " Preserve undo history 
 set undofile
 
 packloadall           " Load all plugins.
+
 silent! helptags ALL  " Load help files for all plugins.
     
 if &t_Co > 2 || has("gui_running")
