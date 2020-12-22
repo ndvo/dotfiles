@@ -1,3 +1,6 @@
+#!/bin/bash
+
+# https://medium.com/@paulodiovani/installing-vim-8-plugins-with-the-native-pack-system-39b71c351fea
 cd apps
 git clone http://github.com/vim/vim.git
 cd vim/src
