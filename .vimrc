@@ -4,10 +4,11 @@ set list
 " Set leaders
 let mapleader = " "
 let maplocaleader = "\\"
+packloadall           " Load all plugins.
 
 " Basic remappings {{{--------
 " Easier Omnicomplete Ctrl x
-:inoremap <C-Space> <C-x>
+inoremap <C-Space> <C-x>
 " Easy ALE
 nnoremap <F3> :ALE
 " Easy save
@@ -17,9 +18,17 @@ nnoremap <F4> :wa
 inoremap <F4> <ESC>:wa
 " Right hand Esc
 inoremap <F12> <ESC>
+" Replace with current yank
+vnoremap <leader>p "_dP
 
 " }}}
 
+
+" Finding ---------- {{{
+nnoremap <C-/> :Rg<cr>
+nnoremap <C-1> :FZF<cr>
+nnoremap <del> :Bwipeout<cr>
+" }}}
 
 " ALE ------------ {{{
 " Completion
@@ -34,7 +43,7 @@ set omnifunc=ale#completion#OmniFunc
 "
 let g:ale_linters = {
       \  'typescript': ['eslint', 'tsserver'],
-      \  'javascript': [ 'standard' ] 
+      \  'javascript': [ 'standard', 'tsserver' ] 
       \}
  "}}}
  
@@ -63,7 +72,6 @@ set wildmode=longest,list   "Complete longest string, then list alternatives
 " Preserve undo history 
 set undofile
 
-packloadall           " Load all plugins.
 
 silent! helptags ALL  " Load help files for all plugins.
     
@@ -82,8 +90,7 @@ filetype plugin indent on
 set number
 set relativenumber
 
-set autoindent
-set smartindent
+" Show command
 set showcmd
 
 " Show lines above and bellow current line
@@ -95,12 +102,11 @@ packadd! matchit
 
 " Vimscript file settings ------------------- {{{
 augroup customVim
-	autocmd!
-	autocmd FileType vim set foldlevelstart=0
-	autocmd FileType vim setlocal foldmethod=marker
+  autocmd! 
+  autocmd FileType vim set foldlevelstart=0
+  autocmd FileType vim setlocal foldmethod=marker
 augroup END
 " }}}
-
 
 " General settings -------------------{{{
 augroup customGeneralSettings
@@ -125,23 +131,24 @@ augroup END
 
 " Tabstop -------------- {{{
 " General tabstop settings
-set autoindent
 set tabstop=2
+set smartindent
 set shiftwidth=2
 set expandtab
 augroup customStartup
   autocmd!
   " 4 spaces languages
   autocmd FileType python,java set tabstop=4|set shiftwidth=4|set noexpandtab
-  au BufEnter *.py,*java set ai sw=4 ts=4  et 
+  au BufEnter *.py,*java set sw=4 ts=4  et 
   " 2 spaces languages
   autocmd FileType njk,sql,cpp,php,html,js,ts,shell,dot,awkr set tabstop=2|set shiftwidth=2|set noexpandtab
-  au BufEnter *.njk,*.sql,*.cpp,*.c++,*.php,*.html,*.js,*.ts,*.sh,*.dot,*.awk set ai sw=2 ts=2 et
+  au BufEnter *.njk,*.sql,*.cpp,*.c++,*.php,*.html,*.js,*.ts,*.sh,*.dot,*.awk set sw=2 ts=2 et
 augroup END
 " }}}
 
 " Importing libraries ----------- {{{
 augroup customImport
+  autocmd!
   autocmd FileType go nnoremap <buffer> <leader>imp Oimport (<CR>)<ESC>hi""<ESC>h
   autocmd FileType ts nnoremap <buffer> <leader>imp Oimport {  } from '';<ESC>F{lli
 augroup END
@@ -149,18 +156,19 @@ augroup END
 
 " Graphviz dot files --------------- {{{
 augroup custoDotFiles
-	autocmd FileType dot nnoremap <buffer> <leader>cl osubgraph cluster_NOME{<CR>}<ESC>^kfN
+  autocmd!
+  autocmd FileType dot nnoremap <buffer> <leader>cl osubgraph cluster_NOME{<CR>}<ESC>^kfN
 augroup END
 " }}}
 
 " Javascript --------------- {{{
 augroup customJS
-	autocmd!
+  autocmd!
   " operation inside previous (including current) function
-	autocmd FileType * onoremap if :<c-u>execute "normal! ?^\[ \t\]*function\rf{:nohlsearch\rvi{"<cr>
+  autocmd FileType * onoremap if :<c-u>execute "normal! ?^\[ \t\]*function\rf{:nohlsearch\rvi{"<cr>
   " console.debugs the Word under cursor
-	autocmd FileType javascript  nnoremap <leader>dg yiWoconsole.debug()<esc>P
-	autocmd FileType typescript  nnoremap <leader>dg yiWoconsole.debug()<esc>P
+  autocmd FileType javascript  nnoremap <leader>dg yiWoconsole.debug()<esc>P
+  autocmd FileType typescript  nnoremap <leader>dg yiWoconsole.debug()<esc>P
 
 augroup END
 " }}}
@@ -170,11 +178,11 @@ augroup customFunctions
   " Declare function
   autocmd FileType go nnoremap <buffer> <leader>f ofunc (r *Receiver) name (p Parameter) (r Return){<CR>}<ESC>k^f(l
   autocmd FileType python nnoremap <buffer> <leader>f odef name(parameter):<CR>pass<ESC>k^fn
-  autocmd FileType python nnoremap <buffer> <leader>l  lambda x: x<ESC>
-  autocmd FileType javascript,js nnoremap <buffer> <leader>f ofunction name(parameter){<CR>}<ESC>kf l
-  autocmd FileType javascript,js nnoremap <buffer> <leader>F oconst name = (parameter) => {<CR>}<ESC>kf l
-  autocmd FileType javascript,js nnoremap <buffer> <leader>l  function (parameter){ }<ESC>F(l
-  autocmd FileType javascript,js nnoremap <buffer> <leader>L  i (parameter) => { }<ESC>F(l
+  autocmd FileType python nnoremap <buffer> <leader>l ilambda x: x<ESC>
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>f ofunction name(parameter){<CR>}<ESC>kf l
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>F oconst name = (parameter) => {<CR>}<ESC>kf l
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>l  i function (parameter){ }<ESC>F(l
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>L  i (parameter) => { }<ESC>F(l
   autocmd FileType php nnoremap <buffer> <leader>f ofunction <C-R>=expand("%:t:r")<CR>_Name($parameter){<CR>}<ESC>k$F_l
   " Abbreviation for return
   autocmd FileType go,php,python,java,js,typescript,javascript nnoremap <buffer> <leader>r oreturn 
@@ -187,12 +195,10 @@ augroup custom ifEmpty
   autocmd FileType php nnoremap <buffer> <leader>ifem iif (empty()){<CR>}<ESC>k^f(f(a
   " Create equals if x not empty
   autocmd FileType php nnoremap <buffer> <leader>toem ^f=wyt;iempty(<ESC>pa) ? "" : <ESC>
-
   autocmd FileType java nnoremap <buffer> <leader>ifem iif (PLACEHOLDER == null){<CR>}<ESC>k^fPciw
   autocmd FileType java nnoremap <buffer> <leader>toem ^f=wyt;Pa == null ? "" : 
 augroup END
 " }}}
-
 
 " Markup ----------------- {{{
 augroup customMarkup
@@ -249,7 +255,7 @@ endfunction
 nnoremap <Leader>h :call HTMLEncode()<CR>
 nnoremap <Leader>H :call HTMLDecode()<CR>
 
-set termguicolors
+"set termguicolors
 colorscheme nord
 
 "set rtp+=~/apps/tabnine-vim/
