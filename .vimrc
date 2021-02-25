@@ -136,6 +136,8 @@ augroup customGeneralSettings
   " Easy Buffers
   autocmd FileType * nnoremap <PageUp> :bprevious<CR>
   autocmd FileType * nnoremap <PageDown> :bnext<CR>
+  autocmd FileType * tnoremap <PageUp> <C-W>:bprevious<CR>
+  autocmd FileType * tnoremap <PageDown> <C-W>:bnext<CR>
   " Surround
   autocmd FileType * vnoremap <leader>s" <esc>`<i"<esc>`>la"
   autocmd FileType * vnoremap <leader>s' <esc>`<i'<esc>`>la'
