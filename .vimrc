@@ -44,11 +44,6 @@ vnoremap <leader>p "_dP
 " }}}
 
 
-" Finding ---------- {{{
-nnoremap <C-/> :Rg<cr>
-nnoremap <C-1> :FZF<cr>
-nnoremap <del> :Bwipeout<cr>
-" }}}
 
 " ALE ------------ {{{
 " Completion
@@ -146,6 +141,10 @@ augroup customGeneralSettings
   " Replace surround
   autocmd FileType * vnoremap <leader>r" <esc>`<r"<esc>`>hr"
   autocmd FileType * vnoremap <leader>r' <esc>`<hr'<esc>`>lr'
+  " Finding ----------
+  autocmd FileType * nnoremap <C-/> :Rg<CR>
+  autocmd FileType * nnoremap <C-1> :FZF<CR>
+  autocmd FileType * nnoremap <del> :Bwipeout<CR>
 augroup END
 " }}}
 
