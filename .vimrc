@@ -10,7 +10,12 @@ packloadall           " Load all plugins.
 " Easier Omnicomplete Ctrl x
 inoremap <C-Space> <C-x>
 " Easy ALE
+nnoremap <leader>a :ALE
 nnoremap <F3> :ALE
+nnoremap <leader>adef :ALEGoToDefinition<CR>
+nnoremap <leader>aref :ALEFindReferences<CR>
+nnoremap <leader>adet :ALEDetail<CR>
+nnoremap <leader>adoc :ALEDocumentation<CR>
 " Easy save
 nnoremap <F2> :w
 inoremap <F2> <ESC>:w
