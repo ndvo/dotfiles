@@ -6,6 +6,21 @@ let mapleader = " "
 let maplocaleader = "\\"
 packloadall           " Load all plugins.
 
+nnoremap <ALT-1> :tabn 1<cr>
+nnoremap <ALT-2> :tabn 2<cr>
+nnoremap <ALT-3> :tabn 3<cr>
+nnoremap <ALT-4> :tabn 4<cr>
+
+" File Browser Netrw {{{ ----
+let g:netrw_preview = 1
+let g:netrw_liststyle = 3
+let g:netrw_winsize = 30
+" }}}
+
+" Git {{{ ----
+nnoremap <leader>g :!git 
+" ---- }}}
+
 " Basic remappings {{{--------
 " Easier Omnicomplete Ctrl x
 inoremap <C-Space> <C-x>
