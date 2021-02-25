@@ -44,11 +44,13 @@ package https://github.com/moll/vim-bbye &
 package https://github.com/airblade/vim-rooter &
 package https://github.com/jremmen/vim-ripgrep &
 package https://github.com/junegunn/fzf &
+package https://github.com/kana/vim-arpeggio &
 wait
 ) &
 (
 set_group lsp
 package https://github.com/dense-analysis/ale &
+package https://github.com/codota/tabnine-vim &
 wait
 ) &
 (
