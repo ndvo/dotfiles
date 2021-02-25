@@ -66,7 +66,8 @@ let g:ale_fixers = {
       \  'typescript': ['eslint', 'tslint', 'typecheck', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
       \  'javascript': [ 'standard', 'prettier' ], 
       \  'c': ['gcc'],
-      \  'c++': ['g++']
+      \  'c++': ['g++'],
+      \  'python': ['autoimport', 'autopep8', 'yapf']
       \}
 
 let g:ale_linter_aliases = {
