@@ -5,6 +5,8 @@ Arpeggio inoremap com com
 Arpeggio inoremap cao ção
 Arpeggio inoremap de de
 Arpeggio inoremap da da
+Arpeggio inoremap ao ão
+Arpeggio inoremap oe ões
 Arpeggio inoremap so<space> sos 
 Arpeggio inoremap sa<space> sas 
 Arpeggio inoremap no<space> não 
