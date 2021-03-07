@@ -1,3 +1,4 @@
+set exrc
 set hidden
 set visualbell
 set list
