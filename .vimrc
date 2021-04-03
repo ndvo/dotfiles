@@ -59,13 +59,13 @@ set omnifunc=ale#completion#OmniFunc
 "
 let g:ale_linters = {
       \  'typescript': ['eslint', 'tsserver'],
-      \  'javascript': [ 'standard', 'tsserver' ] 
+      \  'javascript': [ 'eslint', 'standard', 'tsserver' ] 
       \}
  "}}}
  
 let g:ale_fixers = {
       \  'typescript': ['eslint', 'tslint', 'typecheck', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
-      \  'javascript': [ 'standard', 'prettier' ], 
+      \  'javascript': [ 'eslint', 'standard', 'prettier' ], 
       \  'c': ['gcc'],
       \  'c++': ['g++'],
       \  'python': ['autoimport', 'autopep8', 'yapf']
@@ -202,13 +202,20 @@ augroup customFunctions
   autocmd FileType go nnoremap <buffer> <leader>f ofunc (r *Receiver) name (p Parameter) (r Return){<CR>}<ESC>k^f(l
   autocmd FileType python nnoremap <buffer> <leader>f odef name(parameter):<CR>pass<ESC>k^fn
   autocmd FileType python nnoremap <buffer> <leader>l ilambda x: x<ESC>
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>f ofunction name(parameter){<CR>}<ESC>kf l
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>F oconst name = (parameter) => {<CR>}<ESC>kf l
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>l  i function (parameter){ }<ESC>F(l
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>L  i (parameter) => { }<ESC>F(l
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>f ofunction name() {<CR>}<ESC>kf l
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>F oconst name = () => {<CR>}<ESC>kf l
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>l  i function () {}<ESC>F(l
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>L  i () => {}<ESC>F(l
   autocmd FileType php nnoremap <buffer> <leader>f ofunction <C-R>=expand("%:t:r")<CR>_Name($parameter){<CR>}<ESC>k$F_l
   " Abbreviation for return
   autocmd FileType go,php,python,java,js,typescript,javascript nnoremap <buffer> <leader>r oreturn 
+augroup END
+" }}}
+
+" Creating tests ------------ {{{
+augroup customTests
+  " Declare tests
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>des odescribe("description", function() {<CR>});<ESC>k^f(l
 augroup END
 " }}}
 
