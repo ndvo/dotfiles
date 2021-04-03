@@ -255,6 +255,13 @@ augroup customMarkup
 augroup END
 " }}}
 
+" Easy range ----------------- {{{
+augroup easyRange
+  autocmd CmdlineEnter * :set norelativenumber | redraw!
+  autocmd CmdlineLeave * :set relativenumber | redraw!
+augroup END
+" }}}
+
 augroup customNerdTree
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   autocmd FileType * nnoremap <C-n> :NERDTreeToggle<cr>
