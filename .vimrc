@@ -293,10 +293,10 @@ nnoremap <Leader>h :call HTMLEncode()<CR>
 nnoremap <Leader>H :call HTMLDecode()<CR>
 
 "set termguicolors
-colorscheme nord
+colorscheme gruvbox
 
-set rtp+=~/.vim/pack/lsp/start/tabnine-vim
+"set rtp+=~/.vim/pack/lsp/start/tabnine-vim
 
 " Attempt to make tabnine usable
-nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>                " turn off YCM
-nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>                "turn on YCM
+"nnoremap <leader>y :let g:ycm_auto_trigger=0<CR>                " turn off YCM
+"nnoremap <leader>Y :let g:ycm_auto_trigger=1<CR>                "turn on YCM
