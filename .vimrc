@@ -14,7 +14,6 @@ nnoremap <ALT-4> :tabn 4<cr>
 
 " File Browser Netrw {{{ ----
 let g:netrw_preview = 1
-let g:netrw_liststyle = 3
 let g:netrw_winsize = 30
 " }}}
 
