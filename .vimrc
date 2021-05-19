@@ -320,10 +320,15 @@ endfunction
 com! -nargs=+ -complete=command Bufdo call BufDo(<q-args>)
 
 " Easy range ----------------- {{{
-augroup easyRange
-  autocmd!
-  autocmd CmdlineEnter * silent! :Windofast set norelativenumber | redraw
-  autocmd CmdlineLeave * silent! :Windofast set relativenumber
-augroup END
+" augroup easyRange
+"   autocmd CmdlineEnter * silent! :Windofast set norelativenumber | redraw
+"   autocmd CmdlineLeave * silent! :Windofast set relativenumber
+" augroup END
 " }}}
 
+:onoremap <silent> p :<c-u>execute "normal! ?`\rlv/`<bs>"<cr>
+:onoremap <silent> ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
+
+
+"silent! so .vimlocal
+"silent! so .vimrc
