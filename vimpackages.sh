@@ -45,6 +45,7 @@ package https://github.com/airblade/vim-rooter &
 package https://github.com/jremmen/vim-ripgrep &
 package https://github.com/junegunn/fzf &
 package https://github.com/kana/vim-arpeggio &
+package https://github.com/vim-scripts/zeavim &
 wait
 ) &
 (
