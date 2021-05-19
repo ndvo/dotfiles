@@ -139,6 +139,11 @@ augroup customGeneralSettings
   autocmd FileType * nnoremap <PageDown> :bnext<CR>
   autocmd FileType * tnoremap <PageUp> <C-W>:bprevious<CR>
   autocmd FileType * tnoremap <PageDown> <C-W>:bnext<CR>
+  autocmd FileType * inoremap <PageUp> <Esc>:bprevious<CR>
+  autocmd FileType * inoremap <PageDown> <Esc>:bnext<CR>
+  " Issue navigation
+  autocmd FileType * nnoremap <s-down> :ALENext<CR>
+  autocmd FileType * nnoremap <s-up> :ALEPrevious<CR>
   " Surround
   autocmd FileType * vnoremap <leader>s" <esc>`<i"<esc>`>la"
   autocmd FileType * vnoremap <leader>s' <esc>`<i'<esc>`>la'
@@ -190,8 +195,8 @@ augroup customJS
   " operation inside previous (including current) function
   autocmd FileType * onoremap if :<c-u>execute "normal! ?^\[ \t\]*function\rf{:nohlsearch\rvi{"<cr>
   " console.debugs the Word under cursor
-  autocmd FileType javascript  nnoremap <leader>dg yiWoconsole.debug()<esc>P
-  autocmd FileType typescript  nnoremap <leader>dg yiWoconsole.debug()<esc>P
+  autocmd FileType javascript  nnoremap <leader>dg yiWoconsole.debug('<esc>pa', <esc>pa)<esc>
+  autocmd FileType typescript  nnoremap <leader>dg yiWoconsole.debug('<esc>pa', <esc>pa);<esc>
 
 augroup END
 " }}}
@@ -204,8 +209,8 @@ augroup customFunctions
   autocmd FileType python nnoremap <buffer> <leader>l ilambda x: x<ESC>
   autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>f ofunction name() {<CR>}<ESC>kf l
   autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>F oconst name = () => {<CR>}<ESC>kf l
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>l  i function () {}<ESC>F(l
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>L  i () => {}<ESC>F(l
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>l afunction () {}<ESC>F(l
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>L a() => {}<ESC>F(l
   autocmd FileType php nnoremap <buffer> <leader>f ofunction <C-R>=expand("%:t:r")<CR>_Name($parameter){<CR>}<ESC>k$F_l
   " Abbreviation for return
   autocmd FileType go,php,python,java,js,typescript,javascript nnoremap <buffer> <leader>r oreturn 
@@ -304,6 +309,7 @@ com! -nargs=+ -complete=command Windo call WinDo(<q-args>)
 
 " Just like Windo, but disable all autocommands for super fast processing.
 com! -nargs=+ -complete=command Windofast noautocmd call WinDo(<q-args>)
+
 
 " Just like bufdo, but restore the current buffer when done.
 function! BufDo(command)
