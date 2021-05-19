@@ -6,9 +6,8 @@ git clone http://github.com/vim/vim.git
 cd vim/src
 ./configure \
             --with-features=huge \
-            --prefix=/usr/local \
+            --prefix='/usr/local' \
             --enable-gui=auto \
-           
             --enable-cscope \
             --enable-fail-if-missing \
             --enable-largefile \
