@@ -84,6 +84,7 @@ set cursorline
 set formatoptions-=t
 
 set wildmode=longest,list   "Complete longest string, then list alternatives
+set wildmenu
 
 " Preserve undo history 
 set undofile
