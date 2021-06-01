@@ -337,5 +337,7 @@ com! -nargs=+ -complete=command Bufdo call BufDo(<q-args>)
 :onoremap <silent> ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
 
 
-"silent! so .vimlocal
-"silent! so .vimrc
+" Terminal ------------ {{{
+" Completion
+nnoremap <s-cr> :vertical terminal<cr>
+ "}}}
