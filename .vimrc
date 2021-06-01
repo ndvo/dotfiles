@@ -32,6 +32,11 @@ nnoremap <leader>adef :ALEGoToDefinition<CR>
 nnoremap <leader>aref :ALEFindReferences<CR>
 nnoremap <leader>adet :ALEDetail<CR>
 nnoremap <leader>adoc :ALEDocumentation<CR>
+nnoremap <leader>ay :ALEInfoToClipboard<CR>
+nnoremap <leader>as :ALERename<CR>
+nnoremap <leader><leader> :ALEHover<CR>
+nnoremap <leader>asug :ALEFixSuggest<CR>
+nnoremap <leader>afix :ALEFix<CR>
 " Easy save
 nnoremap <F2> :w
 inoremap <F2> <ESC>:w
