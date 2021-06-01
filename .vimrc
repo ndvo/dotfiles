@@ -140,6 +140,7 @@ augroup customGeneralSettings
   " Easy Tabs
   autocmd FileType * nnoremap <Right> gt
   autocmd FileType * nnoremap <Left> gT
+  autocmd FileType * nnoremap <s-right> :tab sp<CR>
   " Easy Buffers
   autocmd FileType * nnoremap <PageUp> :bprevious<CR>
   autocmd FileType * nnoremap <PageDown> :bnext<CR>
