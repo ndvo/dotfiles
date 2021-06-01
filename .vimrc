@@ -24,6 +24,7 @@ nnoremap <leader>g :!git
 " Basic remappings {{{--------
 " Easier Omnicomplete Ctrl x
 inoremap <C-Space> <C-x>
+inoremap <leader><leader> <C-x><C-o>
 " Easy ALE
 nnoremap <leader>a :ALE
 nnoremap <F3> :ALE
