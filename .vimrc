@@ -340,6 +340,7 @@ augroup END
 :onoremap <silent> p :<c-u>execute "normal! ?`\rlv/`<bs>"<cr>
 :onoremap <silent> ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
 
+set grepprg=rg
 
 " Terminal ------------ {{{
 " Completion
