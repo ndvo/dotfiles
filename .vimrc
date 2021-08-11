@@ -48,7 +48,11 @@ inoremap <F4> <ESC>:wa
 inoremap <F12> <ESC>
 " Replace with current yank
 vnoremap <leader>p "_dP
-
+" Consistency
+nnoremap Y y$
+" Keep it centered
+nnoremap n nzzzv
+nnoremap N Nzzzv
 " }}}
 
 
@@ -110,10 +114,6 @@ set mouse=a
 set nocompatible
 
 filetype plugin indent on
-
-" Line numbers
-set number
-set relativenumber
 
 " Show command
 set showcmd
@@ -300,7 +300,8 @@ nnoremap <Leader>h :call HTMLEncode()<CR>
 nnoremap <Leader>H :call HTMLDecode()<CR>
 
 "set termguicolors
-colorscheme gruvbox
+"colorscheme gruvbox
+colorscheme nord
 
 "set rtp+=~/.vim/pack/lsp/start/tabnine-vim
 
