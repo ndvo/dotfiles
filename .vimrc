@@ -34,6 +34,8 @@ nnoremap <leader>adet :ALEDetail<CR>
 nnoremap <leader>adoc :ALEDocumentation<CR>
 nnoremap <leader>ay :ALEInfoToClipboard<CR>
 nnoremap <leader>as :ALERename<CR>
+nnoremap <leader>ai :ALEImport<CR>
+nnoremap <leader>ao :ALEOrganizeImports<CR>
 nnoremap <leader><leader> :ALEHover<CR>
 nnoremap <leader>asug :ALEFixSuggest<CR>
 nnoremap <leader>afix :ALEFix<CR>
