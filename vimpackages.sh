@@ -51,11 +51,11 @@ wait
 (
 set_group lsp
 package https://github.com/dense-analysis/ale &
-package https://github.com/codota/tabnine-vim &
 wait
 ) &
 (
 set_group syntax
+package https://github.com/sheerun/vim-polyglot &
 wait
 ) &
 (
