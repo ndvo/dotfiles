@@ -278,10 +278,11 @@ augroup customMarkup
 augroup END
 " }}}
 
-augroup customNerdTree
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-  autocmd FileType * nnoremap <C-n> :NERDTreeToggle<cr>
+" Template strings -------- {{{
+augroup stringHelpers
+      autocmd FileType javascript,js,typescript,ts inoremap <buffer> $$ ${}<ESC>i
 augroup END
+" }}}
 
 au BufNewFile,BufRead *.njk,*.html,*.htm,*.shtml,*.stm set ft=jinja
 
