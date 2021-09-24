@@ -162,6 +162,8 @@ augroup customGeneralSettings
   autocmd FileType * tnoremap <PageDown> <C-W>:bnext<CR>
   autocmd FileType * inoremap <PageUp> <Esc>:bprevious<CR>
   autocmd FileType * inoremap <PageDown> <Esc>:bnext<CR>
+  autocmd FileType * inoremap <c-PageDown> <Esc>:tabNext<CR>
+  autocmd FileType * inoremap <c-PageUp> <Esc>:tabprevious<CR>
   " Issue navigation
   autocmd FileType * nnoremap <s-down> :ALENext<CR>
   autocmd FileType * nnoremap <s-up> :ALEPrevious<CR>
