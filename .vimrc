@@ -139,6 +139,12 @@ augroup customVim
 augroup END
 " }}}
 
+" Finding ----------
+nnoremap <C-/> :Rg<CR>
+nnoremap <leader>of :Files<CR>
+nnoremap <leader>ob :Buffers<CR>
+nnoremap <leader>rt :call fzf#run({'sink': 'read', 'dir': "~/templates/".&filetype, 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "bat {}"'})<cr>
+
 " General settings -------------------{{{
 augroup customGeneralSettings
   autocmd!
@@ -165,9 +171,6 @@ augroup customGeneralSettings
   " Replace surround
   autocmd FileType * vnoremap <leader>r" <esc>`<r"<esc>`>hr"
   autocmd FileType * vnoremap <leader>r' <esc>`<hr'<esc>`>lr'
-  " Finding ----------
-  autocmd FileType * nnoremap <C-/> :Rg<CR>
-  autocmd FileType * nnoremap <C-1> :FZF<CR>
   autocmd FileType * nnoremap <del> :Bwipeout<CR>
 augroup END
 " }}}
