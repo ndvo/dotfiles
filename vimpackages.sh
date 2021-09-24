@@ -44,8 +44,10 @@ package https://github.com/moll/vim-bbye &
 #package https://github.com/airblade/vim-rooter &
 package https://github.com/jremmen/vim-ripgrep &
 package https://github.com/junegunn/fzf &
+package https://github.com/junegunn/fzf.vim &
 package https://github.com/kana/vim-arpeggio &
 package https://github.com/vim-scripts/zeavim &
+package https://github.com/tpope/vim-fugitive &
 wait
 ) &
 (
