@@ -61,8 +61,6 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 " }}}
 
-
-
 " ALE ------------ {{{
 " Completion
 let g:ale_hover_to_preview = 1
@@ -78,8 +76,6 @@ let g:ale_linters = {
       \  'typescript': ['eslint', 'tsserver'],
       \  'javascript': [ 'eslint', 'standard', 'tsserver' ] 
       \}
- "}}}
- 
 let g:ale_fixers = {
       \  'typescript': ['eslint', 'tslint', 'typecheck', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
       \  'javascript': [ 'eslint', 'standard', 'prettier' ], 
@@ -87,7 +83,6 @@ let g:ale_fixers = {
       \  'c++': ['g++'],
       \  'python': ['autoimport', 'autopep8', 'yapf']
       \}
-
 let g:ale_linter_aliases = {
       \ 'jsx': ['css', 'javascript'],
       \ 'mdx': ['css', 'javascript'],
@@ -173,6 +168,7 @@ augroup customGeneralSettings
   " Replace surround
   autocmd FileType * vnoremap <leader>r" <esc>`<r"<esc>`>hr"
   autocmd FileType * vnoremap <leader>r' <esc>`<hr'<esc>`>lr'
+  " Remove a file from Buffer list
   autocmd FileType * nnoremap <del> :Bwipeout<CR>
 augroup END
 " }}}
@@ -332,7 +328,6 @@ com! -nargs=+ -complete=command Windo call WinDo(<q-args>)
 " Just like Windo, but disable all autocommands for super fast processing.
 com! -nargs=+ -complete=command Windofast noautocmd call WinDo(<q-args>)
 
-
 " Just like bufdo, but restore the current buffer when done.
 function! BufDo(command)
   let currBuff=bufnr("%")
@@ -340,7 +335,6 @@ function! BufDo(command)
   execute 'buffer ' . currBuff
 endfunction
 com! -nargs=+ -complete=command Bufdo call BufDo(<q-args>)
-
 
 set number relativenumber
 augroup numbertoggle
