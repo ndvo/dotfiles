@@ -148,8 +148,6 @@ augroup customGeneralSettings
   autocmd FileType * nnoremap <leader>ve :vsplit $MYVIMRC<cr>
   autocmd FileType * nnoremap <leader>vs :source $MYVIMRC<cr>
   " Easy Tabs
-  autocmd FileType * nnoremap <Right> gt
-  autocmd FileType * nnoremap <Left> gT
   autocmd FileType * nnoremap <s-right> :tab sp<CR>
   " Easy Buffers
   autocmd FileType * nnoremap <PageUp> :bprevious<CR>
