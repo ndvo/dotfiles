@@ -102,7 +102,7 @@ set wildmenu
 
 " Preserve undo history 
 set undofile
-
+set undodir=$HOME/.vim/undo/
 
 silent! helptags ALL  " Load help files for all plugins.
     
