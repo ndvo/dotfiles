@@ -49,6 +49,7 @@ package https://github.com/kana/vim-arpeggio &
 package https://github.com/tpope/vim-fugitive &
 package https://github.com/puremourning/vimspector &
 package https://github.com/mbbill/undotree.git &
+package https://github.com/preservim/tagbar.git &
 wait
 ) &
 (

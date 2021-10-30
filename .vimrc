@@ -7,6 +7,7 @@ let mapleader = " "
 let maplocaleader = "\\"
 packloadall           " Load all plugins.
 
+" Buffer navigation
 nnoremap <ALT-1> :tabn 1<cr>
 nnoremap <ALT-2> :tabn 2<cr>
 nnoremap <ALT-3> :tabn 3<cr>
@@ -15,6 +16,11 @@ nnoremap <ALT-4> :tabn 4<cr>
 " File Browser Netrw {{{ ----
 let g:netrw_preview = 1
 let g:netrw_winsize = 30
+nnoremap <left> :Lex<cr>
+
+" Tag Browser Tagbar
+nnoremap <right> :TagbarToggle<cr>
+
 " open files from netrw in a previous window, unless we're opening the current dir
 if argv(0) ==# '.'
     let g:netrw_browse_split = 0
