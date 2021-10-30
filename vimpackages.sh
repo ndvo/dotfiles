@@ -46,8 +46,9 @@ package https://github.com/jremmen/vim-ripgrep &
 package https://github.com/junegunn/fzf &
 package https://github.com/junegunn/fzf.vim &
 package https://github.com/kana/vim-arpeggio &
-package https://github.com/vim-scripts/zeavim &
 package https://github.com/tpope/vim-fugitive &
+package https://github.com/puremourning/vimspector &
+package https://github.com/mbbill/undotree.git &
 wait
 ) &
 (
@@ -63,6 +64,8 @@ wait
 (
 set_group colorschemes
 package https://github.com/altercation/vim-colors-solarized.git &
+package https://github.com/flazz/vim-colorschemes.git &
+package https://github.com/arcticicestudio/nord-vim.git &
 wait
 ) &
 wait
