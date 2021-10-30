@@ -345,6 +345,8 @@ set grepprg=rg
 " Completion
 nnoremap <s-cr> :vertical terminal<cr>
  "}}}
+ let g:rooter_manual_only = 1
+
 
 let g:opamshare = substitute(system('opam var share'),'\n$','','''')
 execute "set rtp+=" . g:opamshare . "/merlin/vim"
