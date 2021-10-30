@@ -73,15 +73,16 @@ set omnifunc=ale#completion#OmniFunc
 "let g:ale_lint_on_insert_leave = 0
 "
 let g:ale_linters = {
+      \  'html': ['eslint', 'tsserver'],
       \  'typescript': ['eslint', 'tsserver'],
-      \  'javascript': [ 'eslint', 'standard', 'tsserver' ] 
+      \  'javascript': [ 'eslint', 'standard', 'tsserver' ] ,
+      \  'python' : ['autoimport', 'black', 'flakehell', 'prospector', 'pylama', 'pylsp', 'pyre', 'pyright', 'reorder_python_imports'],
       \}
 let g:ale_fixers = {
       \  'typescript': ['eslint', 'tslint', 'typecheck', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
       \  'javascript': [ 'eslint', 'standard', 'prettier' ], 
       \  'c': ['gcc'],
-      \  'c++': ['g++'],
-      \  'python': ['autoimport', 'autopep8', 'yapf']
+      \  'c++': ['g++']
       \}
 let g:ale_linter_aliases = {
       \ 'jsx': ['css', 'javascript'],
