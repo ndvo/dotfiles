@@ -72,6 +72,7 @@ nnoremap N Nzzzv
 let g:ale_hover_to_preview = 1
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
+let g:ale_lint_on_text_changed = 'never'
 set omnifunc=ale#completion#OmniFunc
 "set omnifunc=syntaxcomplete#Complete
 " Run linting only on fie save and file enter
