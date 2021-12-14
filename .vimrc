@@ -118,8 +118,6 @@ if &t_Co > 2 || has("gui_running")
   syntax on
 endif
 
-set t_Co=256
-
 set mouse=a
 set nocompatible
 
