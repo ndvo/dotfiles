@@ -83,11 +83,12 @@ let g:ale_linters = {
       \  'html': ['eslint', 'tsserver'],
       \  'typescript': ['eslint', 'tsserver'],
       \  'javascript': [ 'eslint', 'standard', 'tsserver' ] ,
-      \  'python' : ['autoimport', 'black', 'flakehell', 'prospector', 'pylama', 'pylsp', 'pyre', 'pyright', 'reorder_python_imports'],
+      \  'python' : [ 'autoimport', 'black', 'flakehell', 'mypy', 'prospector', 'pylama', 'pylsp', 'pyre', 'pyright', 'yapf'],
       \}
 let g:ale_fixers = {
       \  'typescript': ['eslint', 'tslint', 'typecheck', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
       \  'javascript': [ 'eslint', 'standard', 'prettier' ], 
+      \  'python': ['black', 'reorder_python_imports', 'yapf'],
       \  'c': ['gcc'],
       \  'c++': ['g++']
       \}
