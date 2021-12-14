@@ -166,8 +166,8 @@ augroup customGeneralSettings
   autocmd FileType * inoremap <c-PageDown> <Esc>:tabNext<CR>
   autocmd FileType * inoremap <c-PageUp> <Esc>:tabprevious<CR>
   " Issue navigation
-  autocmd FileType * nnoremap <s-down> :ALENext<CR>
-  autocmd FileType * nnoremap <s-up> :ALEPrevious<CR>
+  autocmd FileType * nnoremap <leader>an :ALENext<CR>
+  autocmd FileType * nnoremap <leader>ap :ALEPrevious<CR>
   " Surround
   autocmd FileType * vnoremap <leader>s" <esc>`<i"<esc>`>la"
   autocmd FileType * vnoremap <leader>s' <esc>`<i'<esc>`>la'
