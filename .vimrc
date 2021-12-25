@@ -359,3 +359,4 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " Termine o diretório swap com duas barras para usar caminhos absolutos
 set directory^=$HOME/.vim/swap//
+set nowrapscan
