@@ -72,6 +72,7 @@ nnoremap N Nzzzv
 let g:ale_hover_to_preview = 1
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
+let g:ale_lint_on_text_changed = 'never'
 set omnifunc=ale#completion#OmniFunc
 "set omnifunc=syntaxcomplete#Complete
 " Run linting only on fie save and file enter
@@ -82,11 +83,12 @@ let g:ale_linters = {
       \  'html': ['eslint', 'tsserver'],
       \  'typescript': ['eslint', 'tsserver'],
       \  'javascript': [ 'eslint', 'standard', 'tsserver' ] ,
-      \  'python' : ['autoimport', 'black', 'flakehell', 'prospector', 'pylama', 'pylsp', 'pyre', 'pyright', 'reorder_python_imports'],
+      \  'python' : [ 'autoimport', 'black', 'flakehell', 'mypy', 'prospector', 'pylama', 'pylsp', 'pyre', 'pyright', 'yapf'],
       \}
 let g:ale_fixers = {
       \  'typescript': ['eslint', 'tslint', 'typecheck', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
       \  'javascript': [ 'eslint', 'standard', 'prettier' ], 
+      \  'python': ['black', 'reorder_python_imports', 'yapf'],
       \  'c': ['gcc'],
       \  'c++': ['g++']
       \}
@@ -116,8 +118,6 @@ if &t_Co > 2 || has("gui_running")
   syntax on
 endif
 
-set t_Co=256
-
 set mouse=a
 set nocompatible
 
@@ -146,6 +146,7 @@ nnoremap <C-/> :Rg<CR>
 nnoremap <leader>of :Files<CR>
 nnoremap <leader>ob :Buffers<CR>
 nnoremap <leader>rt :call fzf#run({'sink': 'read', 'dir': "~/templates/".&filetype, 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "bat {}"'})<cr>
+nnoremap <leader>rg :Rg<CR>
 
 " General settings -------------------{{{
 augroup customGeneralSettings
@@ -165,8 +166,8 @@ augroup customGeneralSettings
   autocmd FileType * inoremap <c-PageDown> <Esc>:tabNext<CR>
   autocmd FileType * inoremap <c-PageUp> <Esc>:tabprevious<CR>
   " Issue navigation
-  autocmd FileType * nnoremap <s-down> :ALENext<CR>
-  autocmd FileType * nnoremap <s-up> :ALEPrevious<CR>
+  autocmd FileType * nnoremap <leader>an :ALENext<CR>
+  autocmd FileType * nnoremap <leader>ap :ALEPrevious<CR>
   " Surround
   autocmd FileType * vnoremap <leader>s" <esc>`<i"<esc>`>la"
   autocmd FileType * vnoremap <leader>s' <esc>`<i'<esc>`>la'
@@ -345,7 +346,8 @@ augroup END
 :onoremap <silent> p :<c-u>execute "normal! ?`\rlv/`<bs>"<cr>
 :onoremap <silent> ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
 
-set grepprg=rg
+set grepprg=rg\ --vimgrep
+set grepformat=%f:%l:%c:%m
 
 " Terminal ------------ {{{
 " Completion
@@ -361,3 +363,4 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 set directory^=$HOME/.vim/swap//
 set nowrapscan
 set lazyredraw
+set exrc
