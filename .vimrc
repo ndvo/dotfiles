@@ -37,6 +37,7 @@ nnoremap <leader>w <c-w>
 let g:netrw_preview = 1
 let g:netrw_winsize = 30
 nnoremap <left> :Lex<cr>
+nnoremap <leader>on :Lex<cr>
 
 " Tag Browser Tagbar
 nnoremap <right> :TagbarToggle<cr>
