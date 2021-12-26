@@ -29,6 +29,9 @@ nnoremap <ALT-2> :tabn 2<cr>
 nnoremap <ALT-3> :tabn 3<cr>
 nnoremap <ALT-4> :tabn 4<cr>
 
+" Buffer navigation
+nnoremap <leader>w <c-w>
+
 " File Browser Netrw {{{ ----
 let g:netrw_preview = 1
 let g:netrw_winsize = 30
