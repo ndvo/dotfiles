@@ -17,11 +17,12 @@
 set exrc " lê .vimrc local ao diretório
 set hidden " mantém buffers abertos ao fechar
 set visualbell " sinal visual ao invés de sonoro
-set list
+set list " mostra caracteres invisíveis
+
 " Set leaders
 let mapleader = " "
 let maplocaleader = "\\"
-packloadall           " Load all plugins.
+packloadall           " Carrega os plugins disponíveis.
 
 " Window navigation
 nnoremap <ALT-1> :tabn 1<cr>
