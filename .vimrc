@@ -41,6 +41,7 @@ nnoremap <leader>on :Lex<cr>
 
 " Tag Browser Tagbar
 nnoremap <right> :TagbarToggle<cr>
+nnoremap <leader>ot :TagbarToggle<cr>
 
 " open files from netrw in a previous window, unless we're opening the current dir
 if argv(0) ==# '.'
