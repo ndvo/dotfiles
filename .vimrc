@@ -23,7 +23,7 @@ let mapleader = " "
 let maplocaleader = "\\"
 packloadall           " Load all plugins.
 
-" Buffer navigation
+" Window navigation
 nnoremap <ALT-1> :tabn 1<cr>
 nnoremap <ALT-2> :tabn 2<cr>
 nnoremap <ALT-3> :tabn 3<cr>
