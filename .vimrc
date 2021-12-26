@@ -147,7 +147,6 @@ set showcmd
 
 " Show lines above and bellow current line
 set scrolloff=3
-set background=dark
 set backspace=eol,start,indent
 
 packadd! matchit
