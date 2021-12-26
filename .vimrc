@@ -146,7 +146,7 @@ filetype plugin indent on
 set showcmd
 
 " Show lines above and bellow current line
-set scrolloff=3
+set scrolloff=6
 set backspace=eol,start,indent
 
 packadd! matchit
