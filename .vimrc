@@ -1,6 +1,7 @@
-set exrc
-set hidden
-set visualbell
+
+set exrc " lê .vimrc local ao diretório
+set hidden " mantém buffers abertos ao fechar
+set visualbell " sinal visual ao invés de sonoro
 set list
 " Set leaders
 let mapleader = " "
