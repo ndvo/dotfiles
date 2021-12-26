@@ -1,3 +1,18 @@
+""" -- Principios ---
+""" Consistência
+""" - manter e expandir a composibilidade
+""" Usar o leader
+""" - maior portabilidade entre sistemas
+""" - maior portabilidade entre teclados
+""" - mantém os dedos nas letras
+""" - fácil manutenção
+""" Usar mais de uma letra para cada comando
+""" - evita colisões entre comandos
+""" - facilita a memorização e recuperação
+""" Usar comandos expansiveis (como :w ao invés de :w<cr>)
+""" - aumenta as oportunidades de uso
+""" - facilita a memorização e recuperação
+
 
 set exrc " lê .vimrc local ao diretório
 set hidden " mantém buffers abertos ao fechar
