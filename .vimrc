@@ -167,12 +167,17 @@ nnoremap <leader>ob :Buffers<CR>
 nnoremap <leader>rt :call fzf#run({'sink': 'read', 'dir': "~/templates/".&filetype, 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "bat {}"'})<cr>
 nnoremap <leader>rg :Rg<CR>
 
+" Vim - melhoria continua do vim -----{{{{
+augroup aprimoramentoVim
+  autocmd!
+  " Edição e carregamento rápido de configurações
+  autocmd FileType * nnoremap <leader>ve :vsplit $MYVIMRC<cr>
+  autocmd FileType * nnoremap <leader>vs :source $MYVIMRC<cr>
+" }}}}
+
 " General settings -------------------{{{
 augroup customGeneralSettings
   autocmd!
-  " Edit/load vimrc
-  autocmd FileType * nnoremap <leader>ve :vsplit $MYVIMRC<cr>
-  autocmd FileType * nnoremap <leader>vs :source $MYVIMRC<cr>
   " Easy Tabs
   autocmd FileType * nnoremap <s-right> :tab sp<CR>
   " Easy Buffers
