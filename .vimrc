@@ -1,25 +1,47 @@
-set exrc
-set hidden
-set visualbell
-set list
+""" -- Principios ---
+""" Consistência
+""" - manter e expandir a composibilidade
+""" Usar o leader
+""" - maior portabilidade entre sistemas
+""" - maior portabilidade entre teclados
+""" - mantém os dedos nas letras
+""" - fácil manutenção
+""" Usar mais de uma letra para cada comando
+""" - evita colisões entre comandos
+""" - facilita a memorização e recuperação
+""" Usar comandos expansiveis (como :w ao invés de :w<cr>)
+""" - aumenta as oportunidades de uso
+""" - facilita a memorização e recuperação
+
+
+set exrc " lê .vimrc local ao diretório
+set hidden " mantém buffers abertos ao fechar
+set visualbell " sinal visual ao invés de sonoro
+set list " mostra caracteres invisíveis
+
 " Set leaders
 let mapleader = " "
 let maplocaleader = "\\"
-packloadall           " Load all plugins.
+packloadall           " Carrega os plugins disponíveis.
 
-" Buffer navigation
+" Window navigation
 nnoremap <ALT-1> :tabn 1<cr>
 nnoremap <ALT-2> :tabn 2<cr>
 nnoremap <ALT-3> :tabn 3<cr>
 nnoremap <ALT-4> :tabn 4<cr>
 
+" Buffer navigation
+nnoremap <leader>w <c-w>
+
 " File Browser Netrw {{{ ----
 let g:netrw_preview = 1
 let g:netrw_winsize = 30
 nnoremap <left> :Lex<cr>
+nnoremap <leader>on :Lex<cr>
 
 " Tag Browser Tagbar
 nnoremap <right> :TagbarToggle<cr>
+nnoremap <leader>ot :TagbarToggle<cr>
 
 " open files from netrw in a previous window, unless we're opening the current dir
 if argv(0) ==# '.'
@@ -129,8 +151,7 @@ filetype plugin indent on
 set showcmd
 
 " Show lines above and bellow current line
-set scrolloff=3
-set background=dark
+set scrolloff=6
 set backspace=eol,start,indent
 
 packadd! matchit
@@ -150,12 +171,17 @@ nnoremap <leader>ob :Buffers<CR>
 nnoremap <leader>rt :call fzf#run({'sink': 'read', 'dir': "~/templates/".&filetype, 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "bat {}"'})<cr>
 nnoremap <leader>rg :Rg<CR>
 
+" Vim - melhoria continua do vim -----{{{{
+augroup aprimoramentoVim
+  autocmd!
+  " Edição e carregamento rápido de configurações
+  autocmd FileType * nnoremap <leader>ve :vsplit $MYVIMRC<cr>
+  autocmd FileType * nnoremap <leader>vs :source $MYVIMRC<cr>
+" }}}}
+
 " General settings -------------------{{{
 augroup customGeneralSettings
   autocmd!
-  " Edit/load vimrc
-  autocmd FileType * nnoremap <leader>ve :vsplit $MYVIMRC<cr>
-  autocmd FileType * nnoremap <leader>vs :source $MYVIMRC<cr>
   " Easy Tabs
   autocmd FileType * nnoremap <s-right> :tab sp<CR>
   " Easy Buffers
@@ -363,6 +389,6 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " Termine o diretório swap com duas barras para usar caminhos absolutos
 set directory^=$HOME/.vim/swap//
-
+set nowrapscan
+set lazyredraw
 set exrc
-
