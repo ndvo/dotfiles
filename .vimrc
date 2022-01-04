@@ -40,6 +40,7 @@ nnoremap <leader>jbp <c-^>
 
 " File Browser Netrw {{{ ----
 let g:netrw_preview = 1
+
 let g:netrw_winsize = 30
 nnoremap <left> :Lex<cr>
 nnoremap <leader>on :Lex<cr>
@@ -397,3 +398,5 @@ set directory^=$HOME/.vim/swap//
 set nowrapscan
 set lazyredraw
 set exrc
+
+set confirm " pedir confirmação ao invés de bloquear ação por buffer não salvo
