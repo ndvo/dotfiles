@@ -13,6 +13,8 @@
 """ - aumenta as oportunidades de uso
 """ - facilita a memorização e recuperação
 
+""" leader w - comandos relacionados à janela ou Ctrl-W
+""" leader o - comandos relacionados a abrir alguma coisa
 
 set exrc " lê .vimrc local ao diretório
 set hidden " mantém buffers abertos ao fechar
@@ -55,6 +57,7 @@ endif
 " }}}
 
 " Git {{{ ----
+"
 nnoremap <leader>g :!git 
 " ---- }}}
 
@@ -103,7 +106,7 @@ set omnifunc=ale#completion#OmniFunc
 " Run linting only on fie save and file enter
 "let g:ale_lint_on_text_changed = 'never'
 "let g:ale_lint_on_insert_leave = 0
-"
+
 let g:ale_linters = {
       \  'html': ['eslint', 'tsserver'],
       \  'typescript': ['eslint', 'tsserver'],
@@ -123,6 +126,7 @@ let g:ale_linter_aliases = {
       \}
  "}}}
 
+" Usar cedilha mesmo que o sistema operacional não queira
 inoremap ć ç
 
 set nowrap
@@ -138,7 +142,7 @@ set undofile
 set undodir=$HOME/.vim/undo/
 
 silent! helptags ALL  " Load help files for all plugins.
-    
+
 if &t_Co > 2 || has("gui_running")
   syntax on
 endif
@@ -148,7 +152,7 @@ set nocompatible
 
 filetype plugin indent on
 
-" Show command
+" Mostrar o comando que está sendo usado
 set showcmd
 
 " Show lines above and bellow current line
