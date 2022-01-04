@@ -33,6 +33,9 @@ nnoremap <ALT-4> :tabn 4<cr>
 " Buffer navigation
 nnoremap <leader>w <c-w>
 
+" Jumps
+nnoremap <leader>jbp <c-^>
+
 " File Browser Netrw {{{ ----
 let g:netrw_preview = 1
 let g:netrw_winsize = 30
