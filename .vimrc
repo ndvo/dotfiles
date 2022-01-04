@@ -58,8 +58,9 @@ endif
 " }}}
 
 " Git {{{ ----
-"
-nnoremap <leader>g :!git 
+nnoremap <leader>gs :vert Git<cr>
+nnoremap <leader>gl :vert Git log --graph<cr>
+nnoremap <leader>gb :Git blame<cr>
 " ---- }}}
 
 " Basic remappings {{{--------
