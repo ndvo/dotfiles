@@ -53,6 +53,11 @@ package https://github.com/preservim/tagbar.git &
 wait
 ) &
 (
+set_group project
+package https://github.com/embear/vim-localvimrc &
+wait
+) &
+(
 set_group lsp
 package https://github.com/dense-analysis/ale &
 wait
