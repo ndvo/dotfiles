@@ -50,6 +50,7 @@ package https://github.com/tpope/vim-fugitive &
 package https://github.com/puremourning/vimspector &
 package https://github.com/mbbill/undotree.git &
 package https://github.com/preservim/tagbar.git &
+package https://github.com/vim-test/vim-test.git &
 wait
 ) &
 (
