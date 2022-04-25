@@ -422,3 +422,5 @@ function! DeleteEmptyBuffers()
         exe 'bdelete' join(empty)
     endif
 endfunction
+
+set noma
