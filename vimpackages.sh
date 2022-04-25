@@ -51,6 +51,7 @@ package https://github.com/puremourning/vimspector &
 package https://github.com/mbbill/undotree.git &
 package https://github.com/preservim/tagbar.git &
 package https://github.com/wellle/context.vim &
+package https://github.com/vim-test/vim-test.git &
 wait
 ) &
 (
