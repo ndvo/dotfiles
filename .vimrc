@@ -260,6 +260,8 @@ augroup customJS
   " console.debugs the Word under cursor
   autocmd FileType javascript  nnoremap <leader>dg yiWoconsole.debug('<esc>pa', <esc>pa)<esc>
   autocmd FileType typescript  nnoremap <leader>dg yiWoconsole.debug('<esc>pa', <esc>pa);<esc>
+  autocmd FileType python  nnoremap <leader>dg yiWoprint('<esc>pa')<esc>2F'<cr>l
+  autocmd FileType python  nnoremap <leader>dG Iimport pdb; pdb.set_trace()<esc>
 
 augroup END
 " }}}
