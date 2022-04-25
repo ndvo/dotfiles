@@ -61,6 +61,13 @@ endif
 nnoremap <leader>gs :vert Git<cr>
 nnoremap <leader>gl :vert Git log --graph<cr>
 nnoremap <leader>gb :Git blame<cr>
+nnoremap <leader>gd :vert Gdiff 
+nnoremap <leader>gp :Git pull<cr>
+nnoremap <leader>gP :Git push
+nnoremap <leader>gc- :Git checkout -<cr>
+nnoremap <leader>gcd :Git checkout develop<cr>
+nnoremap <leader>gcm :Git checkout master<cr>
+nnoremap <leader>gcs :Git checkout staging<cr>
 " ---- }}}
 
 " Basic remappings {{{--------
