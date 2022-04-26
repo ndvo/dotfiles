@@ -186,7 +186,7 @@ augroup END
 nnoremap <leader>of :Files<CR>
 nnoremap <leader>ob :Buffers<CR>
 nnoremap <leader>rt :call fzf#run({'sink': 'read', 'dir': "~/templates/".&filetype, 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "bat {}"'})<cr>
-nnoremap <leader>rg :Rg <CR>
+nnoremap <leader>rg :Rg -g '!tags' <cword> <CR>
 
 " Vim - melhoria continua do vim -----{{{{
 augroup aprimoramentoVim
