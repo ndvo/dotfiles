@@ -40,6 +40,8 @@ nnoremap <leader>jbp <c-^>
 
 " Toggles
 nnoremap <leader>thl :set hlsearch!<cr>
+nnoremap <leader>ted :set ma!<cr>
+
 " File Browser Netrw {{{ ----
 let g:netrw_preview = 1
 
