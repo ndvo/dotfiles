@@ -38,6 +38,8 @@ nnoremap <leader>w <c-w>
 " Jumps
 nnoremap <leader>jbp <c-^>
 
+" Toggles
+nnoremap <leader>thl :set hlsearch!<cr>
 " File Browser Netrw {{{ ----
 let g:netrw_preview = 1
 
