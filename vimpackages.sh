@@ -56,6 +56,7 @@ wait
 (
 set_group lsp
 package https://github.com/dense-analysis/ale &
+package https://github.com/ludovicchabant/vim-gutentags &
 wait
 ) &
 (
