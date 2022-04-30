@@ -405,4 +405,6 @@ set nowrapscan
 
 set lazyredraw
 
+set ttyfast
+
 set confirm " pedir confirmação ao invés de bloquear ação por buffer não salvo
