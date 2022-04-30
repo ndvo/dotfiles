@@ -87,9 +87,6 @@ nnoremap <F2> :w
 inoremap <F2> <ESC>:w
 nnoremap <F4> :wa
 inoremap <F4> <ESC>:wa
-" Right hand Esc
-inoremap <F12> <ESC>
-" Replace with current yank
 
 " Substitui seleção pelo conteúdo do registro
 vnoremap <leader>p "_dP
