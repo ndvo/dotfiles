@@ -262,14 +262,14 @@ augroup END
 " Creating functions ------------ {{{
 augroup customFunctions
   " Declare function
-  autocmd FileType go nnoremap <buffer> <leader>f ofunc (r *Receiver) name (p Parameter) (r Return){<CR>}<ESC>k^f(l
-  autocmd FileType python nnoremap <buffer> <leader>f odef name(parameter):<CR>pass<ESC>k^fn
-  autocmd FileType python nnoremap <buffer> <leader>l ilambda x: x<ESC>
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>f ofunction name() {<CR>}<ESC>kf l
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>F oconst name = () => {<CR>}<ESC>kf l
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>l afunction () {}<ESC>F(l
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>L a() => {}<ESC>F(l
-  autocmd FileType php nnoremap <buffer> <leader>f ofunction <C-R>=expand("%:t:r")<CR>_Name($parameter){<CR>}<ESC>k$F_l
+  autocmd FileType go nnoremap <buffer> <leader>if ofunc (r *Receiver) name (p Parameter) (r Return){<CR>}<ESC>k^f(l
+  autocmd FileType python nnoremap <buffer> <leader>if odef name(parameter):<CR>pass<ESC>k^fn
+  autocmd FileType python nnoremap <buffer> <leader>il ilambda x: x<ESC>
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>if ofunction name() {<CR>}<ESC>kf l
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>iF oconst name = () => {<CR>}<ESC>kf l
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>il afunction () {}<ESC>F(l
+  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>iL a() => {}<ESC>F(l
+  autocmd FileType php nnoremap <buffer> <leader>if ofunction <C-R>=expand("%:t:r")<CR>_Name($parameter){<CR>}<ESC>k$F_l
   " Abbreviation for return
   autocmd FileType go,php,python,java,js,typescript,javascript nnoremap <buffer> <leader>r oreturn 
 augroup END
