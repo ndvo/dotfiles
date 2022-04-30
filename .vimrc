@@ -394,8 +394,8 @@ nnoremap <s-cr> :vertical terminal<cr>
  let g:rooter_manual_only = 1
 
 
-let g:opamshare = substitute(system('opam var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
+" let g:opamshare = substitute(system('opam var share'),'\n$','','''')
+" execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " Termine o diretório swap com duas barras para usar caminhos absolutos
 set directory^=$HOME/.vim/swap//
