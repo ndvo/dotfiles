@@ -35,19 +35,21 @@ nnoremap <leader>jbp <c-^>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-" Netrw {{{ ----
-let g:netrw_preview = 1
-let g:netrw_liststyle = 3
-" let g:netrw_list_hide= netrw_gitignore#Hide().'.*\.swp$'
-
-let g:netrw_winsize = 30
-nnoremap <left> :Lex<cr>
-nnoremap <leader>on :Lex<cr>
+" Toggles
+nnoremap <leader>thl :set hlsearch!<cr>
+nnoremap <leader>ted :set ma!<cr>
 
 " Tagbar
 nnoremap <right> :TagbarToggle<cr>
 nnoremap <leader>ot :TagbarToggle<cr>
 
+" Netrw {{{ ----
+let g:netrw_preview = 1
+let g:netrw_liststyle = 3
+" let g:netrw_list_hide= netrw_gitignore#Hide().'.*\.swp$'
+let g:netrw_winsize = 30
+nnoremap <left> :Lex<cr>
+nnoremap <leader>on :Lex<cr>
 " open files from netrw in a previous window, unless we're opening the current dir
 if argv(0) ==# '.'
     let g:netrw_browse_split = 0
@@ -60,6 +62,13 @@ endif
 nnoremap <leader>gs :vert Git<cr>
 nnoremap <leader>gl :vert Git log --graph<cr>
 nnoremap <leader>gb :Git blame<cr>
+nnoremap <leader>gd :vert Gdiff 
+nnoremap <leader>gp :Git pull<cr>
+nnoremap <leader>gP :Git push
+nnoremap <leader>gc- :Git checkout -<cr>
+nnoremap <leader>gcd :Git checkout develop<cr>
+nnoremap <leader>gcm :Git checkout master<cr>
+nnoremap <leader>gcs :Git checkout staging<cr>
 " ---- }}}
 
 " Básicos {{{--------
@@ -175,7 +184,7 @@ nnoremap <C-/> :Rg<CR>
 nnoremap <leader>of :Files<CR>
 nnoremap <leader>ob :Buffers<CR>
 nnoremap <leader>rt :call fzf#run({'sink': 'read', 'dir': "~/templates/".&filetype, 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "bat {}"'})<cr>
-nnoremap <leader>rg :Rg<CR>
+nnoremap <leader>rg :Rg -g '!tags' <cword> <CR>
 
 " Vim - melhoria continua do vim -----{{{{
 augroup aprimoramentoVim
@@ -252,6 +261,8 @@ augroup customJS
   " console.debugs the Word under cursor
   autocmd FileType javascript  nnoremap <leader>dg yiWoconsole.debug('<esc>pa', <esc>pa)<esc>
   autocmd FileType typescript  nnoremap <leader>dg yiWoconsole.debug('<esc>pa', <esc>pa);<esc>
+  autocmd FileType python  nnoremap <leader>dg yiWoprint('<esc>pa')<esc>2F'<cr>l
+  autocmd FileType python  nnoremap <leader>dG Iimport pdb; pdb.set_trace()<esc>
 
 augroup END
 " }}}
@@ -390,6 +401,7 @@ set grepformat=%f:%l:%c:%m
 " Terminal ------------ {{{
 " Completion
 nnoremap <s-cr> :vertical terminal<cr>
+nnoremap <leader>w<cr> :vertical terminal<cr>
  "}}}
  let g:rooter_manual_only = 1
 
@@ -408,3 +420,18 @@ set lazyredraw
 set ttyfast
 
 set confirm " pedir confirmação ao invés de bloquear ação por buffer não salvo
+
+function! DeleteEmptyBuffers()
+    let [i, n; empty] = [1, bufnr('$')]
+    while i <= n
+        if bufexists(i) && bufname(i) == ''
+            call add(empty, i)
+        endif
+        let i += 1
+    endwhile
+    if len(empty) > 0
+        exe 'bdelete' join(empty)
+    endif
+endfunction
+
+set noma

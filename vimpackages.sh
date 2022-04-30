@@ -41,7 +41,6 @@ function package () {
 (
 set_group utils
 package https://github.com/moll/vim-bbye &
-#package https://github.com/airblade/vim-rooter &
 package https://github.com/jremmen/vim-ripgrep &
 package https://github.com/junegunn/fzf &
 package https://github.com/junegunn/fzf.vim &
@@ -50,17 +49,14 @@ package https://github.com/tpope/vim-fugitive &
 package https://github.com/puremourning/vimspector &
 package https://github.com/mbbill/undotree.git &
 package https://github.com/preservim/tagbar.git &
+package https://github.com/wellle/context.vim &
 package https://github.com/vim-test/vim-test.git &
-wait
-) &
-(
-set_group project
-package https://github.com/embear/vim-localvimrc &
 wait
 ) &
 (
 set_group lsp
 package https://github.com/dense-analysis/ale &
+package https://github.com/ludovicchabant/vim-gutentags &
 wait
 ) &
 (
