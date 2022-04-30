@@ -400,7 +400,7 @@ set directory^=$HOME/.vim/swap//
 
 " Evita reiniciar uma busca a partir do início do arquivo
 set nowrapscan
+
 set lazyredraw
-set exrc
 
 set confirm " pedir confirmação ao invés de bloquear ação por buffer não salvo
