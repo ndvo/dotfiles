@@ -21,18 +21,21 @@ set hidden " mantém buffers abertos ao fechar
 set visualbell " sinal visual ao invés de sonoro
 set list " mostra caracteres invisíveis
 
-" Set leaders
+" Teclas líder
 let mapleader = " "
 let maplocaleader = "\\"
 packloadall           " Carrega os plugins disponíveis.
 
-" Buffer navigation
+" Navegação entre buffers
 nnoremap <leader>w <c-w>
 
-" Jumps
+" Saltos
 nnoremap <leader>jbp <c-^>
+" Mantém a centralização
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
-" File Browser Netrw {{{ ----
+" Netrw {{{ ----
 let g:netrw_preview = 1
 let g:netrw_liststyle = 3
 " let g:netrw_list_hide= netrw_gitignore#Hide().'.*\.swp$'
@@ -41,7 +44,7 @@ let g:netrw_winsize = 30
 nnoremap <left> :Lex<cr>
 nnoremap <leader>on :Lex<cr>
 
-" Tag Browser Tagbar
+" Tagbar
 nnoremap <right> :TagbarToggle<cr>
 nnoremap <leader>ot :TagbarToggle<cr>
 
@@ -59,11 +62,12 @@ nnoremap <leader>gl :vert Git log --graph<cr>
 nnoremap <leader>gb :Git blame<cr>
 " ---- }}}
 
-" Basic remappings {{{--------
+" Básicos {{{--------
 " Easier Omnicomplete Ctrl x
 inoremap <C-Space> <C-x>
 inoremap <leader><leader> <C-x><C-o>
-" Easy ALE
+
+" ALE
 nnoremap <leader>a :ALE
 nnoremap <F3> :ALE
 nnoremap <leader>adef :ALEGoToDefinition<CR>
@@ -77,7 +81,8 @@ nnoremap <leader>ao :ALEOrganizeImports<CR>
 nnoremap <leader><leader> :ALEHover<CR>
 nnoremap <leader>asug :ALEFixSuggest<CR>
 nnoremap <leader>afix :ALEFix<CR>
-" Easy save
+
+" Salvar
 nnoremap <F2> :w
 inoremap <F2> <ESC>:w
 nnoremap <F4> :wa
@@ -85,12 +90,13 @@ inoremap <F4> <ESC>:wa
 " Right hand Esc
 inoremap <F12> <ESC>
 " Replace with current yank
+
+" Substitui seleção pelo conteúdo do registro
 vnoremap <leader>p "_dP
-" Consistency
+
+" Consistência
 nnoremap Y y$
-" Keep it centered
-nnoremap n nzzzv
-nnoremap N Nzzzv
+
 " }}}
 
 " ALE ------------ {{{
@@ -135,17 +141,17 @@ set formatoptions-=t
 set wildmode=longest,list   "Complete longest string, then list alternatives
 set wildmenu
 
-" Preserve undo history 
+" Desfazer persistente
 set undofile
 set undodir=$HOME/.vim/undo/
 
-silent! helptags ALL  " Load help files for all plugins.
+silent! helptags ALL  " Carregar arquivos de ajuda de todos os pluging
 
 if &t_Co > 2 || has("gui_running")
   syntax on
 endif
 
-set mouse=a
+set mouse=a " Permite usar o mouse
 set nocompatible
 
 filetype plugin indent on
@@ -167,7 +173,7 @@ augroup customVim
 augroup END
 " }}}
 
-" Finding ----------
+" Pesquisar ----------
 nnoremap <C-/> :Rg<CR>
 nnoremap <leader>of :Files<CR>
 nnoremap <leader>ob :Buffers<CR>
@@ -196,6 +202,7 @@ augroup customGeneralSettings
   autocmd FileType * inoremap <PageDown> <Esc>:bnext<CR>
   autocmd FileType * inoremap <c-PageDown> <Esc>:tabNext<CR>
   autocmd FileType * inoremap <c-PageUp> <Esc>:tabprevious<CR>
+  autocmd FileType * nnoremap <del> :Bwipeout<CR>
   " Issue navigation
   autocmd FileType * nnoremap <leader>an :ALENext<CR>
   autocmd FileType * nnoremap <leader>ap :ALEPrevious<CR>
@@ -205,8 +212,6 @@ augroup customGeneralSettings
   " Replace surround
   autocmd FileType * vnoremap <leader>r" <esc>`<r"<esc>`>hr"
   autocmd FileType * vnoremap <leader>r' <esc>`<hr'<esc>`>lr'
-  " Remove a file from Buffer list
-  autocmd FileType * nnoremap <del> :Bwipeout<CR>
 augroup END
 " }}}
 
@@ -392,6 +397,8 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 
 " Termine o diretório swap com duas barras para usar caminhos absolutos
 set directory^=$HOME/.vim/swap//
+
+" Evita reiniciar uma busca a partir do início do arquivo
 set nowrapscan
 set lazyredraw
 set exrc
