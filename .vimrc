@@ -26,12 +26,6 @@ let mapleader = " "
 let maplocaleader = "\\"
 packloadall           " Carrega os plugins disponíveis.
 
-" Window navigation
-nnoremap <ALT-1> :tabn 1<cr>
-nnoremap <ALT-2> :tabn 2<cr>
-nnoremap <ALT-3> :tabn 3<cr>
-nnoremap <ALT-4> :tabn 4<cr>
-
 " Buffer navigation
 nnoremap <leader>w <c-w>
 
