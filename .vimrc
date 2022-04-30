@@ -323,6 +323,11 @@ augroup END
 
 au BufNewFile,BufRead *.njk,*.html,*.htm,*.shtml,*.stm set ft=jinja
 
+" Correções, Formatações e refatoramento
+
+vnoremap <leader>fj :!fixjson<cr>
+nnoremap <leader>fj va{:!fixjson<cr>
+
 function! HTMLEncode()
 perl << EOF
  use HTML::Entities;
