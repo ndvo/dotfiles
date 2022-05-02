@@ -50,6 +50,9 @@ let g:netrw_liststyle = 3
 let g:netrw_winsize = 30
 nnoremap <left> :Lex<cr>
 nnoremap <leader>on :Lex<cr>
+nnoremap <down> :UndotreeToggle<cr>
+nnoremap <leader>ou :UndotreeToggle<cr>
+
 " open files from netrw in a previous window, unless we're opening the current dir
 if argv(0) ==# '.'
     let g:netrw_browse_split = 0
