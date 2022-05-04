@@ -445,3 +445,5 @@ function! DeleteEmptyBuffers()
 endfunction
 
 set noma
+
+set nrformats+=alpha " permite ao vim incrementar texto
