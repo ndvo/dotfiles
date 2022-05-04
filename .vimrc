@@ -65,7 +65,8 @@ endif
 
 " Git {{{ ----
 nnoremap <leader>gs :vert Git<cr>
-nnoremap <leader>gl :vert Git log --graph<cr>
+nnoremap <leader>gl :vert Git log --oneline<cr>
+nnoremap <leader>gL :vert Git log --graph<cr>
 nnoremap <leader>gb :Git blame<cr>
 nnoremap <leader>gd :vert Gdiff 
 nnoremap <leader>gp :Git pull<cr>
