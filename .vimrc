@@ -46,6 +46,8 @@ nnoremap <leader>ot :TagbarToggle<cr>
 " Netrw {{{ ----
 let g:netrw_preview = 1
 let g:netrw_liststyle = 3
+autocmd FileType netrw nnoremap <buffer> <silent> zc <Plug>NetrwTreeSqueeze
+
 " let g:netrw_list_hide= netrw_gitignore#Hide().'.*\.swp$'
 let g:netrw_winsize = 30
 nnoremap <left> :Lex<cr>
