@@ -38,6 +38,8 @@ nnoremap N Nzzzv
 " Toggles
 nnoremap <leader>thl :set hlsearch!<cr>
 nnoremap <leader>ted :set ma!<cr>
+nnoremap <leader>tna :set number!<cr>
+nnoremap <leader>tnr :set relativenumber!<cr>
 
 " Tagbar
 nnoremap <right> :TagbarToggle<cr>
@@ -395,12 +397,12 @@ function! BufDo(command)
 endfunction
 com! -nargs=+ -complete=command Bufdo call BufDo(<q-args>)
 
-set number relativenumber
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,CmdlineLeave * set relativenumber |redraw
-  autocmd BufLeave,FocusLost,InsertEnter,CmdlineEnter   * set norelativenumber |redraw
-augroup END
+"set number relativenumber
+"augroup numbertoggle
+"  autocmd!
+"  autocmd BufEnter,FocusGained,InsertLeave,CmdlineLeave * set relativenumber |redraw
+"  autocmd BufLeave,FocusLost,InsertEnter,CmdlineEnter   * set norelativenumber |redraw
+"augroup END
 
 :onoremap <silent> p :<c-u>execute "normal! ?`\rlv/`<bs>"<cr>
 :onoremap <silent> ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
