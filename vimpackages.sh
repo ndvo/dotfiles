@@ -61,7 +61,6 @@ wait
 ) &
 (
 set_group syntax
-package https://github.com/sheerun/vim-polyglot &
 wait
 ) &
 (

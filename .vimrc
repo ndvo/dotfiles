@@ -38,6 +38,8 @@ nnoremap N Nzzzv
 " Toggles
 nnoremap <leader>thl :set hlsearch!<cr>
 nnoremap <leader>ted :set ma!<cr>
+nnoremap <leader>tna :set number!<cr>
+nnoremap <leader>tnr :set relativenumber!<cr>
 
 " Tagbar
 nnoremap <right> :TagbarToggle<cr>
@@ -46,10 +48,15 @@ nnoremap <leader>ot :TagbarToggle<cr>
 " Netrw {{{ ----
 let g:netrw_preview = 1
 let g:netrw_liststyle = 3
+autocmd FileType netrw nnoremap <buffer> <silent> zc <Plug>NetrwTreeSqueeze
+
 " let g:netrw_list_hide= netrw_gitignore#Hide().'.*\.swp$'
 let g:netrw_winsize = -40
 nnoremap <left> :Lex<cr>
 nnoremap <leader>on :Lex<cr>
+nnoremap <down> :UndotreeToggle<cr>
+nnoremap <leader>ou :UndotreeToggle<cr>
+
 " open files from netrw in a previous window, unless we're opening the current dir
 if argv(0) ==# '.'
     let g:netrw_browse_split = 0
@@ -60,8 +67,10 @@ endif
 
 " Git {{{ ----
 nnoremap <leader>gs :vert Git<cr>
-nnoremap <leader>gl :vert Git log --graph<cr>
+nnoremap <leader>gl :vert Git log --oneline<cr>
+nnoremap <leader>gL :vert Git log --graph<cr>
 nnoremap <leader>gb :Git blame<cr>
+nnoremap <leader>g/ :Git branch<cr>
 nnoremap <leader>gd :vert Gdiff 
 nnoremap <leader>gp :Git pull<cr>
 nnoremap <leader>gP :Git push
@@ -69,6 +78,10 @@ nnoremap <leader>gc- :Git checkout -<cr>
 nnoremap <leader>gcd :Git checkout develop<cr>
 nnoremap <leader>gcm :Git checkout master<cr>
 nnoremap <leader>gcs :Git checkout staging<cr>
+nnoremap <leader>grhom :Git reset --hard origin/master
+nnoremap <leader>grhod :Git reset --hard origin/develop
+nnoremap <leader>grhos :Git reset --hard origin/staging
+nnoremap <leader>grhs :Git reset --hard staging
 " ---- }}}
 
 " Básicos {{{--------
@@ -388,12 +401,12 @@ function! BufDo(command)
 endfunction
 com! -nargs=+ -complete=command Bufdo call BufDo(<q-args>)
 
-set number relativenumber
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave,CmdlineLeave * set relativenumber |redraw
-  autocmd BufLeave,FocusLost,InsertEnter,CmdlineEnter   * set norelativenumber |redraw
-augroup END
+"set number relativenumber
+"augroup numbertoggle
+"  autocmd!
+"  autocmd BufEnter,FocusGained,InsertLeave,CmdlineLeave * set relativenumber |redraw
+"  autocmd BufLeave,FocusLost,InsertEnter,CmdlineEnter   * set norelativenumber |redraw
+"augroup END
 
 :onoremap <silent> p :<c-u>execute "normal! ?`\rlv/`<bs>"<cr>
 :onoremap <silent> ih :<c-u>execute "normal! ?^==\\+$\r:nohlsearch\rkvg_"<cr>
@@ -438,3 +451,5 @@ function! DeleteEmptyBuffers()
 endfunction
 
 set noma
+
+set nrformats+=alpha " permite ao vim incrementar texto
