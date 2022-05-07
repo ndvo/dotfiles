@@ -74,7 +74,7 @@ nnoremap <leader>gcs :Git checkout staging<cr>
 " Básicos {{{--------
 " Easier Omnicomplete Ctrl x
 inoremap <C-Space> <C-x>
-inoremap <leader><leader> <C-x><C-o>
+inoremap <leader><leader> _
 
 " ALE
 nnoremap <leader>a :ALE
