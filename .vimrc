@@ -74,7 +74,7 @@ nnoremap <leader>gcs :Git checkout staging<cr>
 " Básicos {{{--------
 " Easier Omnicomplete Ctrl x
 inoremap <C-Space> <C-x>
-inoremap <leader><leader> _
+inoremap <Space><Space> _
 
 " ALE
 nnoremap <leader>a :ALE
@@ -138,6 +138,8 @@ let g:ale_linter_aliases = {
 
 " Usar cedilha mesmo que o sistema operacional não queira
 inoremap ć ç
+nnoremap ç :
+nnoremap Ç :
 
 set nowrap
 set colorcolumn=80
