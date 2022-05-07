@@ -202,10 +202,26 @@ augroup END
 
 " Pesquisar ----------
 nnoremap <C-/> :Rg<CR>
-nnoremap <leader>of :Files<CR>
-nnoremap <leader>ob :Buffers<CR>
 nnoremap <leader>rt :call fzf#run({'sink': 'read', 'dir': "~/templates/".&filetype, 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "bat {}"'})<cr>
 nnoremap <leader>rg :Rg -g '!tags' <cword> <CR>
+
+" Vim - Abre ferramentas auxiliares-----{{{{
+augroup OpenAuxiliaryTools
+  " A ideia de ter uma tecla específica para "abrir" é estranha porque pode se
+  " aplicar a praticamente qualquer ferramenta, mas é mais ou menos assim que
+  " minha cabeça tem funcionado. "Abra o netrw" é mais ou menos o pensamento
+  " que me vem quando penso em navegar por arquivos, por isso <leader>on. Ter
+  " uma seção específica para cada ferramenta poderia ser interessante, mas ao
+  " menos por enquanto eu uso as ferramentas listadas abaixo de forma
+  " limitada, quase só para ver algo rapidamente e em seguida fechá-las. Por
+  " isso não parece valer a pena ter uma seção para cada uma.
+  nnoremap <leader>of :Files<CR>
+  nnoremap <leader>ob :Buffers<CR>
+  nnoremap <leader>on :Lex<cr>
+  nnoremap <leader>ou :UndotreeToggle<cr>
+  nnoremap <leader>ot :TagbarToggle<cr>
+augroup END
+" }}}}
 
 " Vim - melhoria continua do vim -----{{{{
 augroup aprimoramentoVim
