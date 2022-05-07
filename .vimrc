@@ -249,6 +249,7 @@ augroup customGeneralSettings
   " Issue navigation
   autocmd FileType * nnoremap <leader>an :ALENext<CR>
   autocmd FileType * nnoremap <leader>ap :ALEPrevious<CR>
+  autocmd FileType * nnoremap <leader>al :ALELint<CR>
   " Surround
   autocmd FileType * vnoremap <leader>s" <esc>`<i"<esc>`>la"
   autocmd FileType * vnoremap <leader>s' <esc>`<i'<esc>`>la'
