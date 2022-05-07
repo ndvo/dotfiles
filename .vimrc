@@ -75,10 +75,13 @@ nnoremap <leader>gc- :Git checkout -<cr>
 nnoremap <leader>gcd :Git checkout develop<cr>
 nnoremap <leader>gcm :Git checkout master<cr>
 nnoremap <leader>gcs :Git checkout staging<cr>
+nnoremap <leader>gcn :Git checkout nelson/sandbox<cr>
 nnoremap <leader>grhom :Git reset --hard origin/master
 nnoremap <leader>grhod :Git reset --hard origin/develop
 nnoremap <leader>grhos :Git reset --hard origin/staging
 nnoremap <leader>grhs :Git reset --hard staging
+nnoremap <leader>gf :Git fetch
+nnoremap <leader>gg :Git cherry-pick <cword>
 " ---- }}}
 
 " Básicos {{{--------
