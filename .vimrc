@@ -264,6 +264,9 @@ set tabstop=2
 set smartindent
 set shiftwidth=2
 set expandtab
+" }}}
+
+" Configura inicialização -------------- {{{
 augroup customStartup
   autocmd!
   " 4 spaces languages
