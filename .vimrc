@@ -169,9 +169,14 @@ set undodir=$HOME/.vim/undo/
 
 silent! helptags ALL  " Carregar arquivos de ajuda de todos os pluging
 
-if &t_Co > 2 || has("gui_running")
-  syntax on
-endif
+"if &t_Co > 2 || has("gui_running")
+"  syntax on
+"endif
+syntax manual
+augroup PatchDiffHighlight
+  autocmd!
+  autocmd Filetype diff,fugitive,git set syntax=ON
+augroup END
 
 set mouse=a " Permite usar o mouse
 set nocompatible
