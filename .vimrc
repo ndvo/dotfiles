@@ -47,7 +47,7 @@ nnoremap <leader>ot :TagbarToggle<cr>
 let g:netrw_preview = 1
 let g:netrw_liststyle = 3
 " let g:netrw_list_hide= netrw_gitignore#Hide().'.*\.swp$'
-let g:netrw_winsize = 30
+let g:netrw_winsize = -40
 nnoremap <left> :Lex<cr>
 nnoremap <leader>on :Lex<cr>
 " open files from netrw in a previous window, unless we're opening the current dir
