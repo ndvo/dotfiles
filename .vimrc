@@ -43,7 +43,6 @@ nnoremap <leader>tnr :set relativenumber!<cr>
 
 " Tagbar
 nnoremap <right> :TagbarToggle<cr>
-nnoremap <leader>ot :TagbarToggle<cr>
 
 " Netrw {{{ ----
 let g:netrw_preview = 1
@@ -53,9 +52,7 @@ autocmd FileType netrw nnoremap <buffer> <silent> zc <Plug>NetrwTreeSqueeze
 " let g:netrw_list_hide= netrw_gitignore#Hide().'.*\.swp$'
 let g:netrw_winsize = -40
 nnoremap <left> :Lex<cr>
-nnoremap <leader>on :Lex<cr>
 nnoremap <down> :UndotreeToggle<cr>
-nnoremap <leader>ou :UndotreeToggle<cr>
 
 " open files from netrw in a previous window, unless we're opening the current dir
 if argv(0) ==# '.'
