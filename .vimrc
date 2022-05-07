@@ -403,9 +403,14 @@ endfunction
 nnoremap <Leader>h :call HTMLEncode()<CR>
 nnoremap <Leader>H :call HTMLDecode()<CR>
 
-set termguicolors
 "colorscheme gruvbox
-colorscheme nord
+"colorscheme nord
+colorscheme Atelier_SulphurpoolDark
+if &term =~ '256color'
+    " disable Background Color Erase for tmux
+    " see: sunaku.github.io/vim-256color-bce.html
+    set t_ut=
+endif
 
 " Just like windo, but restore the current window when done.
 function! WinDo(command)
