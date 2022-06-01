@@ -208,6 +208,7 @@ augroup END
 nnoremap <C-/> :Rg<CR>
 nnoremap <leader>rt :call fzf#run({'sink': 'read', 'dir': "~/templates/".&filetype, 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "bat {}"'})<cr>
 nnoremap <leader>rg :Rg -g '!tags' <cword> <CR>
+nnoremap <leader>RG :Rg -g '!tags' 
 
 " Vim - Abre ferramentas auxiliares-----{{{{
 augroup OpenAuxiliaryTools
