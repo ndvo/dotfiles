@@ -80,6 +80,9 @@ nnoremap <leader>grhom :Git reset --hard origin/master
 nnoremap <leader>grhod :Git reset --hard origin/develop
 nnoremap <leader>grhos :Git reset --hard origin/staging
 nnoremap <leader>grhs :Git reset --hard staging
+nnoremap <leader>grbs :Git rebase  origin/staging
+nnoremap <leader>grbd :Git rebase  origin/develop
+nnoremap <leader>grbm :Git rebase  origin/master
 nnoremap <leader>gf :Git fetch
 nnoremap <leader>gg :Git cherry-pick <cword>
 " ---- }}}
