@@ -224,6 +224,8 @@ augroup OpenAuxiliaryTools
   nnoremap <leader>on :Lex<cr>
   nnoremap <leader>ou :UndotreeToggle<cr>
   nnoremap <leader>ot :TagbarToggle<cr>
+  nnoremap <leader>op <c-w>}
+  nnoremap <leader>oP <c-w><c-z><c-w>}
 augroup END
 " }}}}
 
