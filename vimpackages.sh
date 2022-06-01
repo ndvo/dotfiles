@@ -41,26 +41,59 @@ function package () {
 (
 set_group utils
 package https://github.com/moll/vim-bbye &
+package https://github.com/tpope/vim-dispatch &
+wait
+) &
+(
+set_group reading
+package https://github.com/wellle/context.vim &
+wait
+) &
+(
+set_group searching
 package https://github.com/jremmen/vim-ripgrep &
 package https://github.com/junegunn/fzf &
 package https://github.com/junegunn/fzf.vim &
+wait
+) &
+(
+set_group editing
 package https://github.com/kana/vim-arpeggio &
-package https://github.com/tpope/vim-fugitive &
-package https://github.com/puremourning/vimspector &
+package https://github.com/tpope/vim-jdaddy &
+package https://github.com/tpope/vim-abolish &
+wait
+) &
+(
+set_group version_control
 package https://github.com/mbbill/undotree.git &
-package https://github.com/preservim/tagbar.git &
-package https://github.com/wellle/context.vim &
-package https://github.com/vim-test/vim-test.git &
+package https://github.com/tpope/vim-fugitive &
+package https://github.com/tpope/vim-rhubarb.git &&
 wait
 ) &
 (
 set_group lsp
 package https://github.com/dense-analysis/ale &
 package https://github.com/ludovicchabant/vim-gutentags &
+package https://github.com/tpope/lsp &
+wait
+) &
+(
+set_group debugging
+package https://github.com/puremourning/vimspector &
+wait
+) &
+(
+set_group navigation
+package https://github.com/preservim/tagbar.git &
 wait
 ) &
 (
 set_group syntax
+wait
+) &
+(
+set_group testing
+package https://github.com/vim-test/vim-test.git &
 wait
 ) &
 (
