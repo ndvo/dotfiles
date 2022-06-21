@@ -16,6 +16,8 @@
 """ leader w - comandos relacionados à janela ou Ctrl-W
 """ leader o - comandos relacionados a abrir alguma coisa
 
+set t_Co=256
+
 set exrc " lê .vimrc local ao diretório
 set hidden " mantém buffers abertos ao fechar
 set visualbell " sinal visual ao invés de sonoro
