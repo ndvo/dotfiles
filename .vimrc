@@ -272,6 +272,7 @@ augroup END
 " General tabstop settings
 set tabstop=2
 set smartindent
+set autoindent
 set shiftwidth=2
 set expandtab
 " }}}
