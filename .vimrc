@@ -495,3 +495,5 @@ set noma
 set nrformats+=alpha " permite ao vim incrementar texto
 let g:ale_python_auto_pipenv = 1
 
+let g:ale_python_pylint_change_directory=0
+let g:ale_python_flake8_change_directory=0
