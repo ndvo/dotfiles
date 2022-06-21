@@ -156,6 +156,7 @@ let g:ale_linter_aliases = {
 
 " Usar cedilha mesmo que o sistema operacional não queira
 inoremap ć ç
+inoremap Ç :
 nnoremap ç :
 nnoremap Ç :
 
