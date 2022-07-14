@@ -74,14 +74,14 @@ nnoremap <leader>gd :vert Gdiff
 nnoremap <leader>gp :Git pull<cr>
 nnoremap <leader>gP :Git push
 nnoremap <leader>gc- :Git checkout -<cr>
-nnoremap <leader>gcd :Git checkout develop<cr>
-nnoremap <leader>gcm :Git checkout master<cr>
-nnoremap <leader>gcs :Git checkout staging<cr>
-nnoremap <leader>gcn :Git checkout nelson/sandbox<cr>
+nnoremap <leader>gcd :Git checkout $dev<cr>
+nnoremap <leader>gcm :Git checkout $master<cr>
+nnoremap <leader>gcs :Git checkout $staging<cr>
+nnoremap <leader>gcn :Git checkout $sandbox<cr>
 nnoremap <leader>grhom :Git reset --hard origin/master
 nnoremap <leader>grhod :Git reset --hard origin/develop
 nnoremap <leader>grhos :Git reset --hard origin/staging
-nnoremap <leader>grhs :Git reset --hard staging
+nnoremap <leader>grhs :Git reset --hard $staging
 nnoremap <leader>grbs :Git rebase  origin/staging
 nnoremap <leader>grbd :Git rebase  origin/develop
 nnoremap <leader>grbm :Git rebase  origin/master
