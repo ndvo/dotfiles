@@ -268,6 +268,14 @@ augroup customGeneralSettings
   autocmd FileType * vnoremap <leader>r' <esc>`<hr'<esc>`>lr'
 augroup END
 " }}}
+  "
+  " Insert mode and normal mode leader is ; followed by a letter
+  tnoremap ;n <c-w><s-n>
+  tnoremap ;w <c-w><s-n><c-w>
+  inoremap ;n <esc>
+  inoremap ;w <esc><c-w>
+  " avoid silly error of using insert leader in normal mode
+  nnoremap ;w <c-w>
 
 " Tabstop -------------- {{{
 " General tabstop settings
