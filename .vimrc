@@ -223,6 +223,7 @@ augroup OpenAuxiliaryTools
   " limitada, quase só para ver algo rapidamente e em seguida fechá-las. Por
   " isso não parece valer a pena ter uma seção para cada uma.
   nnoremap <leader>of :Files<CR>
+  nnoremap <leader>og :GFiles<CR>
   nnoremap <leader>ob :Buffers<CR>
   nnoremap <leader>on :Lex<cr>
   nnoremap <leader>ou :UndotreeToggle<cr>
