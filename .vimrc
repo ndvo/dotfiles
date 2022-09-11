@@ -128,7 +128,7 @@ let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
 set omnifunc=ale#completion#OmniFunc
 "set omnifunc=syntaxcomplete#Complete
-" Run linting only on fie save and file enter
+" prefiro rodar o linter sob comando
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_on_enter = 0
