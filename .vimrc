@@ -122,9 +122,10 @@ nnoremap Y y$
 " }}}
 
 " ALE ------------ {{{
+"
 " Completion
-let g:ale_hover_to_preview = 1
-let g:ale_completion_enabled = 1
+let g:ale_hover_to_preview = 0
+let g:ale_completion_enabled = 0
 let g:ale_completion_autoimport = 1
 set omnifunc=ale#completion#OmniFunc
 "set omnifunc=syntaxcomplete#Complete
