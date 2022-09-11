@@ -1,3 +1,3 @@
 #!/bin/bash
 
-feh --bg-scale $1
+feh --bg-scale "$1"
