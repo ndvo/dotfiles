@@ -104,4 +104,9 @@ package https://github.com/flazz/vim-colorschemes.git &
 package https://github.com/arcticicestudio/nord-vim.git &
 wait
 ) &
+(
+set_group framework
+package https://github.com/tpope/vim-rails &
+wait
+) &
 wait
