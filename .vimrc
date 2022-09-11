@@ -232,6 +232,7 @@ augroup OpenAuxiliaryTools
   nnoremap <leader>op <c-w>}
   nnoremap <leader>oP <c-w><c-z><c-w>}
   nnoremap <leader>o. :Explore<cr>
+  nnoremap <leader>os :call EditSchema()<cr>
 augroup END
 " }}}}
 
