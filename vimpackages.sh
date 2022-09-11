@@ -61,6 +61,7 @@ set_group editing
 package https://github.com/kana/vim-arpeggio &
 package https://github.com/tpope/vim-jdaddy &
 package https://github.com/tpope/vim-abolish &
+package https://github.com/vim-scripts/SyntaxComplete &
 wait
 ) &
 (
