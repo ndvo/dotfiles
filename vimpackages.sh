@@ -99,6 +99,11 @@ package https://github.com/vim-test/vim-test.git &
 wait
 ) &
 (
+set_group database
+package https://github.com/tpope/vim-dadbod &
+wait
+) &
+(
 set_group colorschemes
 package https://github.com/altercation/vim-colors-solarized.git &
 package https://github.com/flazz/vim-colorschemes.git &
