@@ -512,6 +512,20 @@ let g:ale_python_flake8_change_directory=0
 
 set synmaxcol=300
 
+
+function! DeleteHiddenBuffers()
+  let tpbl=[]
+  let closed = 0
+  call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+  for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+    if getbufvar(buf, '&mod') == 0
+      silent execute 'bwipeout' buf
+      let closed += 1
+    endif
+  endfor
+  echo "Closed ".closed." hidden buffers"
+endfunction
+
 " Abre um arquivo a partir de uma variável definida em uma string.
 function FileEdit(path)
   execute "e ".fnameescape(a:path)
