@@ -89,6 +89,7 @@ wait
 ) &
 (
 set_group syntax
+package https://github.com/MaxMEllon/vim-jsx-pretty &
 wait
 ) &
 (
