@@ -144,7 +144,8 @@ let g:ale_fixers = {
       \  'javascript': [ 'eslint', 'standard', 'prettier' ], 
       \  'python': ['black', 'reorder_python_imports', 'yapf'],
       \  'c': ['gcc'],
-      \  'c++': ['g++']
+      \  'c++': ['g++'],
+      \  'ruby': ['rubocop']
       \}
 let g:ale_linter_aliases = {
       \ 'jsx': ['css', 'javascript'],
