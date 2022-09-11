@@ -231,6 +231,7 @@ augroup OpenAuxiliaryTools
   nnoremap <leader>ot :TagbarToggle<cr>
   nnoremap <leader>op <c-w>}
   nnoremap <leader>oP <c-w><c-z><c-w>}
+  nnoremap <leader>o. :Explore<cr>
 augroup END
 " }}}}
 
@@ -507,3 +508,38 @@ let g:ale_python_auto_pipenv = 1
 
 let g:ale_python_pylint_change_directory=0
 let g:ale_python_flake8_change_directory=0
+
+" Abre um arquivo a partir de uma variável definida em uma string.
+function FileEdit(path)
+  execute "e ".fnameescape(a:path)
+endfunction
+
+function CascadeVariable(variable)
+  let l:possibilities = [ 
+        \ get(b:, a:variable),
+        \ get(w:, a:variable),
+        \ get(t:, a:variable),
+        \ get(g:, a:variable) ]
+  echo l:possibilities
+  for i in l:possibilities
+    if type(i)
+      return i
+    endif
+  endfor
+endfunction
+
+" Abre o arquivo que define o Esquema do projeto
+" 
+" O esquema é o arquivo (ou diretório) que define as entidades do projeto em
+" questão.
+" 
+" No rails seria o schema.rb, mas podemos pensar em qualquer arquivo que
+" define um esquema, tal como um arquivo com interfaces typescript.
+"
+" Esta função presume que haverá uma variável global g:schema
+" defina esta variável no .vimrc do diretório do projeto
+" 
+function EditSchema()
+  let l:filename = CascadeVariable('schema')
+  call FileEdit(l:filename)
+endfunction
