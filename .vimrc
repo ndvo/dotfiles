@@ -108,10 +108,9 @@ nnoremap <leader>asug :ALEFixSuggest<CR>
 nnoremap <leader>afix :ALEFix<CR>
 
 " Salvar
-nnoremap <F2> :w
-inoremap <F2> <ESC>:w
-nnoremap <F4> :wa
-inoremap <F4> <ESC>:wa
+nnoremap <leader>bw :w<cr>
+nnoremap <leader>bW :wa<cr>
+inoremap ;bw <c-o>:w<cr>
 
 " Substitui seleção pelo conteúdo do registro
 vnoremap <leader>p "_dP
