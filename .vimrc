@@ -470,6 +470,7 @@ set grepformat=%f:%l:%c:%m
   nnoremap <s-cr> :vertical terminal<cr>
   nnoremap <leader>w<cr> :vertical terminal<cr>
 "}}}
+let g:rooter_manual_only = 1
 
 
 " let g:opamshare = substitute(system('opam var share'),'\n$','','''')
