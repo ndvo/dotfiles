@@ -466,11 +466,10 @@ set grepprg=rg\ --vimgrep
 set grepformat=%f:%l:%c:%m
 
 " Terminal ------------ {{{
-" Completion
-nnoremap <s-cr> :vertical terminal<cr>
-nnoremap <leader>w<cr> :vertical terminal<cr>
- "}}}
- let g:rooter_manual_only = 1
+  " Completion
+  nnoremap <s-cr> :vertical terminal<cr>
+  nnoremap <leader>w<cr> :vertical terminal<cr>
+"}}}
 
 
 " let g:opamshare = substitute(system('opam var share'),'\n$','','''')
