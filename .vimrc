@@ -70,10 +70,10 @@ nnoremap <leader>gd :vert Gdiff
 nnoremap <leader>gp :Git pull<cr>
 nnoremap <leader>gP :Git push
 nnoremap <leader>gc- :Git checkout -<cr>
-nnoremap <leader>gcd :Git checkout $dev<cr>
-nnoremap <leader>gcm :Git checkout $master<cr>
-nnoremap <leader>gcs :Git checkout $staging<cr>
-nnoremap <leader>gcn :Git checkout $sandbox<cr>
+nnoremap <leader>gcd :execute "Git checkout " g:dev <cr>
+nnoremap <leader>gcm :execute "Git checkout " g:master <cr>
+nnoremap <leader>gcs :execute "Git checkout " g:staging <cr>
+nnoremap <leader>gcn :execute "Git checkout " g:sandbox <cr>
 nnoremap <leader>grhom :Git reset --hard origin/master
 nnoremap <leader>grhod :Git reset --hard origin/develop
 nnoremap <leader>grhos :Git reset --hard origin/staging
