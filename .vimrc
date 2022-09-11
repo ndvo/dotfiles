@@ -195,6 +195,7 @@ set scrolloff=6
 set backspace=eol,start,indent
 
 packadd! matchit
+set foldmethod=indent
 
 " Vimscript file settings ------------------- {{{
 augroup customVim
