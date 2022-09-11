@@ -48,22 +48,17 @@ nnoremap <leader>tal :ALEToggle<cr>
 nnoremap <right> :TagbarToggle<cr>
 
 " Netrw {{{ ----
-let g:netrw_preview = 1
-let g:netrw_liststyle = 3
-autocmd FileType netrw nnoremap <buffer> <silent> zc <Plug>NetrwTreeSqueeze
+
+augroup NetRW
+  autocmd!
+  let g:netrw_preview = 1
+  autocmd FileType netrw nnoremap <buffer> <silent> zc <Plug>NetrwTreeSqueeze
+augroup END
 
 " let g:netrw_list_hide= netrw_gitignore#Hide().'.*\.swp$'
 let g:netrw_winsize = -40
 nnoremap <left> :Lex<cr>
 nnoremap <down> :UndotreeToggle<cr>
-
-" open files from netrw in a previous window, unless we're opening the current dir
-if argv(0) ==# '.'
-    let g:netrw_browse_split = 0
-else
-    let g:netrw_browse_split = 4
-endif
-" }}}
 
 " Git {{{ ----
 nnoremap <leader>gs :vert Git<cr>
