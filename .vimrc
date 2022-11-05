@@ -242,6 +242,7 @@ augroup aprimoramentoVim
   autocmd!
   " Edição e carregamento rápido de configurações
   autocmd FileType * nnoremap <leader>ve :vsplit $MYVIMRC<cr>
+  autocmd FileType * nnoremap <leader>VE :vsplit .vimrc<cr>
   autocmd FileType * nnoremap <leader>vs :source $MYVIMRC<cr>
 " }}}}
 
