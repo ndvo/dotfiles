@@ -5,8 +5,38 @@
 # *.[oa]
 # *~
 #
+
+    # Vim files
+*.swl
+*.swm
+*.swo
+*.swn
 *.swp
+.vimrc
+Session.vim
+
+    # screenshot file
+a.png
+
+    # project dictionary files - given team do not use Vim, no sense in sharing
+en.utf-8.add
+en.utf-8.add.spl
+
+    # Ctags files
 tags
 tags.lock
 tags.temp
+
+    # Custom changes to environment 
 nelson-env.sh
+
+    # Private related Project Folders
+ # files related to automating workflow (PR, Commits, etc.)
+workflow
+ # files related to better understanding the project
+notes
+ # files used to test and learn
+sandbox
+ # files listing next steps
+todo
+
