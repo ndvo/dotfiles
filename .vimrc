@@ -61,7 +61,8 @@ nnoremap <left> :Lex<cr>
 nnoremap <down> :UndotreeToggle<cr>
 
 " Git {{{ ----
-nnoremap <leader>gs :vert Git<cr>
+nnoremap <leader>gs :tab Git<cr>
+nnoremap <leader>gv :vert Git<cr>
 nnoremap <leader>gl :vert Git log --oneline<cr>
 nnoremap <leader>gL :vert Git log --graph<cr>
 nnoremap <leader>gb :Git blame --date short <cr>
