@@ -111,7 +111,7 @@ nnoremap <leader>afix :ALEFix<CR>
 " Salvar
 nnoremap <leader>bw :w<cr>
 nnoremap <leader>bW :wa<cr>
-inoremap ;bw <c-o>:w<cr>
+inoremap <s-space>bw <c-o>:w<cr>
 
 " Substitui seleção pelo conteúdo do registro
 vnoremap <leader>p "_dP
@@ -274,13 +274,13 @@ augroup customGeneralSettings
 augroup END
 " }}}
   "
-  " Insert mode and normal mode leader is ; followed by a letter
-  tnoremap ;n <c-w><s-n>
-  tnoremap ;w <c-w><s-n><c-w>
-  inoremap ;n <esc>
-  inoremap ;w <esc><c-w>
+  " Quando no modo de inserção, usa o shift-space para inicializar comandos
+  tnoremap <s-space>n <c-w><s-n>
+  tnoremap <s-space>w <c-w><s-n><c-w>
+  inoremap <s-space>n <esc>
+  inoremap <s-space>w <esc><c-w>
   " avoid silly error of using insert leader in normal mode
-  nnoremap ;w <c-w>
+  nnoremap <s-space>w <c-w>
 
 " Tabstop -------------- {{{
 " General tabstop settings
