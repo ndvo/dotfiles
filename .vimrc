@@ -235,6 +235,7 @@ augroup OpenAuxiliaryTools
   nnoremap <leader>oP <c-w><c-z><c-w>}
   nnoremap <leader>o. :Explore<cr>
   nnoremap <leader>os :call EditSchema()<cr>
+  nnoremap <leader>ow :e ~/subscribe/wiki/<cr>
 augroup END
 " }}}}
 
