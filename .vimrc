@@ -330,8 +330,8 @@ augroup customJS
   " operation inside previous (including current) function
   autocmd FileType * onoremap if :<c-u>execute "normal! ?^\[ \t\]*function\rf{:nohlsearch\rvi{"<cr>
   " console.debugs the Word under cursor
-  autocmd FileType javascript  nnoremap <leader>dg yiWoconsole.debug('<esc>pa', <esc>pa)<esc>
-  autocmd FileType typescript  nnoremap <leader>dg yiWoconsole.debug('<esc>pa', <esc>pa);<esc>
+  autocmd FileType javascript  nnoremap <leader>dg yiWoconsole.debug({ <esc>pa })<esc>
+  autocmd FileType typescript  nnoremap <leader>dg yiWoconsole.debug({ <esc>pa })<esc>
   autocmd FileType python  nnoremap <leader>dg yiWoprint('<esc>pa')<esc>2F'<cr>l
   autocmd FileType python  nnoremap <leader>dG oimport pdb; pdb.set_trace()<esc>
 
