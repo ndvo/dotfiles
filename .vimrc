@@ -587,3 +587,11 @@ function EditRoutes()
   let l:filename = CascadeVariable('routes')
   call FileEdit(l:filename)
 endfunction
+
+function ToggleSyntaxHL()
+  if exists("syntax_on")
+    syntax off
+  else
+    syntax enable
+  endif
+endfunction
