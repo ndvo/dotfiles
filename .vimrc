@@ -606,3 +606,4 @@ function ToggleSyntaxHL()
     syntax enable
   endif
 endfunction
+set spell
