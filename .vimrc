@@ -89,6 +89,7 @@ nnoremap <leader>gf :Git fetch
 nnoremap <leader>gg :Git cherry-pick <cword>
 nnoremap <leader>gfd :execute "Git fetch origin " g:dev ":" g:dev
 nnoremap <leader>ghc :!gh pr checkout 
+nnoremap <leader>gwip :Git add . | Git commit -m 'wip'
 " ---- }}}
 
 " Básicos {{{--------
