@@ -59,6 +59,7 @@ wait
 (
 set_group editing
 package https://github.com/AndrewRadev/sideways.vim &
+package https://github.com/AndrewRadev/splitjoin.vim &
 package https://github.com/kana/vim-arpeggio &
 package https://github.com/tpope/vim-jdaddy &
 package https://github.com/tpope/vim-abolish &
