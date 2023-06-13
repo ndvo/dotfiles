@@ -572,3 +572,18 @@ function EditSchema()
   let l:filename = CascadeVariable('schema')
   call FileEdit(l:filename)
 endfunction
+
+function Editv2()
+  let l:filename = CascadeVariable('v2')
+  call FileEdit(l:filename)
+endfunction
+
+function Editv3()
+  let l:filename = CascadeVariable('v3')
+  call FileEdit(l:filename)
+endfunction
+
+function EditRoutes()
+  let l:filename = CascadeVariable('routes')
+  call FileEdit(l:filename)
+endfunction
