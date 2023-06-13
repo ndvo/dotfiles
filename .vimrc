@@ -43,6 +43,7 @@ nnoremap <leader>ted :set ma!<cr>
 nnoremap <leader>tna :set number!<cr>
 nnoremap <leader>tnr :set relativenumber!<cr>
 nnoremap <leader>tal :ALEToggle<cr>
+nnoremap <leader>tsl :call ToggleSyntaxHL()
 
 " Tagbar
 nnoremap <right> :TagbarToggle<cr>
