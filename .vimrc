@@ -88,6 +88,7 @@ nnoremap <leader>gbkp :Git checkout -b bkp-
 nnoremap <leader>gf :Git fetch
 nnoremap <leader>gg :Git cherry-pick <cword>
 nnoremap <leader>gfd :execute "Git fetch origin " g:dev ":" g:dev
+nnoremap <leader>ghc :!gh pr checkout 
 " ---- }}}
 
 " Básicos {{{--------
