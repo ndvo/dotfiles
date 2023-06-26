@@ -60,10 +60,14 @@ wait
 set_group editing
 package https://github.com/AndrewRadev/sideways.vim &
 package https://github.com/AndrewRadev/splitjoin.vim &
+package https://github.com/AndrewRadev/switch.vim &
+package https://github.com/AndrewRadev/tagalong.vim &
 package https://github.com/kana/vim-arpeggio &
-package https://github.com/tpope/vim-jdaddy &
+package https://github.com/rstacruz/sparkup &
 package https://github.com/tpope/vim-abolish &
+package https://github.com/tpope/vim-jdaddy &
 package https://github.com/vim-scripts/SyntaxComplete &
+package https://github.com/prettier/vim-prettier &
 wait
 ) &
 (
