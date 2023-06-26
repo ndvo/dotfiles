@@ -91,6 +91,8 @@ nnoremap <leader>gfd :execute "Git fetch origin " g:dev ":" g:dev
 nnoremap <leader>ghc :!gh pr checkout 
 " Cria um commit 'Work in Progress'
 nnoremap <leader>gwip : Git commit -m 'wip'
+" Deleta a branch sobre a qual o cursor está (a ser usado do <leader>g/
+nnoremap <leader>gbd :Git branch -D <C-r><C-l>
 " ---- }}}
 
 " Básicos {{{--------
