@@ -644,7 +644,6 @@ function ToggleSyntaxHL()
     syntax enable
   endif
 endfunction
-set spell
 
 function OpenChangedFile()
   call fzf#run({ 'source': 'git diff --name-only origin/development', 'sink': 'e', 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "bat {}"'})
