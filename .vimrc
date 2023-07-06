@@ -74,6 +74,8 @@ nnoremap <leader>gL :vert Git log --graph<cr>
 nnoremap <leader>gb :Git blame --date short <cr>
 " Lista branches locais
 nnoremap <leader>g/ :Git branch<cr>
+" Lista branches ordenadas por data de commit
+nnoremap <leader>g? :Git branch -vv --sort=-committerdate<cr>
 " Compara o arquivo atual com a versão estagiada
 nnoremap <leader>gd :vert Gdiff 
 " Baixa as alterações da branch do servidor remoto
