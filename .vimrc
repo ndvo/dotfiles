@@ -118,6 +118,8 @@ nnoremap <leader>gg :Git cherry-pick <cword>
 nnoremap <leader>gfd :execute "Git fetch origin " g:dev ":" g:dev
 " Faz checkout de um commit usando o número do PR
 nnoremap <leader>ghc :!gh pr checkout 
+nnoremap <leader>ghs :call GhStatus() <cr>
+nnoremap <leader>ghv :call GhVertStatus() <cr>
 " Cria um commit 'Work in Progress'
 nnoremap <leader>gwip : Git commit -m 'wip'
 " Deleta a branch sobre a qual o cursor está (a ser usado do <leader>g/
@@ -643,6 +645,20 @@ function ToggleSyntaxHL()
   else
     syntax enable
   endif
+endfunction
+
+function GhStatus()
+  execute 'tabnew'
+  call GhStatusExecute()
+endfunction
+
+function GhVertStatus()
+  execute 'vnew'
+  call GhStatusExecute()
+endfunction
+
+function GhStatusExecute()
+  execute "r !gh pr list --search \"-author:@me draft:false label:account -label:merge is:open sort:created-asc\" | column -t -s '\t' "
 endfunction
 
 function OpenChangedFile()
