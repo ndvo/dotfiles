@@ -120,6 +120,7 @@ nnoremap <leader>gfd :execute "Git fetch origin " g:dev ":" g:dev
 nnoremap <leader>ghc :!gh pr checkout 
 nnoremap <leader>ghs :call GhStatus() <cr>
 nnoremap <leader>ghv :call GhVertStatus() <cr>
+nnoremap <leader>ghd :call PRChanges() <cr>
 " Cria um commit 'Work in Progress'
 nnoremap <leader>gwip : Git commit -m 'wip'
 " Deleta a branch sobre a qual o cursor está (a ser usado do <leader>g/
@@ -659,12 +660,23 @@ function GhVertStatus()
   call GhStatusExecute()
 endfunction
 
+function PRChanges()
+  let wordUnderCursor = expand("<cword>")
+  execute 'vnew'
+  call SetTopLine("Changes from PR ".wordUnderCursor)
+  execute "r !gh pr diff --name-only ".wordUnderCursor
+endfunction
+
 function GhStatusExecute()
   execute "r !gh pr list --search \"-author:@me draft:false label:account -label:merge is:open sort:created-asc\" | column -t -s '\t' "
 endfunction
 
 function OpenChangedFile()
   call fzf#run({ 'source': 'git diff --name-only origin/development', 'sink': 'e', 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "bat {}"'})
+endfunction
+
+function SetTopLine(text)
+  call setline(1, add(line('$') == 1 && col('$') == 1 ? [] : getline(0, '$'), a:text))
 endfunction
 
 let g:switch_custom_definitions = [
