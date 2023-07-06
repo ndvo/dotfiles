@@ -271,7 +271,9 @@ augroup OpenAuxiliaryTools
   " isso não parece valer a pena ter uma seção para cada uma.
   nnoremap <leader>of :Files<CR>
   nnoremap <leader>og :GFiles<CR>
+  nnoremap <leader>od :call OpenChangedFile() <cr>
   nnoremap <leader>ob :Buffers<CR>
+  nnoremap <leader>oh :History<CR>
   nnoremap <leader>on :Lex<cr>
   nnoremap <leader>ou :UndotreeToggle<cr>
   nnoremap <leader>ot :TagbarToggle<cr>
