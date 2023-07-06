@@ -62,32 +62,59 @@ nnoremap <left> :Lex<cr>
 nnoremap <down> :UndotreeToggle<cr>
 
 " Git {{{ ----
+" Mostra o estado do Git em uma nova aba
 nnoremap <leader>gs :tab Git<cr>
+" Mostra o estado do Git como uma divisão vertical
 nnoremap <leader>gv :vert Git<cr>
+" Mostra o log, versão simples
 nnoremap <leader>gl :vert Git log --oneline<cr>
+" Mostra o log, versão completa
 nnoremap <leader>gL :vert Git log --graph<cr>
+" Mostra o Git Blame
 nnoremap <leader>gb :Git blame --date short <cr>
+" Lista branches locais
 nnoremap <leader>g/ :Git branch<cr>
+" Compara o arquivo atual com a versão estagiada
 nnoremap <leader>gd :vert Gdiff 
+" Baixa as alterações da branch do servidor remoto
 nnoremap <leader>gp :Git pull<cr>
+" Salva as alterações da branch no servidor remoto
 nnoremap <leader>gP :Git push
+" Volta para a branch anterior
 nnoremap <leader>gc- :Git checkout -<cr>
+" Abre a branch g:dev
 nnoremap <leader>gcd :execute "Git checkout " g:dev <cr>
+" Abre a branch g:master
 nnoremap <leader>gcm :execute "Git checkout " g:master <cr>
+" Abre a branch g:staging
 nnoremap <leader>gcs :execute "Git checkout " g:staging <cr>
+" Abre a branch g:sandbox
 nnoremap <leader>gcn :execute "Git checkout " g:sandbox <cr>
+" Torna branch atual igual a master
 nnoremap <leader>grhom :Git reset --hard origin/master
+" Torna branch atual igual a develop
 nnoremap <leader>grhod :Git reset --hard origin/develop
+" Torna branch atual igual a staging
 nnoremap <leader>grhos :Git reset --hard origin/staging
+" Torna branch atual igual a $staging
 nnoremap <leader>grhs :Git reset --hard $staging
+" Rebase com staging
 nnoremap <leader>grbs :Git rebase  origin/staging
+" Rebase com develop
 nnoremap <leader>grbd :Git rebase  origin/develop
+" Rebase com master
 nnoremap <leader>grbm :Git rebase  origin/master
+" Reseta a branch sob o cursor
 nnoremap <leader>grw :Git reset <C-r><C-w>^
+" Prepara um comando para criar uma branch de backup
 nnoremap <leader>gbkp :Git checkout -b bkp-
+" Faz um git fetch
 nnoremap <leader>gf :Git fetch
+" Faz um cherry pick do commit sob o cursor
 nnoremap <leader>gg :Git cherry-pick <cword>
+" Atualiza a branch development
 nnoremap <leader>gfd :execute "Git fetch origin " g:dev ":" g:dev
+" Faz checkout de um commit usando o número do PR
 nnoremap <leader>ghc :!gh pr checkout 
 " Cria um commit 'Work in Progress'
 nnoremap <leader>gwip : Git commit -m 'wip'
