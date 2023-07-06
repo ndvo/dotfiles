@@ -147,6 +147,10 @@ nnoremap <leader><leader> :ALEHover<CR>
 nnoremap <leader>asug :ALEFixSuggest<CR>
 nnoremap <leader>afix :ALEFix<CR>
 
+" Colar
+nnoremap gp "0p
+nnoremap gP "0P
+
 " Salvar
 nnoremap <leader>bw :w<cr>
 nnoremap <leader>bW :wa<cr>
