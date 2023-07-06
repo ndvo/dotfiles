@@ -129,6 +129,8 @@ nnoremap <leader>gbd :Git branch -D <C-r><C-l>
 inoremap <C-Space> <C-x>
 
 inoremap <S-Space> <Esc>
+inoremap <Tab> =
+inoremap <S-Tab> +
 
 " ALE
 nnoremap <leader>a :ALE
