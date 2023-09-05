@@ -98,6 +98,7 @@ wait
 (
 set_group navigation
 package https://github.com/preservim/tagbar.git &
+package https://github.com/vim-scripts/BufOnly.vim & 
 wait
 ) &
 (
