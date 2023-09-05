@@ -15,6 +15,11 @@
 
 """ leader w - comandos relacionados à janela ou Ctrl-W
 """ leader o - comandos relacionados a abrir alguma coisa
+""" leader g - comandos relacionados ao git
+""" leader gh - comandos relacionados ao git hub
+""" leader c - comandos relacionados a copiar
+""" leader t - toggles
+""" leader l - comandos relacionados a limpar o vim
 
 set t_Co=256
 
@@ -29,6 +34,8 @@ let maplocaleader = "\\"
 packloadall           " Carrega os plugins disponíveis.
 
 " Navegação entre buffers
+" Este atalho permite que todos os comandos C-w sejam acessados sem precisar
+" do ctrl
 nnoremap <leader>w <c-w>
 
 " Saltos
