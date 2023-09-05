@@ -74,6 +74,20 @@ nnoremap <left> :Lex<cr>
 nnoremap <down> :UndotreeToggle<cr>
 
 " Git {{{ ----
+" mnemônicos:
+"   Os mnemônicos usados por enquanto são os seguintes:
+"   (manter esta lista ajuda a reorganizar os comandos e fazer com que façam
+"   mais sentido).
+"" s -> status
+"" v -> vertical
+"" l -> log
+"" b -> blame/branch
+"" d -> diff
+"" p -> pull/push
+"" c -> checkout
+"" r -> reset
+"" h -> gh GitHub Command Line
+"" /? -> branch
 " Mostra o estado do Git em uma nova aba
 nnoremap <leader>gs :tab Git<cr>
 " Mostra o estado do Git como uma divisão vertical
@@ -133,6 +147,7 @@ nnoremap <leader>ghc :!gh pr checkout
 nnoremap <leader>ghs :call GhStatus() <cr>
 nnoremap <leader>ghv :call GhVertStatus() <cr>
 nnoremap <leader>ghd :call PRChanges() <cr>
+nnoremap <leader>ghw :!gh pr checkout <C-r><C-w>
 " Cria um commit 'Work in Progress'
 nnoremap <leader>gwip : Git commit -m 'wip'
 " Deleta a branch sobre a qual o cursor está (a ser usado do <leader>g/
@@ -142,7 +157,6 @@ nnoremap <leader>gbd :Git branch -D <C-r><C-l>
 " Básicos {{{--------
 " Easier Omnicomplete Ctrl x
 inoremap <C-Space> <C-x>
-
 inoremap <S-Space> <Esc>
 inoremap <Tab> =
 inoremap <S-Tab> +
