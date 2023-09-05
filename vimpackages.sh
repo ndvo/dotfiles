@@ -85,6 +85,12 @@ package https://github.com/tpope/lsp &
 wait
 ) &
 (
+set_group autocomplete
+#package https://github.com/jayli/vim-easycomplete.git &
+#package https://github.com/codota/tabnine-vim.git &
+wait
+) &
+(
 set_group debugging
 package https://github.com/puremourning/vimspector &
 wait
