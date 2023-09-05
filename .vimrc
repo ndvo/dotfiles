@@ -37,6 +37,7 @@ packloadall           " Carrega os plugins disponíveis.
 " Este atalho permite que todos os comandos C-w sejam acessados sem precisar
 " do ctrl
 nnoremap <leader>w <c-w>
+nnoremap <leader>wwq :windo q<cr>
 
 " Saltos
 nnoremap <leader>jbp <c-^>
