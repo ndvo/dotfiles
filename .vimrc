@@ -53,6 +53,10 @@ nnoremap <leader>tnr :set relativenumber!<cr>
 nnoremap <leader>tal :ALEToggle<cr>
 nnoremap <leader>tsl :call ToggleSyntaxHL()
 
+" Limpeza
+nnoremap <leader>lh :call DeleteHiddenBuffers()
+nnoremap <leader>le :call DeleteEmptyBuffers()
+
 " Tagbar
 nnoremap <right> :TagbarToggle<cr>
 
