@@ -129,6 +129,8 @@ nnoremap <leader>grhos :Git reset --hard origin/staging
 " Torna branch atual igual a $staging
 nnoremap <leader>grhs :Git reset --hard $staging
 " Rebase com staging
+nnoremap <leader>grbi :Git rebase  -i
+" Rebase com staging
 nnoremap <leader>grbs :Git rebase  origin/staging
 " Rebase com develop
 nnoremap <leader>grbd :Git rebase  origin/develop
