@@ -686,7 +686,7 @@ function EditRoutes()
 endfunction
 
 function ToggleSyntaxHL()
-  if exists("syntax_on")
+  if exists("g:syntax_on")
     syntax off
   else
     syntax enable
