@@ -165,6 +165,9 @@ inoremap <S-Space> <Esc>
 inoremap <Tab> =
 inoremap <S-Tab> +
 
+" Switch
+nnoremap <leader>sw :Switch<CR>
+
 " ALE
 nnoremap <leader>a :ALE
 nnoremap <F3> :ALE
