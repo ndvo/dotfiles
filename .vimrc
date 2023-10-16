@@ -316,6 +316,7 @@ augroup OpenAuxiliaryTools
   nnoremap <leader>ov2 :call Editv2()<cr>
   nnoremap <leader>ov3 :call Editv3()<cr>
   nnoremap <leader>ow :e ~/subscribe/wiki/<cr>
+  nnoremap <leader>omd :call EditMdTemplate()<cr>
 augroup END
 " }}}}
 
@@ -728,3 +729,14 @@ let g:switch_custom_definitions = [
       \     },
       \   }
       \ ]
+function EditMdTemplate()
+  call FileEdit(CurrentTemplateName())
+endfunction
+
+function CurrentTemplateName()
+  return '.github/pr-descriptions/'.GitBranch().'.template.md'
+endfunction
+
+function GitBranch()
+  return substitute(system('git branch --show-current'), '\n$', '', '')
+endfunction
