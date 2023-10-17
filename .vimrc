@@ -750,6 +750,7 @@ let g:switch_custom_definitions = [
       \     },
       \   }
       \ ]
+" set complete+=kspell
 set backupdir=~/tmp
 
 function EditMdTemplate()
