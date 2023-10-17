@@ -750,6 +750,7 @@ let g:switch_custom_definitions = [
       \     },
       \   }
       \ ]
+set spellfile=$HOME/.vim-spell-en.utf-8.add
 " set complete+=kspell
 set backupdir=~/tmp
 
