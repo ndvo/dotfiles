@@ -421,6 +421,7 @@ augroup END
 " Creating functions ------------ {{{
 augroup customFunctions
   " Declare function
+  autocmd!
   autocmd FileType go nnoremap <buffer> <leader>if ofunc (r *Receiver) name (p Parameter) (r Return){<CR>}<ESC>k^f(l
   autocmd FileType python nnoremap <buffer> <leader>if odef name(parameter):<CR>pass<ESC>k^fn
   autocmd FileType python nnoremap <buffer> <leader>il ilambda x: x<ESC>
@@ -445,6 +446,7 @@ augroup END
 " Creating tests ------------ {{{
 augroup customTests
   " Declare tests
+  autocmd!
   autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>des odescribe("description", function() {<CR>});<ESC>k^f(l
 augroup END
 " }}}
@@ -464,6 +466,7 @@ augroup END
 augroup customMarkup
   " HTML Files
   " Break up a tag
+  autocmd!
   autocmd FileType html nnoremap <buffer> <leader>brt cit<CR><CR><ESC><UP>PVat=
   " Creating lists
   " - unordered
