@@ -750,6 +750,8 @@ let g:switch_custom_definitions = [
       \     },
       \   }
       \ ]
+set backupdir=~/tmp
+
 function EditMdTemplate()
   call FileEdit(CurrentTemplateName())
 endfunction
