@@ -528,9 +528,16 @@ endfunction
 nnoremap <Leader>h :call HTMLEncode()<CR>
 nnoremap <Leader>H :call HTMLDecode()<CR>
 
-"colorscheme gruvbox
-"colorscheme nord
-colorscheme Atelier_SulphurpoolDark
+" colorscheme Atelier_SulphurpoolDark
+" colorscheme nord
+" colorscheme gruvbox
+" colorscheme gotham256
+" colorscheme nofrils-dark
+" colorscheme happy_hacking
+" colorscheme railscasts
+" colorscheme minimalist
+colorscheme apprentice
+
 if &term =~ '256color'
     " disable Background Color Erase for tmux
     " see: sunaku.github.io/vim-256color-bce.html
