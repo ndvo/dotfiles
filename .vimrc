@@ -51,7 +51,7 @@ nnoremap <leader>ted :set ma!<cr>
 nnoremap <leader>tna :set number!<cr>
 nnoremap <leader>tnr :set relativenumber!<cr>
 nnoremap <leader>tal :ALEToggle<cr>
-nnoremap <leader>tsl :call ToggleSyntaxHL()
+nnoremap <leader>tsl :call ToggleSyntaxHL()<cr>
 
 " Limpeza
 nnoremap <leader>lh :call DeleteHiddenBuffers()
