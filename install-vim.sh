@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Este script para instalar o Vim ainda não está satisfatório. Eu sempre acabo editando e reinstalando.
+
+# Enquanto ainda não tenho um que seja adequado (se é que vou ter um dia), fica o link para a documentação que lista e descreve as opções.
+# https://vimdoc.sourceforge.net/htmldoc/various.html#:!!
+# Os itens marcados com "m" são de instalação manual. Os demais podem ser selecionados em conjunto ao se escolher Tiny, Normal, Big ou Huge
+
 # https://medium.com/@paulodiovani/installing-vim-8-plugins-with-the-native-pack-system-39b71c351fea
 cd apps
 git clone http://github.com/vim/vim.git
