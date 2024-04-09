@@ -82,10 +82,13 @@ set_group lsp
 package https://github.com/dense-analysis/ale &
 package https://github.com/ludovicchabant/vim-gutentags &
 # package https://github.com/tpope/lsp &
+package https://github.com/prabirshrestha/vim-lsp &
+package https://github.com/ternjs/tern_for_vim &
 wait
 ) &
 (
 set_group autocomplete
+package https://github.com/heavenshell/vim-jsdoc &
 #package https://github.com/jayli/vim-easycomplete &
 #package https://github.com/codota/tabnine-vim &
 wait
