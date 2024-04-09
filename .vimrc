@@ -108,7 +108,7 @@ nnoremap <leader>g? :Git branch -vv --sort=-committerdate<cr>
 " Compara o arquivo atual com a versão estagiada
 nnoremap <leader>gd :vert Gdiff 
 " Compara o arquivo atual com a versão development
-nnoremap <leader>gdd :vert Gdiff 
+nnoremap <leader>gdd :execute "vert Gdiff " g:dev <cr>
 " Baixa as alterações da branch do servidor remoto
 nnoremap <leader>gp :Git pull<cr>
 " Salva as alterações da branch no servidor remoto
