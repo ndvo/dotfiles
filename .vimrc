@@ -44,6 +44,9 @@ nnoremap <leader>jbp <c-^>
 " Mantém a centralização
 nnoremap n nzzzv
 nnoremap N Nzzzv
+" Move por blocos
+nnoremap H :SidewaysJumpLeft<cr>
+nnoremap L :SidewaysJumpRight<cr>
 
 " Toggles
 nnoremap <leader>thl :set hlsearch!<cr>
