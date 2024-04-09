@@ -546,7 +546,9 @@ nnoremap <Leader>H :call HTMLDecode()<CR>
 " colorscheme happy_hacking
 " colorscheme railscasts
 " colorscheme minimalist
-colorscheme apprentice
+colorscheme PaperColor
+" colorscheme apprentice
+set background=light
 
 if &term =~ '256color'
     " disable Background Color Erase for tmux
@@ -777,6 +779,8 @@ function GitBranch()
 endfunction
 
 set tags=./tags;,tags;
+let $BAT_THEME = 'gruvbox-light'
+
 " Executa comando no terminal e põe o resultado na próxima linha
 vnoremap <leader>exec yPgv:!
 
