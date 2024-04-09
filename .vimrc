@@ -329,6 +329,7 @@ augroup OpenAuxiliaryTools
   nnoremap <leader>ov3 :call Editv3()<cr>
   nnoremap <leader>ow :e ~/subscribe/wiki/<cr>
   nnoremap <leader>omd :call EditMdTemplate()<cr>
+  nnoremap <leader>ol :Lines<cr>
 augroup END
 " }}}}
 
