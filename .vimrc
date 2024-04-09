@@ -503,7 +503,7 @@ augroup stringHelpers
   autocmd!
   autocmd FileType javascript,js,typescript,ts inoremap <buffer> $$ ${}<ESC>i
   autocmd FileType ruby inoremap <buffer> $$ #{}<ESC>i
-  autocmd FileType erb inoremap <buffer> $$ <%=  %><ESC>kki
+  autocmd FileType eruby inoremap <buffer> $$ <%=  %><ESC>kki
   autocmd FileType python inoremap <buffer> $$ {}<ESC>i
 augroup END
 " }}}
