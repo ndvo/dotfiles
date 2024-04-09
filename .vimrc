@@ -776,5 +776,6 @@ function GitBranch()
   return substitute(system('git branch --show-current'), '\n$', '', '')
 endfunction
 
+set tags=./tags;,tags;
 " Executa comando no terminal e põe o resultado na próxima linha
 vnoremap <leader>exec yPgv:!
