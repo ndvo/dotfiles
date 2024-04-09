@@ -794,6 +794,14 @@ endfunction
 
 command! UseNearestParentTagsFile call UseNearestParentTagsFile()
 nnoremap <leader>ct :UseNearestParentTagsFile<cr>
+
+let g:gutentags_project_root = ['.vimrc']
+" Create a .vimrc for each subproject in the folder
+" such a folder should contain the executables for ALE
+" run ALEInfo to learn what variables should be set
+" create a script to replace each of those and reach to docker to run the
+" script
+
 let $BAT_THEME = 'gruvbox-light'
 
 " Executa comando no terminal e põe o resultado na próxima linha
