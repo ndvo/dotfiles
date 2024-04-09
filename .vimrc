@@ -779,3 +779,30 @@ endfunction
 set tags=./tags;,tags;
 " Executa comando no terminal e põe o resultado na próxima linha
 vnoremap <leader>exec yPgv:!
+
+
+nnoremap <leader>rmd :call <SID>FuzzyTestChecklist()<cr>
+nnoremap <leader>rjs :call <SID>FuzzyJs()<cr>
+
+function! <SID>FuzzyTestChecklist()
+    let tempfile=tempname()
+    execute '!~/subscribe/dev/saf/ndvo/scripts/taskdescriptionlines.sh >' . shellescape(tempfile)
+    try
+        silent execute 'read' tempfile
+    finally
+        call delete(tempfile)
+    endtry
+endfunction
+
+function! <SID>FuzzyJs()
+    let tempfile=tempname()
+    execute '!~/subscribe/dev/saf/ndvo/scripts/fuzzyjs.sh >' . shellescape(tempfile)
+    try
+        silent execute 'read' tempfile
+    finally
+        call delete(tempfile)
+    endtry
+endfunction
+
+
+command! -nargs=0 InteractiveFZFCommand call <SID>InteractiveFZFCommand()
