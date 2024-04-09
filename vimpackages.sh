@@ -72,22 +72,22 @@ wait
 ) &
 (
 set_group version_control
-package https://github.com/mbbill/undotree.git &
+package https://github.com/mbbill/undotree &
 package https://github.com/tpope/vim-fugitive &
-package https://github.com/tpope/vim-rhubarb.git &&
+package https://github.com/tpope/vim-rhubarb &&
 wait
 ) &
 (
 set_group lsp
 package https://github.com/dense-analysis/ale &
 package https://github.com/ludovicchabant/vim-gutentags &
-package https://github.com/tpope/lsp &
+# package https://github.com/tpope/lsp &
 wait
 ) &
 (
 set_group autocomplete
-#package https://github.com/jayli/vim-easycomplete.git &
-#package https://github.com/codota/tabnine-vim.git &
+#package https://github.com/jayli/vim-easycomplete &
+#package https://github.com/codota/tabnine-vim &
 wait
 ) &
 (
@@ -97,7 +97,7 @@ wait
 ) &
 (
 set_group navigation
-package https://github.com/preservim/tagbar.git &
+package https://github.com/preservim/tagbar &
 package https://github.com/vim-scripts/BufOnly.vim & 
 wait
 ) &
@@ -108,7 +108,7 @@ wait
 ) &
 (
 set_group testing
-package https://github.com/vim-test/vim-test.git &
+package https://github.com/vim-test/vim-test &
 wait
 ) &
 (
@@ -118,9 +118,9 @@ wait
 ) &
 (
 set_group colorschemes
-package https://github.com/altercation/vim-colors-solarized.git &
-package https://github.com/flazz/vim-colorschemes.git &
-package https://github.com/arcticicestudio/nord-vim.git &
+package https://github.com/altercation/vim-colors-solarized &
+package https://github.com/flazz/vim-colorschemes &
+package https://github.com/arcticicestudio/nord-vim &
 wait
 ) &
 (
