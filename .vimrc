@@ -779,6 +779,21 @@ function GitBranch()
 endfunction
 
 set tags=./tags;,tags;
+
+function! UseNearestParentTagsFile()
+  let l:path = "%:p"
+  while expand(l:path) != "/"
+    let l:path = l:path . ":h"
+    if filereadable(expand(l:path) . "/tags")
+      exe "set tags=" . expand(l:path) . "/tags"
+      return
+    endif
+  endwhile
+  echom "No tags file found in path."
+endfunction
+
+command! UseNearestParentTagsFile call UseNearestParentTagsFile()
+nnoremap <leader>ct :UseNearestParentTagsFile<cr>
 let $BAT_THEME = 'gruvbox-light'
 
 " Executa comando no terminal e põe o resultado na próxima linha
