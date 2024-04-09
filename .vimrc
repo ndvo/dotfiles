@@ -299,6 +299,9 @@ nnoremap <leader>rgjs :Rg -g '!tags' -g '*.js'
 nnoremap <leader>rgrb :Rg -g '!tags' -g '*.rb' 
 nnoremap <leader>rgpy :Rg -g '!tags' -g '*.py' 
 
+" navega para o próximo item na change list
+nnoremap <leader>cn :cn<cr>
+
 " Vim - Abre ferramentas auxiliares-----{{{{
 augroup OpenAuxiliaryTools
   " A ideia de ter uma tecla específica para "abrir" é estranha porque pode se
