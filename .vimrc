@@ -242,8 +242,11 @@ inoremap Ç :
 nnoremap ç :
 nnoremap Ç :
 
+" Não quebrar visualmente as linhas
 set nowrap
+" Destaca coluna 80
 set colorcolumn=80
+" Destaca linha atual
 set cursorline
 set formatoptions-=t
 
