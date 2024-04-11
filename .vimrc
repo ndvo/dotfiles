@@ -100,7 +100,7 @@ nnoremap <leader>gl :vert Git log --oneline<cr>
 " Mostra o log, versão completa
 nnoremap <leader>gL :vert Git log --graph<cr>
 " Mostra o Git Blame
-nnoremap <leader>gb :Git blame --date short <cr>
+nnoremap <leader>gbl :Git blame --date short <cr>
 " Lista branches locais
 nnoremap <leader>g/ :Git branch<cr>
 " Lista branches ordenadas por data de commit
@@ -109,6 +109,7 @@ nnoremap <leader>g? :Git branch -vv --sort=-committerdate<cr>
 nnoremap <leader>gd :vert Gdiff 
 " Compara o arquivo atual com a versão development
 nnoremap <leader>gdd :execute "vert Gdiff " g:dev <cr>
+nnoremap <leader>gdl :call DiffPreviousVersion() <cr>
 " Baixa as alterações da branch do servidor remoto
 nnoremap <leader>gp :Git pull<cr>
 " Salva as alterações da branch no servidor remoto
@@ -833,3 +834,39 @@ endfunction
 
 
 command! -nargs=0 InteractiveFZFCommand call <SID>InteractiveFZFCommand()
+
+
+function! DiffPreviousVersion()
+    " Get the current quickfix list
+    let qflist = getqflist()
+    let current_index = getqflist({'idx': 0}).idx
+
+    let fillqf = len(qflist) == 0
+
+    if current_index < len(qflist)
+        " Get the next item
+        let next_item = qflist[current_index]
+        
+        " Extract the filename, line number, and text from the next item
+        "let filename = next_item.filename
+        "let line_number = next_item.lnum
+        let is_commit_message = match(next_item.text, '^\w\{10} .*\(\#\d\+\)$')
+        if is_commit_message
+          let commit = matchstr(next_item.text, '^\w\+')
+          echo next_item.text
+          echo commit
+          let cmd = 'Gvdiffsplit '.commit.':% | cnext'
+          echo cmd
+          execute cmd
+        else
+          fillqf = true
+        endif
+    else
+      if fillqf
+        echo "Preparing list of changes to this file"
+        execute 'Gclog --oneline %'
+      else
+        echo "no previous version to show"
+      endif
+    endif
+endfunction
