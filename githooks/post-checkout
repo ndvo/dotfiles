@@ -1,0 +1,22 @@
+#!/bin/bash
+
+echo "### Post checkout ###";
+pwd;
+
+branchName=$(git rev-parse --abbrev-ref HEAD);
+prFolders=".github/pr-descriptions";
+templateName="$branchName.template.md";
+templatePath="$prFolders/$templateName";
+
+echo $branchName;
+echo $templatePath;
+
+if [ ! -e "$templatePath" ]; then
+  cp .github/PULL_REQUEST_TEMPLATE.md "$templatePath";
+  echo "PR description created $templatePath";
+else
+  echo "PR description updated $templatePath";
+  gh pr view | sed -n '/^--$/,$p' | tail -n +2 >  "$templatePath";
+fi
+
+echo "### Post checkout ended ###";
