@@ -158,8 +158,9 @@ nnoremap <leader>ghd :call PRChanges() <cr>
 nnoremap <leader>ghw :!gh pr checkout <C-r><C-w>
 " Cria um commit 'Work in Progress'
 nnoremap <leader>gwip : Git commit -m 'wip'
-" Deleta a branch sobre a qual o cursor está (a ser usado do <leader>g/
-nnoremap <leader>gbd :Git branch -D <C-r><C-l>
+" Deleta/remove/apaga a branch sobre a qual o cursor está (a ser usado do <leader>g/
+nnoremap <leader>gbd :Git branch -D <C-r><C-l><cr>
+vnoremap <leader>gbd :<C-U>call RemoveBranches() <cr>
 " ---- }}}
 
 " Básicos {{{--------
