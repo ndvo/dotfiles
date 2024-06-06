@@ -785,6 +785,13 @@ set spellfile=$HOME/.vim-spell-en.utf-8.add
 " set complete+=kspell
 set backupdir=~/tmp
 
+function! s:sinkFileLine(lines) abort
+  echo a:lines
+
+  let filename = a:lines[0]
+  execute 'edit ' . substitute(filename, '\([^:]*\):\([0-9]*\).*', '+\2 \1', '')
+endfunction
+
 function EditMdTemplate()
   call FileEdit(CurrentTemplateName())
 endfunction
