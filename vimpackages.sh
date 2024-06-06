@@ -129,6 +129,7 @@ wait
 (
 set_group framework
 package https://github.com/tpope/vim-rails &
+package https://github.com/tpope/vim-ruby &
 wait
 ) &
 wait
