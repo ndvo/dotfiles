@@ -836,6 +836,7 @@ vnoremap <leader>exec yPgv:!
 
 nnoremap <leader>rmd :call <SID>FuzzyTestChecklist()<cr>
 nnoremap <leader>rjs :call <SID>FuzzyJs()<cr>
+nnoremap <leader>rrb :call <SID>FuzzyRb()<cr>
 
 function! <SID>FuzzyTestChecklist()
     let tempfile=tempname()
