@@ -863,36 +863,44 @@ command! -nargs=0 InteractiveFZFCommand call <SID>InteractiveFZFCommand()
 
 
 function! DiffPreviousVersion()
-    " Get the current quickfix list
-    let qflist = getqflist()
-    let current_index = getqflist({'idx': 0}).idx
+  " Get the current quickfix list
+  let qflist = getqflist()
+  let current_index = getqflist({'idx': 0}).idx
 
-    let fillqf = len(qflist) == 0
+  let fillqf = len(qflist) == 0
 
-    if current_index < len(qflist)
-        " Get the next item
-        let next_item = qflist[current_index]
-        
-        " Extract the filename, line number, and text from the next item
-        "let filename = next_item.filename
-        "let line_number = next_item.lnum
-        let is_commit_message = match(next_item.text, '^\w\{10} .*\(\#\d\+\)$')
-        if is_commit_message
-          let commit = matchstr(next_item.text, '^\w\+')
-          echo next_item.text
-          echo commit
-          let cmd = 'Gvdiffsplit '.commit.':% | cnext'
-          echo cmd
-          execute cmd
-        else
-          fillqf = true
-        endif
+  if current_index < len(qflist)
+    " Get the next item
+    let next_item = qflist[current_index]
+    
+    " Extract the filename, line number, and text from the next item
+    "let filename = next_item.filename
+    "let line_number = next_item.lnum
+    let is_commit_message = match(next_item.text, '^\w\{10} .*\(\#\d\+\)$')
+    if is_commit_message
+      let commit = matchstr(next_item.text, '^\w\+')
+      echo next_item.text
+      echo commit
+      let cmd = 'Gvdiffsplit '.commit.':% | cnext'
+      echo cmd
+      execute cmd
     else
-      if fillqf
-        echo "Preparing list of changes to this file"
-        execute 'Gclog --oneline %'
-      else
-        echo "no previous version to show"
-      endif
+      fillqf = true
+    endif
+  else
+    if fillqf
+      echo "Preparing list of changes to this file"
+      execute 'Gclog --oneline %'
+    else
+      echo "no previous version to show"
+    endif
+  endif
+endfunction
+
+
+function! EnsureDirExists()
+    let dir = expand('%:p:h')
+    if !isdirectory(dir)
+        call mkdir(dir, 'p')
     endif
 endfunction
