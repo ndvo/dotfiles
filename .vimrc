@@ -746,6 +746,7 @@ endfunction
 
 function OpenChangedFile()
   call fzf#run({ 'source': 'git diff --name-only origin/development', 'sink': 'e', 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "bat {}"'})
+
 function OpenRubyByLine()
   call fzf#run({
         \ 'source': "rg -n -g 'saf-api/*.rb' -g 'saf-api/**/*rb' --color always . ",
