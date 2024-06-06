@@ -860,6 +860,16 @@ function! <SID>FuzzyJs()
     endtry
 endfunction
 
+function! <SID>FuzzyRb()
+    let tempfile=tempname()
+    execute '!~/subscribe/dev/saf/ndvo/scripts/fuzzyrb.sh >' . shellescape(tempfile)
+    try
+        silent execute 'read' tempfile
+    finally
+        call delete(tempfile)
+    endtry
+endfunction
+
 
 command! -nargs=0 InteractiveFZFCommand call <SID>InteractiveFZFCommand()
 
