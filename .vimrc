@@ -331,6 +331,8 @@ augroup OpenAuxiliaryTools
   nnoremap <leader>ow :e ~/subscribe/wiki/<cr>
   nnoremap <leader>omd :call EditMdTemplate()<cr>
   nnoremap <leader>ol :Lines<cr>
+  nnoremap <leader>olrb :call OpenRubyByLine() <cr>
+  nnoremap <leader>oljs :call OpenJsByLine() <cr>
 augroup END
 " }}}}
 
@@ -743,6 +745,22 @@ endfunction
 
 function OpenChangedFile()
   call fzf#run({ 'source': 'git diff --name-only origin/development', 'sink': 'e', 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "bat {}"'})
+function OpenRubyByLine()
+  call fzf#run({
+        \ 'source': "rg -n -g 'saf-api/*.rb' -g 'saf-api/**/*rb' --color always . ",
+        \ 'window': {'width': 0.9, 'height': 0.8},
+        \ 'options': '--ansi --delimiter : --nth 3.. --preview "echo {} | sed -e \"s/:.*//\" | xargs batcat " ',
+        \ 'sink*': function('s:sinkFileLine')
+        \ })
+endfunction
+
+function OpenJsByLine()
+  call fzf#run({
+        \ 'source': "rg -n -g 'saf-web/*.js' -g 'saf-web/**/*js' --color always . ",
+        \ 'window': {'width': 0.9, 'height': 0.8},
+        \ 'options': '--ansi --delimiter : --nth 3.. --preview "echo {} | sed -e \"s/:.*//\" | xargs batcat " ',
+        \ 'sink*': function('s:sinkFileLine')
+        \ })
 endfunction
 
 function ReadTemplate()
