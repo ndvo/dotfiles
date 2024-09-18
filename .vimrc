@@ -896,7 +896,7 @@ nnoremap <leader>rrb :call <SID>FuzzyRb()<cr>
 
 function! <SID>FuzzyTestChecklist()
     let tempfile=tempname()
-    execute '!~/subscribe/dev/saf/ndvo/scripts/taskdescriptionlines.sh >' . shellescape(tempfile)
+    execute '!~/dotfiles/scripts/subscribe/taskdescriptionlines.sh >' . shellescape(tempfile)
     try
         silent execute 'read' tempfile
     finally
