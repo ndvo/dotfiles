@@ -461,7 +461,7 @@ augroup END
 augroup customTests
   " Declare tests
   autocmd!
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>des odescribe("description", function() {<CR>});<ESC>k^f(l
+  autocmd FileType javascript,js,jsx,typescript,ts nnoremap <buffer> <leader>des odescribe("description", function() {<CR>});<ESC>k^f(l
 augroup END
 " }}}
 
@@ -505,7 +505,7 @@ augroup END
 " Template strings -------- {{{
 augroup stringHelpers
   autocmd!
-  autocmd FileType javascript,js,typescript,ts inoremap <buffer> $$ ${}<ESC>i
+  autocmd FileType javascript,js,jsx,typescript,ts inoremap <buffer> $$ ${}<ESC>i
   autocmd FileType ruby inoremap <buffer> $$ #{}<ESC>i
   autocmd FileType eruby inoremap <buffer> $$ <%=  %><ESC>kki
   autocmd FileType python inoremap <buffer> $$ {}<ESC>i
@@ -758,7 +758,7 @@ endfunction
 
 function OpenJsByLine()
   call fzf#run({
-        \ 'source': "rg -n -g 'saf-web/*.js' -g 'saf-web/**/*js' --color always . ",
+        \ 'source': "rg -n -g 'frontend/web/*.{js,jsx}' -g 'frontend/web/**/*.{js,jsx}' --color always . ",
         \ 'window': {'width': 0.9, 'height': 0.8},
         \ 'options': '--ansi --delimiter : --nth 3.. --preview "echo {} | sed -e \"s/:.*//\" | xargs batcat " ',
         \ 'sink*': function('s:sinkFileLine')
