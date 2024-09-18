@@ -964,6 +964,10 @@ function! DiffPreviousVersion()
 endfunction
 
 
+
+function! OpenTestFile()
+  execute 'e ' . substitute(substitute(expand('%'), '/app/', '/spec/', ''), '\.rb$', '_spec.rb', '')
+endfunction
 function! EnsureDirExists()
     let dir = expand('%:p:h')
     if !isdirectory(dir)
