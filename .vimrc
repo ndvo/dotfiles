@@ -916,3 +916,9 @@ function! EnsureDirExists()
         call mkdir(dir, 'p')
     endif
 endfunction
+
+function! RemoveBranches()
+    let l:selectedLines = join(getline("'<", "'>"), ' ')
+    echo "Removing ".l:selectedLines
+    execute 'Git branch -D '.l:selectedLines
+endfunction
