@@ -746,7 +746,19 @@ function GhStatusExecute()
 endfunction
 
 function OpenChangedFile()
-  call fzf#run({ 'source': 'git diff --name-only origin/development', 'sink': 'e', 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "bat {}"'})
+  call fzf#run({ 'source': 'git diff --name-only origin/development', 'sink': 'e', 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "cat {}"'})
+endfunction
+
+function OpenChangedFileByLine()
+  let l:changed_files = system('git diff --name-only origin/development')
+  let l:rg_command = 'rg -n '
+  call fzf#run({
+        \ 'source': "rg -n '.'  $(git diff --name-only origin/development)",
+        \ 'window': {'width': 0.9, 'height': 0.8},
+        \ 'options': '--ansi --delimiter : --nth 3.. --preview "echo {} | sed -e \"s/:.*//\" | xargs batcat " ',
+        \ 'sink*': function('s:sinkFileLine')
+        \ })
+endfunction
 
 function OpenRubyByLine()
   call fzf#run({
