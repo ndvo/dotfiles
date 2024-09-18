@@ -111,9 +111,9 @@ nnoremap <leader>gd :vert Gdiff
 nnoremap <leader>gdd :execute "vert Gdiff " g:dev <cr>
 nnoremap <leader>gdl :call DiffPreviousVersion() <cr>
 " Baixa as alterações da branch do servidor remoto
-nnoremap <leader>gp :Git pull<cr>
+nnoremap <leader>gp :Git! pull<cr>
 " Salva as alterações da branch no servidor remoto
-nnoremap <leader>gP :Git push
+nnoremap <leader>gP :Git! push
 " Volta para a branch anterior
 nnoremap <leader>gc- :Git checkout -<cr>
 " Abre a branch g:dev
@@ -145,7 +145,7 @@ nnoremap <leader>grw :Git reset <C-r><C-w>^
 " Prepara um comando para criar uma branch de backup
 nnoremap <leader>gbkp :Git checkout -b bkp-
 " Faz um git fetch
-nnoremap <leader>gf :Git fetch
+nnoremap <leader>gf :Git! fetch<cr>
 " Faz um cherry pick do commit sob o cursor
 nnoremap <leader>gg :Git cherry-pick <cword>
 " Atualiza a branch development
