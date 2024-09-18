@@ -440,21 +440,21 @@ augroup customFunctions
   autocmd FileType go nnoremap <buffer> <leader>if ofunc (r *Receiver) name (p Parameter) (r Return){<CR>}<ESC>k^f(l
   autocmd FileType python nnoremap <buffer> <leader>if odef name(parameter):<CR>pass<ESC>k^fn
   autocmd FileType python nnoremap <buffer> <leader>il ilambda x: x<ESC>
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>if ofunction name() {<CR>}<ESC>kf l
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>iF oconst name = () => {<CR>}<ESC>kf l
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>il afunction () {}<ESC>F(l
-  autocmd FileType javascript,js,typescript,ts nnoremap <buffer> <leader>iL a() => {}<ESC>F(l
+  autocmd FileType javascript,js,jsx,typescript,ts nnoremap <buffer> <leader>if ofunction name() {<CR>}<ESC>kf l
+  autocmd FileType javascript,js,jsx,typescript,ts nnoremap <buffer> <leader>iF oconst name = () => {<CR>}<ESC>kf l
+  autocmd FileType javascript,js,jsx,typescript,ts nnoremap <buffer> <leader>il afunction () {}<ESC>F(l
+  autocmd FileType javascript,js,jsx,typescript,ts nnoremap <buffer> <leader>iL a() => {}<ESC>F(l
   autocmd FileType php nnoremap <buffer> <leader>if ofunction <C-R>=expand("%:t:r")<CR>_Name($parameter){<CR>}<ESC>k$F_l
   autocmd FileType go inoremap <buffer> <s-space>if ofunc (r *Receiver) name (p Parameter) (r Return){<CR>}<ESC>k^f(l
   autocmd FileType python inoremap <buffer> <s-space>if odef name(parameter):<CR>pass<ESC>k^fn
   autocmd FileType python inoremap <buffer> <s-space>il ilambda x: x<ESC>
-  autocmd FileType javascript,js,typescript,ts inoremap <buffer> <s-space>if function name() {<CR>}<ESC>kf l
-  autocmd FileType javascript,js,typescript,ts inoremap <buffer> <s-space>iF const name = () => {<CR>}<ESC>kf l
-  autocmd FileType javascript,js,typescript,ts inoremap <buffer> <s-space>il function () {}<ESC>F(l
-  autocmd FileType javascript,js,typescript,ts inoremap <buffer> <s-space>iL () => {}<ESC>F(l
+  autocmd FileType javascript,js,jsx,typescript,ts inoremap <buffer> <s-space>if function name() {<CR>}<ESC>kf l
+  autocmd FileType javascript,js,jsx,typescript,ts inoremap <buffer> <s-space>iF const name = () => {<CR>}<ESC>kf l
+  autocmd FileType javascript,js,jsx,typescript,ts inoremap <buffer> <s-space>il function () {}<ESC>F(l
+  autocmd FileType javascript,js,jsx,typescript,ts inoremap <buffer> <s-space>iL () => {}<ESC>F(l
   autocmd FileType php inoremap <buffer> <s-space>f ofunction <C-R>=expand("%:t:r")<CR>_Name($parameter){<CR>}<ESC>k$F_l
   " Abbreviation for return
-  autocmd FileType go,php,python,java,js,typescript,javascript nnoremap <buffer> <leader>r oreturn 
+  autocmd FileType go,php,python,java,js,jsx,typescript,javascript nnoremap <buffer> <leader>ir oreturn 
 augroup END
 " }}}
 
@@ -766,8 +766,26 @@ function OpenJsByLine()
         \ })
 endfunction
 
-function ReadTemplate()
-  execute "FZF ~/templates/.".expand("%:e")." <cr>"
+function OpenOpsJsByLine()
+  call fzf#run({
+        \ 'source': "rg -n -g 'frontend/ops/*.{js,jsx}' -g 'frontend/ops/**/*.{js,jsx}' --color always . ",
+        \ 'window': {'width': 0.9, 'height': 0.8},
+        \ 'options': '--ansi --delimiter : --nth 3.. --preview "echo {} | sed -e \"s/:.*//\" | xargs batcat " ',
+        \ 'sink*': function('s:sinkFileLine')
+        \ })
+endfunction
+
+function! ReadTemplate()
+  let l:template_dir = '~/dotfiles/templates/'.expand("%:e")
+  echo l:template_dir
+
+  call fzf#run({
+        \ 'dir': l:template_dir,
+        \ 'sink': 'read',
+        \ 'window': {'width': 0.9, 'height': 0.8},
+        \ 'options': '--ansi --delimiter : --nth 3.. --preview "echo {} | sed -e \"s/:.*//\" | xargs batcat " ',
+        \ })
+endfunction
 endfunction
 
 function SetTopLine(text)
