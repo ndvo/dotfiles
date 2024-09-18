@@ -553,8 +553,11 @@ nnoremap <Leader>H :call HTMLDecode()<CR>
 " colorscheme happy_hacking
 " colorscheme railscasts
 " colorscheme minimalist
-colorscheme PaperColor
 " colorscheme apprentice
+
+" Em uma pesquisa online encontrei artigos afirmando que o preto no branco é
+" menos prejudicial para as vistas. Não encontrei artigos contestando.
+colorscheme PaperColor
 set background=light
 
 if &term =~ '256color'
