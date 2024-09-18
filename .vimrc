@@ -976,3 +976,26 @@ function! RemoveBranches()
     echo "Removing ".l:selectedLines
     execute 'Git branch -D '.l:selectedLines
 endfunction
+
+" autocmd BufEnter * call LoadLocalVimrc()
+
+function! LoadLocalVimrc()
+  let filepath = expand('%')
+
+  if filepath =~ '^saf-api/'
+    if filereadable("/home/nelson/subscribe/vim/api/.vimrc")
+      execute 'source /home/nelson/subscribe/vim/api/.vimrc'
+    endif
+  endif
+  if matchstr(filepath, '^frontend/web/')
+    if filereadable("/home/nelson/subscribe/vim/web/.vimrc")
+      execute 'source /home/nelson/subscribe/vim/web/.vimrc'
+    endif
+  endif
+  if matchstr(filepath, '^frontend/ops/')
+    if filereadable("/home/nelson/subscribe/vim/ops/.vimrc")
+      execute 'source /home/nelson/subscribe/vim/ops/.vimrc'
+    endif
+  endif
+endfunction
+
