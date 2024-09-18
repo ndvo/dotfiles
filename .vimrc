@@ -334,6 +334,7 @@ augroup OpenAuxiliaryTools
   nnoremap <leader>ol :Lines<cr>
   nnoremap <leader>olrb :call OpenRubyByLine() <cr>
   nnoremap <leader>oljs :call OpenJsByLine() <cr>
+  nnoremap <leader>o- <C-^>
 augroup END
 " }}}}
 
