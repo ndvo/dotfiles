@@ -198,6 +198,9 @@ nnoremap gP "0P
 nnoremap <leader>bw :w<cr>
 nnoremap <leader>bW :wa<cr>
 inoremap <s-space>bw <c-o>:w<cr>
+nnoremap <leader>ba :arga %<cr>
+nnoremap <leader>bd :argd %<cr>
+
 
 " Substitui seleção pelo conteúdo do registro
 vnoremap <leader>p "_dP
@@ -319,6 +322,8 @@ augroup OpenAuxiliaryTools
   nnoremap <leader>of :Files<CR>
   nnoremap <leader>og :GFiles<CR>
   nnoremap <leader>od :call OpenChangedFile() <cr>
+  nnoremap <leader>old :call OpenChangedFileByLine() <cr>
+  nnoremap <leader>oa :call OpenArglist() <cr>
   nnoremap <leader>ob :Buffers<CR>
   nnoremap <leader>oh :History<CR>
   nnoremap <leader>on :Lex<cr>
@@ -334,8 +339,10 @@ augroup OpenAuxiliaryTools
   nnoremap <leader>ow :e ~/subscribe/wiki/<cr>
   nnoremap <leader>omd :call EditMdTemplate()<cr>
   nnoremap <leader>ol :Lines<cr>
+  nnoremap <leader>oll :Lines<cr>
   nnoremap <leader>olrb :call OpenRubyByLine() <cr>
   nnoremap <leader>oljs :call OpenJsByLine() <cr>
+  nnoremap <leader>olps :call OpenOpsJsByLine() <cr>
   nnoremap <leader>o- <C-^>
 augroup END
 " }}}}
