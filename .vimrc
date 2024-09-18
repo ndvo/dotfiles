@@ -964,6 +964,9 @@ function! DiffPreviousVersion()
 endfunction
 
 
+function! OpenArglist()
+ call fzf#run({'source': argv(), 'sink*': 'e', 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "batcat {}"'})
+endfunction
 
 function! OpenTestFile()
   execute 'e ' . substitute(substitute(expand('%'), '/app/', '/spec/', ''), '\.rb$', '_spec.rb', '')
