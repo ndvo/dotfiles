@@ -25,7 +25,7 @@
 set t_Co=256
 
 set exrc " lê .vimrc local ao diretório
-set hidden " mantém buffers abertos ao fechar
+"set hidden " mantém buffers abertos ao fechar
 set visualbell " sinal visual ao invés de sonoro
 set list " mostra caracteres invisíveis
 
