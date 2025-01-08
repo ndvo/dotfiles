@@ -119,7 +119,8 @@ nnoremap <leader>g? :Git branch -vv --sort=-committerdate<cr>
 nnoremap <leader>gd :vert Gdiff 
 " Compara o arquivo atual com a versão development
 nnoremap <leader>gdd :execute "vert Gdiff " g:dev <cr>
-nnoremap <leader>gdl :call DiffPreviousVersion() <cr>
+nnoremap <leader>gdl :call DiffPreparePreviousVersions() <cr>
+nnoremap <leader>gdp :call DiffPreviousVersion() <cr>
 " Baixa as alterações da branch do servidor remoto
 nnoremap <leader>gp :Git! pull<cr>
 " Salva as alterações da branch no servidor remoto
@@ -944,13 +945,16 @@ endfunction
 
 command! -nargs=0 InteractiveFZFCommand call <SID>InteractiveFZFCommand()
 
+function! DiffPreparePreviousVersions()
+  echo "Preparing list of git changes to this file."
+  setqflist([])
+  execute 'Gclog --oneline %'
+endfunction
 
 function! DiffPreviousVersion()
   " Get the current quickfix list
   let qflist = getqflist()
   let current_index = getqflist({'idx': 0}).idx
-
-  let fillqf = len(qflist) == 0
 
   if current_index < len(qflist)
     " Get the next item
@@ -967,16 +971,9 @@ function! DiffPreviousVersion()
       let cmd = 'Gvdiffsplit '.commit.':% | cnext'
       echo cmd
       execute cmd
-    else
-      fillqf = true
     endif
   else
-    if fillqf
-      echo "Preparing list of changes to this file"
-      execute 'Gclog --oneline %'
-    else
-      echo "no previous version to show"
-    endif
+    echo "no previous version to show"
   endif
 endfunction
 
