@@ -48,6 +48,7 @@ nnoremap N Nzzzv
 " Move por blocos
 nnoremap H :SidewaysJumpLeft<cr>
 nnoremap L :SidewaysJumpRight<cr>
+nnoremap <c-8> :execute '/'.expand('<cWORD>')<cr>
 
 " Toggles
 nnoremap <leader>thl :set hlsearch!<cr>
