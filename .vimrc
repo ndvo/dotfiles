@@ -21,6 +21,7 @@
 """ leader t - toggles
 """ leader l - comandos relacionados a limpar o vim
 
+""" leader wz fecha preview
 set t_Co=256
 
 set exrc " lê .vimrc local ao diretório
