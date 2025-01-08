@@ -772,8 +772,6 @@ function OpenChangedFile()
 endfunction
 
 function OpenChangedFileByLine()
-  let l:changed_files = system('git diff --name-only origin/development')
-  let l:rg_command = 'rg -n '
   call fzf#run({
         \ 'source': "rg -n '.'  $(git diff --name-only origin/development)",
         \ 'window': {'width': 0.9, 'height': 0.8},
@@ -785,6 +783,15 @@ endfunction
 function OpenRubyByLine()
   call fzf#run({
         \ 'source': "rg -n -g 'saf-api/*.rb' -g 'saf-api/**/*rb' --color always . ",
+        \ 'window': {'width': 0.9, 'height': 0.8},
+        \ 'options': '--ansi --delimiter : --nth 3.. --preview "echo {} | sed -e \"s/:.*//\" | xargs batcat " ',
+        \ 'sink*': function('s:sinkFileLine')
+        \ })
+endfunction
+
+function OpenAnyFileByLine()
+  call fzf#run({
+        \ 'source': "rg -n --color always . ",
         \ 'window': {'width': 0.9, 'height': 0.8},
         \ 'options': '--ansi --delimiter : --nth 3.. --preview "echo {} | sed -e \"s/:.*//\" | xargs batcat " ',
         \ 'sink*': function('s:sinkFileLine')
@@ -817,7 +824,7 @@ function! ReadTemplate()
         \ 'dir': l:template_dir,
         \ 'sink': 'read',
         \ 'window': {'width': 0.9, 'height': 0.8},
-        \ 'options': '--ansi --delimiter : --nth 3.. --preview "echo {} | sed -e \"s/:.*//\" | xargs batcat " ',
+        \ 'options': '--preview "batcat --style=numbers --color=always --line-range :500 {}"',
         \ })
 endfunction
 
