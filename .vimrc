@@ -41,7 +41,7 @@ nnoremap <leader>w <c-w>
 nnoremap <leader>wwq :windo q<cr>
 
 " Saltos
-nnoremap <leader>jbp <c-^>
+" nnoremap <leader>jbp <c-^>
 " Mantém a centralização
 nnoremap n nzzzv
 nnoremap N Nzzzv
