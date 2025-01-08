@@ -653,8 +653,6 @@ function! DeleteEmptyBuffers()
     endif
 endfunction
 
-set noma
-
 " set nrformats+=alpha " permite ao vim incrementar texto
 let g:ale_python_auto_pipenv = 1
 
