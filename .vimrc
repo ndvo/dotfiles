@@ -351,6 +351,7 @@ augroup OpenAuxiliaryTools
   nnoremap <leader>omd :call EditMdTemplate()<cr>
   nnoremap <leader>ol :Lines<cr>
   nnoremap <leader>oll :Lines<cr>
+  nnoremap <leader>olf :call OpenAnyFileByLine()<cr>
   nnoremap <leader>olrb :call OpenRubyByLine() <cr>
   nnoremap <leader>oljs :call OpenJsByLine() <cr>
   nnoremap <leader>olps :call OpenOpsJsByLine() <cr>
