@@ -62,6 +62,14 @@ nnoremap <leader>tsl :call ToggleSyntaxHL()<cr>
 nnoremap <leader>lh :call DeleteHiddenBuffers()
 nnoremap <leader>le :call DeleteEmptyBuffers()
 
+" Consoles
+nnoremap <leader>cterm :tab term
+nnoremap <leader>capi :tab term ++close bash -c "docker-compose run --no-deps --rm -v docker_user:/root api sh"
+nnoremap <leader>cweb :tab term ++close bash -c "docker-compose run --no-deps --rm -v docker_user:/root web sh"
+nnoremap <leader>cruby :tab term ++close bash -c "irb"
+nnoremap <leader>cpython :tab term ++close bash -c "irb"
+nnoremap <leader>cnode :tab term ++close bash -c "node"
+
 " Tagbar
 nnoremap <right> :TagbarToggle<cr>
 
