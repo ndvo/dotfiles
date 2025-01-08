@@ -1029,3 +1029,4 @@ function! LoadLocalVimrc()
   endif
 endfunction
 
+hi link netrwMarkFile Visual
