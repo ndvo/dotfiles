@@ -859,6 +859,10 @@ set spellfile=$HOME/.vim-spell-en.utf-8.add
 " set complete+=kspell
 set backupdir=~/tmp
 
+function! s:echoFileLine(lines) abort
+  echo a:lines
+endfunction
+
 function! s:sinkFileLine(lines) abort
   echo a:lines
 
@@ -942,7 +946,6 @@ function! <SID>FuzzyRb()
     endtry
 endfunction
 
-
 command! -nargs=0 InteractiveFZFCommand call <SID>InteractiveFZFCommand()
 
 function! DiffPreparePreviousVersions()
@@ -977,7 +980,6 @@ function! DiffPreviousVersion()
   endif
 endfunction
 
-
 function! OpenArglist()
  call fzf#run({'source': argv(), 'sink*': 'e', 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "batcat {}"'})
 endfunction
@@ -985,6 +987,7 @@ endfunction
 function! OpenTestFile()
   execute 'e ' . substitute(substitute(expand('%'), '/app/', '/spec/', ''), '\.rb$', '_spec.rb', '')
 endfunction
+
 function! EnsureDirExists()
     let dir = expand('%:p:h')
     if !isdirectory(dir)
