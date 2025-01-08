@@ -41,96 +41,100 @@ function package () {
 
 (
 set_group utils
-package https://github.com/moll/vim-bbye &
-package https://github.com/tpope/vim-dispatch &
+package moll/vim-bbye &
+package tpope/vim-dispatch &
+package thinca/vim-localrc &
 wait
 ) &
 (
 set_group reading
-package https://github.com/wellle/context.vim &
+package wellle/context.vim &
 wait
 ) &
 (
 set_group searching
-package https://github.com/jremmen/vim-ripgrep &
-package https://github.com/junegunn/fzf &
-package https://github.com/junegunn/fzf.vim &
+package jremmen/vim-ripgrep &
+package junegunn/fzf &
+package junegunn/fzf.vim &
 wait
 ) &
 (
 set_group editing
-package https://github.com/AndrewRadev/sideways.vim &
-package https://github.com/AndrewRadev/splitjoin.vim &
-package https://github.com/AndrewRadev/switch.vim &
-package https://github.com/AndrewRadev/tagalong.vim &
-package https://github.com/kana/vim-arpeggio &
-package https://github.com/rstacruz/sparkup &
-package https://github.com/tpope/vim-abolish &
-package https://github.com/tpope/vim-jdaddy &
-package https://github.com/vim-scripts/SyntaxComplete &
-package https://github.com/prettier/vim-prettier &
+package AndrewRadev/sideways.vim &
+package AndrewRadev/splitjoin.vim &
+package AndrewRadev/switch.vim &
+package AndrewRadev/tagalong.vim &
+# package https://github.com/kana/vim-arpeggio &
+package rstacruz/sparkup &
+package tpope/vim-abolish &
+package tpope/vim-jdaddy &
+package vim-scripts/SyntaxComplete &
+package prettier/vim-prettier &
+package chrisbra/unicode.vim
 wait
 ) &
 (
 set_group version_control
-package https://github.com/mbbill/undotree &
-package https://github.com/tpope/vim-fugitive &
-package https://github.com/tpope/vim-rhubarb &&
+package mbbill/undotree &
+package tpope/vim-fugitive &
+package tpope/vim-rhubarb &&
 wait
 ) &
 (
 set_group lsp
-package https://github.com/dense-analysis/ale &
-package https://github.com/ludovicchabant/vim-gutentags &
-# package https://github.com/tpope/lsp &
-package https://github.com/prabirshrestha/vim-lsp &
-package https://github.com/ternjs/tern_for_vim &
+package dense-analysis/ale &
+package pechorin/any-jump.vim &
+# package ludovicchabant/vim-gutentags &
+# package tpope/lsp &
+# package prabirshrestha/vim-lsp &
+# package mattn/vim-lsp-settings &
+# package ternjs/tern_for_vim &
 wait
 ) &
 (
 set_group autocomplete
-package https://github.com/heavenshell/vim-jsdoc &
-#package https://github.com/jayli/vim-easycomplete &
-#package https://github.com/codota/tabnine-vim &
+package heavenshell/vim-jsdoc &
+#package jayli/vim-easycomplete &
+#package codota/tabnine-vim &
 wait
 ) &
 (
 set_group debugging
-package https://github.com/puremourning/vimspector &
+package puremourning/vimspector &
 wait
 ) &
 (
 set_group navigation
-package https://github.com/preservim/tagbar &
-package https://github.com/vim-scripts/BufOnly.vim & 
+package preservim/tagbar &
+package vim-scripts/BufOnly.vim & 
 wait
 ) &
 (
 set_group syntax
-package https://github.com/MaxMEllon/vim-jsx-pretty &
+package MaxMEllon/vim-jsx-pretty &
 wait
 ) &
 (
 set_group testing
-package https://github.com/vim-test/vim-test &
+package vim-test/vim-test &
 wait
 ) &
 (
 set_group database
-package https://github.com/tpope/vim-dadbod &
+package tpope/vim-dadbod &
 wait
 ) &
 (
 set_group colorschemes
-package https://github.com/altercation/vim-colors-solarized &
-package https://github.com/flazz/vim-colorschemes &
-package https://github.com/arcticicestudio/nord-vim &
+package altercation/vim-colors-solarized &
+package flazz/vim-colorschemes &
+package arcticicestudio/nord-vim &
 wait
 ) &
 (
 set_group framework
-package https://github.com/tpope/vim-rails &
-package https://github.com/tpope/vim-ruby &
+package tpope/vim-rails &
+package vim-ruby/vim-ruby &
 wait
 ) &
 wait
