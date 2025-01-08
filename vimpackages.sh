@@ -34,7 +34,8 @@ function package () {
     echo "$expected_repo: $result"
   else
     echo "$expected_repo: Installing..."
-    git clone -q "$repo_url"
+    result=$(git clone -q "git@github.com:$repo_url"".git")
+    echo "$expected_repo: $result"
   fi
 }
 
