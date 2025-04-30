@@ -335,34 +335,35 @@ augroup OpenAuxiliaryTools
   " menos por enquanto eu uso as ferramentas listadas abaixo de forma
   " limitada, quase só para ver algo rapidamente e em seguida fechá-las. Por
   " isso não parece valer a pena ter uma seção para cada uma.
-  nnoremap <leader>of :Files<CR>
-  nnoremap <leader>og :GFiles<CR>
-  nnoremap <leader>od :call OpenChangedFile() <cr>
-  nnoremap <leader>old :call OpenChangedFileByLine() <cr>
+  nnoremap <leader>o- <C-^>
+  nnoremap <leader>o. :Explore<cr>
+  nnoremap <leader>oD :call OpenChangedFile() <cr>
+  nnoremap <leader>oP <c-w><c-z><c-w>}
   nnoremap <leader>oa :call OpenArglist() <cr>
   nnoremap <leader>ob :Buffers<CR>
   nnoremap <leader>od :call OpenLocallyChangedFile() <cr>
+  nnoremap <leader>of :Files<CR>
+  nnoremap <leader>og :GFiles<CR>
   nnoremap <leader>oh :History<CR>
+  nnoremap <leader>ol :Lines<cr>
+  nnoremap <leader>old :call OpenChangedFileByLine() <cr>
+  nnoremap <leader>olf :call OpenAnyFileByLine()<cr>
+  nnoremap <leader>oljs :call OpenJsByLine() <cr>
+  nnoremap <leader>oll :Lines<cr>
+  nnoremap <leader>olps :call OpenOpsJsByLine() <cr>
+  nnoremap <leader>olrb :call OpenRubyByLine() <cr>
+  nnoremap <leader>omd :call EditMdTemplate()<cr>
   nnoremap <leader>on :Lex<cr>
-  nnoremap <leader>ou :UndotreeToggle<cr>
-  nnoremap <leader>ot :TagbarToggle<cr>
   nnoremap <leader>op <c-w>}
-  nnoremap <leader>oP <c-w><c-z><c-w>}
-  nnoremap <leader>o. :Explore<cr>
-  nnoremap <leader>os :call EditSchema()<cr>
   nnoremap <leader>or :call EditRoutes()<cr>
+  nnoremap <leader>os :call EditSchema()<cr>
+  nnoremap <leader>ot :TagbarToggle<cr>
+  nnoremap <leader>ou :UndotreeToggle<cr>
   nnoremap <leader>ov2 :call Editv2()<cr>
   nnoremap <leader>ov3 :call Editv3()<cr>
   nnoremap <leader>ow :e ~/subscribe/wiki/<cr>
-  nnoremap <leader>omd :call EditMdTemplate()<cr>
-  nnoremap <leader>ol :Lines<cr>
-  nnoremap <leader>oll :Lines<cr>
-  nnoremap <leader>olf :call OpenAnyFileByLine()<cr>
-  nnoremap <leader>olrb :call OpenRubyByLine() <cr>
-  nnoremap <leader>oljs :call OpenJsByLine() <cr>
-  nnoremap <leader>olps :call OpenOpsJsByLine() <cr>
-  nnoremap <leader>o- <C-^>
   nnoremap <leader>oz :call OpenSketches() <cr>
+  nnoremap <leader>olog :e ~/daylog.md<cr>
 augroup END
 " }}}}
 
