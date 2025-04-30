@@ -998,6 +998,10 @@ function! OpenTestFile()
   execute 'e ' . substitute(substitute(expand('%'), '/app/', '/spec/', ''), '\.rb$', '_spec.rb', '')
 endfunction
 
+function! OpenSketches()
+  execute 'e ~/subscribe-ndvo/sketches/' . trim(system('git rev-parse --abbrev-ref HEAD'))
+endfunction
+
 function! EnsureDirExists()
     let dir = expand('%:p:h')
     if !isdirectory(dir)
