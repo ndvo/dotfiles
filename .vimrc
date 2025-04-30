@@ -1052,3 +1052,5 @@ function! RunInSketchTerminal()
 
   call term_sendkeys(l:sketch_buff_id, l:code_to_run )
 endfunction
+
+let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript', 'typescript', 'ruby']
