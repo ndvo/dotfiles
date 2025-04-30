@@ -63,6 +63,7 @@ nnoremap <leader>lh :call DeleteHiddenBuffers()
 nnoremap <leader>le :call DeleteEmptyBuffers()
 
 " Consoles
+nnoremap <leader>c. :term ++curwin
 nnoremap <leader>cterm :tab term
 nnoremap <leader>capi :tab term ++close bash -c "docker-compose run --no-deps --rm -v docker_user:/root api sh"
 nnoremap <leader>cweb :tab term ++close bash -c "docker-compose run --no-deps --rm -v docker_user:/root web sh"
