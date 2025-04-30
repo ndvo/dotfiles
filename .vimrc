@@ -115,6 +115,7 @@ nnoremap <leader>gL :vert Git log --graph<cr>
 " Mostra o Git Blame
 nnoremap <leader>gbl :Git blame --date short <cr>
 " Lista branches locais
+nnoremap <leader>gn :call CheckoutBranchNew('')<left><left>
 nnoremap <leader>g/ :call CheckoutBranch()<cr>
 nnoremap <leader>gi :call CheckoutBranchHistory()<cr>
 " Lista branches ordenadas por data de commit
@@ -132,7 +133,7 @@ nnoremap <leader>gP :Git! push
 " Volta para a branch anterior
 nnoremap <leader>gc- :Git checkout -<cr>
 " Abre a branch g:dev
-nnoremap <leader>gcd :execute "Git checkout " g:dev <cr>
+nnoremap <leader>gcd :call CheckoutBranchDevelopment()<cr>
 " Abre a branch g:master
 nnoremap <leader>gcm :execute "Git checkout " g:master <cr>
 " Abre a branch g:staging
@@ -833,12 +834,12 @@ function! ReadTemplate()
         \ })
 endfunction
 
-function! CheckoutBranch() abort
+function CheckoutBranch()
   let l:branches = systemlist('git branch -a')
   
   call fzf#run({
     \ 'source': l:branches,
-    \ 'sink': function('<SID>checkout_branch'),
+    \ 'sink': function('<SID>checkout_branch_session'),
     \ 'window': {'width': 0.9, 'height': 0.8},
     \ 'options': [
       \ '--prompt', 'Branch> ',
@@ -862,6 +863,25 @@ function CheckoutBranchHistory()
     \ ],
     \ })
 endfunction
+
+function CheckoutBranchDevelopment()
+  "execute 'mksession! '.CurrentSessionName()
+  execute "Git checkout " . g:dev
+  "execute 'source '.CurrentSessionName()
+endfunction
+
+function CheckoutBranchNew(name)
+  "execute 'mksession! '.CurrentSessionName()
+  execute '!createbranch '.a:name
+  "execute 'source '.CurrentSessionName()
+endfunction
+
+function s:checkout_branch_session(item)
+  "execute 'mksession! '.CurrentSessionName()
+  call s:checkout_branch(a:item)
+  "execute 'source '.CurrentSessionName()
+endfunction
+
 function s:checkout_branch(item)
   execute 'Git! checkout '.substitute(a:item, '^ *', '', '')
 endfunction
@@ -901,6 +921,10 @@ endfunction
 
 function CurrentTemplateName()
   return '.github/pr-descriptions/'.GitBranch().'.template.md'
+endfunction
+
+function CurrentSessionName()
+  return 'ndvo/sessions/'.GitBranch().'.vim'
 endfunction
 
 function GitBranch()
