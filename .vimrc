@@ -341,6 +341,7 @@ augroup OpenAuxiliaryTools
   nnoremap <leader>old :call OpenChangedFileByLine() <cr>
   nnoremap <leader>oa :call OpenArglist() <cr>
   nnoremap <leader>ob :Buffers<CR>
+  nnoremap <leader>od :call OpenLocallyChangedFile() <cr>
   nnoremap <leader>oh :History<CR>
   nnoremap <leader>on :Lex<cr>
   nnoremap <leader>ou :UndotreeToggle<cr>
@@ -775,6 +776,10 @@ endfunction
 
 function OpenChangedFile()
   call fzf#run({ 'source': 'git diff --name-only origin/development', 'sink': 'e', 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "cat {}"'})
+endfunction
+
+function OpenLocallyChangedFile()
+  call fzf#run({ 'source': 'git diff --name-only $(git merge-base HEAD development)', 'sink': 'e', 'window': {'width': 0.9, 'height': 0.6}, 'options': '--preview "cat {}"'})
 endfunction
 
 function OpenChangedFileByLine()
