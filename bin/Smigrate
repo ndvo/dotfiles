@@ -1,8 +1,10 @@
 #!/bin/bash
 
 if [ ! -t 0 ]; then
-  xterm -e "cd ~/subscribe/dev/saf/ ; make migrate"
+  xterm -hold -e "cd ~/subscribe/dev/saf/ ; make migrate && make migrate_data"
 else
   cd ~/subscribe/dev/saf/
-  make migrate
+  make migrate && make migrate_data
 fi
+
+echo "Task completed. You can close this window now."
