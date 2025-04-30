@@ -73,6 +73,8 @@ nnoremap <leader>cnode :tab term ++close bash -c "node"
 
 " Tagbar
 nnoremap <right> :TagbarToggle<cr>
+vnoremap <leader>x <esc>:call RunInSketchTerminal()<cr>
+nnoremap <leader>x :vert term<cr><c-w>N:file sketch-terminal<c-w>
 
 " Netrw {{{ ----
 
@@ -357,6 +359,7 @@ augroup OpenAuxiliaryTools
   nnoremap <leader>oljs :call OpenJsByLine() <cr>
   nnoremap <leader>olps :call OpenOpsJsByLine() <cr>
   nnoremap <leader>o- <C-^>
+  nnoremap <leader>oz :call OpenSketches() <cr>
 augroup END
 " }}}}
 
@@ -1031,3 +1034,21 @@ function! LoadLocalVimrc()
 endfunction
 
 hi link netrwMarkFile Visual
+
+function! RunInSketchTerminal()
+  let l:sketch_buff_id = v:null
+  for i in term_list()
+    if buffer_name(i) == "sketch-terminal"
+      let l:sketch_buff_id = i
+    endif
+  endfor
+
+  if l:sketch_buff_id is v:null
+    let l:sketch_buff_id = term_start("bash", { "term_name": "sketch-terminal", "term_finish": "close", "vertical": 1 })
+    execute "wincmd p"
+  endif
+
+  let l:code_to_run = trim(@*) . "\<CR>"
+
+  call term_sendkeys(l:sketch_buff_id, l:code_to_run )
+endfunction
