@@ -1078,6 +1078,12 @@ endfunction
 
 hi link netrwMarkFile Visual
 
+let g:fzf_colors = {
+    \ 'border':      ['fg', 'Ignore'],
+    \ 'bg+':        ['bg', 'CursorLine', 'CursorColumn'],
+    \ 'fg+':        ['fg', 'CursorLine', 'CursorColumn']
+    \ }
+
 function! RunInSketchTerminal()
   let l:sketch_buff_id = v:null
   for i in term_list()
