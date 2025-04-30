@@ -77,6 +77,8 @@ vnoremap <leader>x <esc>:call RunInSketchTerminal()<cr>
 nnoremap <leader>x :vert term<cr><c-w>N:file sketch-terminal<c-w>
 
 " Netrw {{{ ----
+"
+nnoremap <leader>mkdir :!mkdir -p %:h<cr>
 
 augroup NetRW
   autocmd!
