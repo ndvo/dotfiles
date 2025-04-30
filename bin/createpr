@@ -5,4 +5,4 @@ prFolders=".github/pr-descriptions";
 templateName="$branchName.template.md";
 templatePath="$prFolders/$templateName";
 
-gh pr create -d -l account -F "$templatePath" -t "$@"
+gh pr create -a "@me" -d -l account -F "$templatePath" -t "$@"
