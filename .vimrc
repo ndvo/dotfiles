@@ -116,6 +116,7 @@ nnoremap <leader>gL :vert Git log --graph<cr>
 nnoremap <leader>gbl :Git blame --date short <cr>
 " Lista branches locais
 nnoremap <leader>g/ :call CheckoutBranch()<cr>
+nnoremap <leader>gi :call CheckoutBranchHistory()<cr>
 " Lista branches ordenadas por data de commit
 nnoremap <leader>g? :Git branch -vv --sort=-committerdate<cr>
 " Compara o arquivo atual com a versão estagiada
@@ -847,6 +848,20 @@ function! CheckoutBranch() abort
     \ })
 endfunction
 
+function CheckoutBranchHistory()
+  let l:branches = systemlist("git reflog | sed -ne 's/.*moving from \\([^ ]*\\).*/\\1/p' | uniq ")
+  
+  call fzf#run({
+    \ 'source': l:branches,
+    \ 'sink': function('<SID>checkout_branch_session'),
+    \ 'window': {'width': 0.9, 'height': 0.8},
+    \ 'options': [
+      \ '--prompt', 'Branch> ',
+      \ '--preview', 'echo {} | sed "s/^ *//;s/ *$//" | xargs git log -n 5 --oneline',
+      \ '--bind', 'ctrl-d:page-down,ctrl-u:page-up',
+    \ ],
+    \ })
+endfunction
 function s:checkout_branch(item)
   execute 'Git! checkout '.substitute(a:item, '^ *', '', '')
 endfunction
