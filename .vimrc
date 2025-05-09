@@ -786,44 +786,28 @@ function OpenLocallyChangedFile()
 endfunction
 
 function OpenChangedFileByLine()
-  call fzf#run({
-        \ 'source': "rg -n '.'  $(git diff --name-only origin/development)",
-        \ 'window': {'width': 0.9, 'height': 0.8},
-        \ 'options': '--ansi --delimiter : --nth 3.. --preview "echo {} | sed -e \"s/:.*//\" | xargs batcat " ',
-        \ 'sink*': function('s:sinkFileLine')
-        \ })
+  call OpenByLine("rg -n '.'  $(git diff --name-only origin/development)")
 endfunction
 
 function OpenRubyByLine()
-  call fzf#run({
-        \ 'source': "rg -n -g 'saf-api/*.rb' -g 'saf-api/**/*rb' --color always . ",
-        \ 'window': {'width': 0.9, 'height': 0.8},
-        \ 'options': '--ansi --delimiter : --nth 3.. --preview "echo {} | sed -e \"s/:.*//\" | xargs batcat " ',
-        \ 'sink*': function('s:sinkFileLine')
-        \ })
+  call OpenByLine("rg -n -g 'saf-api/*.rb' -g 'saf-api/**/*rb' --color always . ")
 endfunction
 
 function OpenAnyFileByLine()
-  call fzf#run({
-        \ 'source': "rg -n --color always . ",
-        \ 'window': {'width': 0.9, 'height': 0.8},
-        \ 'options': '--ansi --delimiter : --nth 3.. --preview "echo {} | sed -e \"s/:.*//\" | xargs batcat " ',
-        \ 'sink*': function('s:sinkFileLine')
-        \ })
+  call OpenByLine("rg -n --color always . ")
 endfunction
 
 function OpenJsByLine()
-  call fzf#run({
-        \ 'source': "rg -n -g 'frontend/web/*.{js,jsx}' -g 'frontend/web/**/*.{js,jsx}' --color always . ",
-        \ 'window': {'width': 0.9, 'height': 0.8},
-        \ 'options': '--ansi --delimiter : --nth 3.. --preview "echo {} | sed -e \"s/:.*//\" | xargs batcat " ',
-        \ 'sink*': function('s:sinkFileLine')
-        \ })
+  call OpenByLine("rg -n -g 'frontend/web/*.{js,jsx}' -g 'frontend/web/**/*.{js,jsx}' --color always . ")
 endfunction
 
 function OpenOpsJsByLine()
+  call OpenByLine("rg -n -g 'frontend/ops/*.{js,jsx}' -g 'frontend/ops/**/*.{js,jsx}' --color always . ")
+endfunction
+
+function OpenByLine(source)
   call fzf#run({
-        \ 'source': "rg -n -g 'frontend/ops/*.{js,jsx}' -g 'frontend/ops/**/*.{js,jsx}' --color always . ",
+        \ 'source': a:source,
         \ 'window': {'width': 0.9, 'height': 0.8},
         \ 'options': '--ansi --delimiter : --nth 3.. --preview "echo {} | sed -e \"s/:.*//\" | xargs batcat " ',
         \ 'sink*': function('s:sinkFileLine')
