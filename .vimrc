@@ -673,7 +673,7 @@ let g:ale_python_flake8_change_directory=0
 set synmaxcol=300
 
 " copia arquivo e linha atual
-nnoremap <leader>cfn :let @"=expand("%").":".line(".")<CR>
+nnoremap <leader>cfn :let @"=expand("%").":".line(".")."\n"<CR>
 
 
 function! DeleteHiddenBuffers()
