@@ -99,7 +99,7 @@ augroup END
 
 " let g:netrw_list_hide= netrw_gitignore#Hide().'.*\.swp$'
 let g:netrw_winsize = -40
-nnoremap <left> :Lex<cr>
+nnoremap <left> :call ToggleLex() <cr>
 nnoremap <down> :UndotreeToggle<cr>
 
 " Git {{{ ----
