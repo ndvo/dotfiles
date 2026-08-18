@@ -1252,3 +1252,6 @@ endfunction
 
 
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript', 'typescript', 'ruby']
+inoremap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+let g:copilot_workspace_folders = ["~/subscribe/dev/saf"]
