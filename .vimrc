@@ -765,11 +765,23 @@ function EditRoutes()
   call FileEdit(l:filename)
 endfunction
 
+syntax enable
+
 function ToggleSyntaxHL()
-  if exists("g:syntax_on")
-    syntax off
+  if &syntax == 'ON'
+    setlocal syntax=OFF
   else
-    syntax enable
+    setlocal syntax=ON
+  endif
+endfunction
+
+function ToggleLex()
+  if exists("t:lex_opened")
+    unlet t:lex_opened
+    Lex
+  else
+    let t:lex_opened = 1
+    Lex %:p:h
   endif
 endfunction
 
