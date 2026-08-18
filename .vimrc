@@ -290,7 +290,7 @@ set colorcolumn=80
 set cursorline
 set formatoptions-=t
 
-set wildmode=longest,list   "Complete longest string, then list alternatives
+set wildmode=longest,list,full   "Complete longest string, then list alternatives
 set wildmenu
 
 " Desfazer persistente
