@@ -380,6 +380,7 @@ augroup OpenAuxiliaryTools
   nnoremap <leader>ov3 :call Editv3()<cr>
   nnoremap <leader>ow :e ~/subscribe/wiki/<cr>
   nnoremap <leader>oz :call OpenSketches() <cr>
+  nnoremap <leader>oZ :call OpenPlans() <cr>
   nnoremap <leader>olog :e ~/daylog.md<cr>
 augroup END
 " }}}}
