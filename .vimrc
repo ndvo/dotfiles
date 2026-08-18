@@ -1180,22 +1180,75 @@ let g:fzf_colors = {
     \ 'fg+':        ['fg', 'CursorLine', 'CursorColumn']
     \ }
 
-function! RunInSketchTerminal()
-  let l:sketch_buff_id = v:null
+
+function! GetNamedTerminal(name)
+  let l:term_buff_id = v:null
   for i in term_list()
-    if buffer_name(i) == "sketch-terminal"
-      let l:sketch_buff_id = i
+    if buffer_name(i) == a:name
+      let l:term_buff_id = i
     endif
   endfor
 
-  if l:sketch_buff_id is v:null
-    let l:sketch_buff_id = term_start("bash", { "term_name": "sketch-terminal", "term_finish": "close", "vertical": 1 })
+  if l:term_buff_id is v:null
+    let l:term_buff_id = term_start("bash", { "term_name": a:name, "term_finish": "close", "vertical": 1 })
     execute "wincmd p"
   endif
+  return l:term_buff_id
+endfunction
 
+function! GetSketchTerminal()
+  return GetNamedTerminal("sketch-terminal")
+endfunction
+
+function! RunQInSketchTerminal()
+  let l:sketch_buff_id = GetSketchTerminal()
+  let l:code_to_run = 'q'
+  call term_sendkeys(l:sketch_buff_id, l:code_to_run )
+endfunction
+
+function! RunIInSketchTerminal()
+  let l:sketch_window = win_findbuf(GetSketchTerminal())
+
+  if !empty(l:sketch_window)
+    let l:current_win = win_getid()
+
+    call win_gotoid(l:sketch_window[0])
+    execute "normal i"
+    call win_gotoid(l:current_win)
+  endif
+endfunction
+
+function! RunInSketchTerminal()
+  let l:sketch_buff_id = GetSketchTerminal()
+  let l:code_to_run = getline('.') . "\<cr>"
+
+  call term_sendkeys(l:sketch_buff_id, l:code_to_run )
+endfunction
+
+function! RunInSketchAPITerminal()
+  let l:sketch_buff_id = GetSketchTerminal()
+
+  call term_sendkeys(l:sketch_buff_id, "docker compose run --no-deps --rm -v docker_user:/root api sh")
+
+  let l:code_to_run = getline('.') . "\<cr>"
+  call term_sendkeys(l:sketch_buff_id, l:code_to_run )
+endfunction
+
+function! RunInSketchRailsTerminal()
+  let l:sketch_buff_id = GetSketchTerminal()
+
+  call term_sendkeys(l:sketch_buff_id, "docker compose run --no-deps --rm -v docker_user:/root api sh\nbundle exec rails c")
+
+  let l:code_to_run = getline('.') . "\<cr>"
+  call term_sendkeys(l:sketch_buff_id, l:code_to_run )
+endfunction
+
+function! RunInSketchTerminalSelection()
+  let l:sketch_buff_id = GetSketchTerminal()
   let l:code_to_run = trim(@*) . "\<CR>"
 
   call term_sendkeys(l:sketch_buff_id, l:code_to_run )
 endfunction
+
 
 let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript', 'typescript', 'ruby']
