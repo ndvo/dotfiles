@@ -333,7 +333,7 @@ augroup END
 
 " Pesquisar ----------
 nnoremap <leader>rt :call ReadTemplate()<cr>
-nnoremap <leader>rg :Rg -g '!tags' <cword> 
+nnoremap <leader>rg :Rg -F -g '!tags' <cword> 
 nnoremap <leader>RG :Rg -g '!tags' 
 nnoremap <leader>rgjs :Rg -g '!tags' -g '*.{jsx,js}' 
 nnoremap <leader>rgrb :Rg -g '!tags' -g '*.rb' 
