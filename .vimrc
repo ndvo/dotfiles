@@ -1255,3 +1255,11 @@ let g:markdown_fenced_languages = ['html', 'python', 'bash=sh', 'javascript', 't
 inoremap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
 let g:copilot_no_tab_map = v:true
 let g:copilot_workspace_folders = ["~/subscribe/dev/saf"]
+
+def MemoryUsage(): string
+  var meminfo = system('free -h | grep Mem')
+  var parts = split(meminfo)
+  return 'Mem: ' .. parts[6]
+enddef
+
+set secure
