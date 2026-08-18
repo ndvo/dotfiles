@@ -137,6 +137,10 @@ nnoremap <leader>g? :Git branch -vv --sort=-committerdate<cr>
 nnoremap <leader>gd :vert Gdiff 
 " Compara o arquivo atual com a versão development
 nnoremap <leader>gdd :execute "vert Gdiff " g:dev <cr>
+" Compara o arquivo atual com a versão staged
+nnoremap <leader>gds :execute "vert Gdiff HEAD" <cr>
+nnoremap <leader>gdo :execute "vert Gdiff origin/HEAD" <cr>
+
 nnoremap <leader>gdl :call DiffPreparePreviousVersions() <cr>
 nnoremap <leader>gdp :call DiffPreviousVersion() <cr>
 " Baixa as alterações da branch do servidor remoto
