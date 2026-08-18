@@ -1126,6 +1126,11 @@ function! OpenSketches()
   execute 'e ~/subscribe-ndvo/sketches/' . trim(system('git rev-parse --abbrev-ref HEAD'))
 endfunction
 
+function! OpenPlans()
+  execute '!mkdir -p ~/subscribe-ndvo/plans/' . trim(system('git rev-parse --abbrev-ref HEAD'))
+  execute 'e ~/subscribe-ndvo/plans/' . trim(system('git rev-parse --abbrev-ref HEAD')) . '/main.md'
+endfunction
+
 function! EnsureDirExists()
     let dir = expand('%:p:h')
     if !isdirectory(dir)
