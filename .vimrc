@@ -78,8 +78,14 @@ nnoremap <leader>cnode :tab term ++close bash -c "node"
 
 " Tagbar
 nnoremap <right> :TagbarToggle<cr>
-vnoremap <leader>x <esc>:call RunInSketchTerminal()<cr>
-nnoremap <leader>x :vert term<cr><c-w>N:file sketch-terminal<c-w>
+nnoremap <leader>ag <esc>:call RunInAgentTuiTerminal()<cr>
+vnoremap <leader>ag <esc>:call RunInAgentTuiTerminalSelection()<cr>
+vnoremap <leader>x <esc>:call RunInSketchTerminalSelection()<cr>
+nnoremap <leader>x <esc>:call RunInSketchTerminal()<cr>
+nnoremap <leader>qx <esc>:call RunQInSketchTerminal()<cr>
+nnoremap <leader>qi <esc>:call RunIInSketchTerminal()<cr>
+nnoremap <leader>cxapi <esc>:call RunInSketchAPITerminal()<cr>
+nnoremap <leader>cxr <esc>:call RunInSketchRailsTerminal()<cr>
 
 " Netrw {{{ ----
 "
