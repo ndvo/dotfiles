@@ -345,6 +345,7 @@ nnoremap <leader>RG :Rg -g '!tags'
 nnoremap <leader>rgjs :Rg -g '!tags' -g '*.{jsx,js,ts,tsx}' 
 nnoremap <leader>rgrb :Rg -g '!tags' -g '*.rb' 
 nnoremap <leader>rgpy :Rg -g '!tags' -g '*.py' 
+nnoremap <leader>rgd :Rg mutators -g $(git diff --name-only HEAD)
 
 " navega para o próximo item na change list
 nnoremap <leader>cn :cn<cr>
@@ -925,19 +926,47 @@ function CheckoutBranchDevelopment()
 endfunction
 
 function CheckoutBranchNew(name)
-  "execute 'mksession! '.CurrentSessionName()
+  execute 'mksession! '.CurrentSessionName()
   execute '!createbranch '.a:name
-  "execute 'source '.CurrentSessionName()
 endfunction
 
 function s:checkout_branch_session(item)
-  "execute 'mksession! '.CurrentSessionName()
+  " execute 'mksession! '.CurrentSessionName()
   call s:checkout_branch(a:item)
-  "execute 'source '.CurrentSessionName()
+  " execute 'source '.CurrentSessionName()
 endfunction
 
+function SaveBranchSession()
+  execute 'mksession! '.CurrentSessionName()
+endfunction
+
+function SaveCopilotChatSession()
+  execute 'CopilotChatSave '.GitBranch()
+endfunction
+
+function LoadCopilotChatSession()
+  execute 'CopilotChatLoad '.GitBranch()
+endfunction
+
+function LoadBranchSession()
+  if filereadable(CurrentSessionName())
+    execute 'source '.CurrentSessionName()
+  else
+    echo "No source file for current branth ".CurrentSessionName()
+  endif
+endfunction
+
+
 function s:checkout_branch(item)
-  execute 'Git! checkout '.substitute(a:item, '^ *', '', '')
+  try
+    let command = '!git checkout '.substitute(a:item, '^ *', '', '')
+    call histadd('cmd', command)
+    execute command
+  catch /.*/
+    echohl ErrorMsg
+    echom 'Failed to checkout branch: ' . a:item . ' with error ' .  v:expection
+    echohl None
+  endtry
 endfunction
 
 function SetTopLine(text)
