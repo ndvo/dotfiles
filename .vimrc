@@ -815,23 +815,23 @@ function OpenLocallyChangedFile()
 endfunction
 
 function OpenChangedFileByLine()
-  call OpenByLine("rg -n '.'  $(git diff --name-only origin/development)")
+  call OpenByLine("LC_ALL=C rg -F -n '.'  $(git diff --name-only origin/development)")
 endfunction
 
 function OpenRubyByLine()
-  call OpenByLine("rg -n -g 'saf-api/*.rb' -g 'saf-api/**/*rb' --color always . ")
+  call OpenByLine("LC_ALL=C rg -F -n -g 'saf-api/*.rb' -g 'saf-api/**/*rb' --color always . ")
 endfunction
 
 function OpenAnyFileByLine()
-  call OpenByLine("rg -n --color always . ")
+  call OpenByLine("LC_ALL=C rg -F -n --color always . ")
 endfunction
 
 function OpenJsByLine()
-  call OpenByLine("rg -n -g 'frontend/web/*.{js,jsx}' -g 'frontend/web/**/*.{js,jsx}' --color always . ")
+  call OpenByLine("LC_ALL=C rg -F -n -g 'frontend/web/*.{js,jsx}' -g 'frontend/web/**/*.{js,jsx}' --color always . ")
 endfunction
 
 function OpenOpsJsByLine()
-  call OpenByLine("rg -n -g 'frontend/ops/*.{js,jsx}' -g 'frontend/ops/**/*.{js,jsx}' --color always . ")
+  call OpenByLine("LC_ALL=C rg -F -n -g 'frontend/ops/*.{js,jsx}' -g 'frontend/ops/**/*.{js,jsx}' --color always . ")
 endfunction
 
 function OpenByLine(source)
