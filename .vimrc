@@ -870,19 +870,45 @@ function CheckoutBranch()
     \ })
 endfunction
 
-function CheckoutBranchHistory()
-  let l:branches = systemlist("git reflog | sed -ne 's/.*moving from \\([^ ]*\\).*/\\1/p' | uniq ")
-  
-  call fzf#run({
+function! CheckoutBranchHistory() abort
+  " Fail fast if not in a git repository
+  let l:is_git = system('git rev-parse --is-inside-work-tree')
+  if v:shell_error
+    echohl ErrorMsg | echo 'Not a git repository.' | echohl None
+    return
+  endif
+
+  " Build a deduplicated list of recently visited branches from reflog,
+  " excluding the current branch.
+  let l:current = trim(system('git rev-parse --abbrev-ref HEAD'))
+  let l:branches = systemlist(
+    \ "git reflog --quiet --no-color --format='%gs' "
+    \ . "| sed -nE 's/.*moving from ([^ ]+) to .*/\\1/p' "
+    \ . "| grep -v '^" . l:current . "$' "
+    \ . "| awk '!seen[$0]++'")
+
+  " Filter out any empty lines
+  call filter(l:branches, '!empty(v:val)')
+
+  if empty(l:branches)
+    echohl WarningMsg | echo 'No branch history found.' | echohl None
+    return
+  endif
+
+  " Wrap with fzf#wrap to respect global fzf preferences
+  call fzf#run(fzf#wrap('CheckoutBranchHistory', {
     \ 'source': l:branches,
-    \ 'sink': function('<SID>checkout_branch_session'),
+    \ 'sink':   function('s:checkout_branch_session'),
     \ 'window': {'width': 0.9, 'height': 0.8},
     \ 'options': [
-      \ '--prompt', 'Branch> ',
-      \ '--preview', 'echo {} | sed "s/^ *//;s/ *$//" | xargs git log -n 5 --oneline',
-      \ '--bind', 'ctrl-d:page-down,ctrl-u:page-up',
-    \ ],
-    \ })
+      \ '--no-sort',
+      \ '--prompt',  'Branch History> ',
+      \ '--header',  'CTRL-D/U: scroll page  \  ENTER: checkout',
+      \ '--preview', 'git log --oneline -n 10 --color=always {1}',
+      \ '--bind',    'ctrl-d:page-down,ctrl-u:page-up',
+      \ '--ansi',
+      \ ],
+    \ }))
 endfunction
 
 function CheckoutBranchDevelopment()
