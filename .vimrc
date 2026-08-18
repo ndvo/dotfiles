@@ -25,6 +25,7 @@
 """ leader c - comandos relacionados a copiar
 """ leader t - toggles
 """ leader l - comandos relacionados a limpar o vim
+""" leader x - comandos do os
 
 """ leader wz fecha preview
 set t_Co=256
@@ -88,7 +89,6 @@ nnoremap <leader>cxapi <esc>:call RunInSketchAPITerminal()<cr>
 nnoremap <leader>cxr <esc>:call RunInSketchRailsTerminal()<cr>
 
 " Netrw {{{ ----
-"
 nnoremap <leader>mkdir :!mkdir -p %:h<cr>
 
 augroup NetRW
@@ -101,6 +101,7 @@ augroup END
 let g:netrw_winsize = -40
 nnoremap <left> :call ToggleLex() <cr>
 nnoremap <down> :UndotreeToggle<cr>
+" ---- }}}
 
 " Git {{{ ----
 " mnemônicos:
@@ -118,6 +119,7 @@ nnoremap <down> :UndotreeToggle<cr>
 "" h -> gh GitHub Command Line
 "" /? -> branch
 " Mostra o estado do Git em uma nova aba
+
 nnoremap <leader>gs :tab Git<cr>
 " Mostra o estado do Git como uma divisão vertical
 nnoremap <leader>gv :vert Git<cr>
@@ -189,12 +191,14 @@ nnoremap <leader>ghs :call GhStatus() <cr>
 nnoremap <leader>ghv :call GhVertStatus() <cr>
 nnoremap <leader>ghd :call PRChanges() <cr>
 nnoremap <leader>ghw :!gh pr checkout <C-r><C-w>
+"nnoremap <leader>ghu :!1,$d|0r !gh pr view --json body -q '.body' <cr>
 " Cria um commit 'Work in Progress'
 nnoremap <leader>gwip : Git commit -m 'wip'
 " Prepara a criação de uma nova branch
 nnoremap <leader>gbn :!createbranch 
 " Deleta/remove/apaga a branch sobre a qual o cursor está (a ser usado do <leader>g/
 nnoremap <leader>gbd :Git branch -D <C-r><C-l><cr>
+"vnoremap <leader>gbd :Git branch -D <C-r><C-l><cr>
 vnoremap <leader>gbd :<C-U>call RemoveBranches() <cr>
 " ---- }}}
 
@@ -252,24 +256,25 @@ let g:ale_completion_autoimport = 1
 set omnifunc=ale#completion#OmniFunc
 "set omnifunc=syntaxcomplete#Complete
 " prefiro rodar o linter sob comando
-let g:ale_lint_on_text_changed = 'never'
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 0
-let g:ale_linters = {
-      \  'html': ['eslint', 'tsserver'],
-      \  'typescript': ['eslint', 'tsserver'],
-      \  'javascript': [ 'eslint', 'standard', 'tsserver' ] ,
-      \  'python' : [ 'autoimport', 'black', 'flakehell', 'mypy', 'prospector', 'pylama', 'pylsp', 'pyre', 'pyright', 'yapf'],
-      \}
-let g:ale_fixers = {
-      \  'typescript': ['eslint', 'tslint', 'typecheck', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
-      \  'javascript': [ 'eslint', 'standard', 'prettier' ], 
-      \  'python': ['black', 'reorder_python_imports', 'yapf'],
-      \  'c': ['gcc'],
-      \  'c++': ['g++'],
-      \  'ruby': ['rubocop']
-      \}
+" let g:ale_lint_on_text_changed = 'never'
+" let g:ale_lint_on_insert_leave = 0
+" let g:ale_lint_on_enter = 0
+" let g:ale_lint_on_save = 0
+"
+"let g:ale_linters = {
+"      \  'html': ['eslint', 'tsserver'],
+"      \  'typescript': ['eslint', 'tsserver'],
+"      \  'javascript': [ 'eslint', 'standard', 'tsserver' ] ,
+"      \  'python' : [ 'autoimport', 'black', 'flakehell', 'mypy', 'prospector', 'pylama', 'pylsp', 'pyre', 'pyright', 'yapf'],
+"      \}
+"let g:ale_fixers = {
+"      \  'typescript': ['eslint', 'tslint', 'typecheck', 'prettier', 'remove_trailing_lines', 'trim_whitespace'],
+"      \  'javascript': [ 'eslint', 'standard', 'prettier' ], 
+"      \  'python': ['black', 'reorder_python_imports', 'yapf'],
+"      \  'c': ['gcc'],
+"      \  'c++': ['g++'],
+"      \  'ruby': ['rubocop']
+"      \}
 let g:ale_linter_aliases = {
       \ 'jsx': ['css', 'javascript'],
       \ 'mdx': ['css', 'javascript'],
@@ -292,6 +297,8 @@ set formatoptions-=t
 
 set wildmode=longest,list,full   "Complete longest string, then list alternatives
 set wildmenu
+set maxmempattern=5000
+set maxmemtot=2048000
 
 " Desfazer persistente
 set undofile
@@ -1044,6 +1051,8 @@ endfunction
 
 command! -nargs=0 InteractiveFZFCommand call <SID>InteractiveFZFCommand()
 
+" call setqflist([], 'r')
+
 function! DiffPreparePreviousVersions()
   echo "Preparing list of git changes to this file."
   setqflist([])
@@ -1122,6 +1131,12 @@ function! LoadLocalVimrc()
     endif
   endif
 endfunction
+
+set spelloptions=camel
+set smartcase
+
+let g:dev = 'development'
+let g:netrw_browse_split = 0
 
 hi link netrwMarkFile Visual
 
