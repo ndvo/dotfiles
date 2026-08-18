@@ -1,3 +1,8 @@
+""" -- Comandos a aprender --
+""" '. salta para última edição
+""" '[ salta para o início da última edição
+""" '] salta para o final da última edição
+""" gv reseleciona
 """ -- Principios ---
 """ Consistência
 """ - manter e expandir a composibilidade
