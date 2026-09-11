@@ -1,0 +1,142 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use File::Path qw(make_path);
+
+# 1. Execute helper functions
+my $branch    = `branch`;
+my $pr_number = `prnumber`;
+
+chomp($branch);
+chomp($pr_number);
+
+die "Error: Could not determine branch name.\n" unless $branch;
+die "Error: Could not determine PR number.\n"  unless $pr_number;
+
+# 2. Define directory paths
+my $reviews_folder = "/home/nelson/subscribe-ndvo/reviews/$branch";
+my $files_md       = "$reviews_folder/files.md";
+
+make_path($reviews_folder) unless -d $reviews_folder;
+
+# 3. Get the fresh list of files from GitHub CLI
+my @fresh_files = `gh pr diff --name-only "$pr_number"`;
+chomp(@fresh_files);
+
+# 4. If the file doesn't exist, create it with a "# Review" section and exit
+if (! -e $files_md) {
+    open(my $fh, '>', $files_md) or die "Could not open '$files_md' for writing: $!";
+    print $fh "APPROVE\n\n"; # Convenient default status placeholder
+    print $fh "# Review\n";
+    for my $file (sort @fresh_files) {
+        next if $file =~ /^\s*$/;
+        print $fh "- [ ] $file\n";
+    }
+    close($fh);
+    exit 0;
+}
+
+# 5. Process existing file structurally
+open(my $fh, '<', $files_md) or die "Could not open '$files_md' for reading: $!";
+
+my @preceding_sections;  # Holds text, keywords, and custom headers ABOVE the checklist
+my %checklist_items;     # Holds 'filename' => { full_text => "...", status => "..." }
+my @other_sections;      # Holds text, headers (like Untouched files) AFTER the checklist
+my $current_file = undef;
+my $in_untouched_section = 0;
+my $has_seen_checklist = 0;
+my $has_review_header = 0;
+
+while (my $line = <$fh>) {
+    # Track if a # Review header already exists in the file
+    if ($line =~ /^#+\s*Review/i) {
+        $has_review_header = 1;
+        # If we haven't hit active checklist items yet, keep it parked in preceding sections
+        if (!$has_seen_checklist) {
+            push @preceding_sections, $line;
+            next;
+        }
+    }
+
+    # Check if we hit the untouched section header
+    if ($line =~ /^#+\s*Untouched files/) {
+        $in_untouched_section = 1;
+        $current_file = undef;
+        push @other_sections, $line;
+        next;
+    }
+    
+    # Match a first-level checklist item: e.g., "- [ ] path/to/file.js"
+    if ($line =~ /^-\s*\[([ x])\]\s*(.+)$/) {
+        my $status = $1;
+        my $path   = $2;
+        $path =~ s/\s+$//; # Clean trailing spaces
+        
+        $has_seen_checklist = 1;
+
+        if ($in_untouched_section) {
+            $current_file = undef;
+            push @other_sections, $line;
+        } else {
+            $current_file = $path;
+            $checklist_items{$current_file} = {
+                status    => $status,
+                full_text => $line,
+            };
+        }
+    }
+    # Match an attached subitem or note (lines starting with space/tab, list marker, or empty lines)
+    elsif (defined $current_file && ($line =~ /^\s/ || $line =~ /^-\s[^\[]/ || $line =~ /^\s*$/)) {
+        $checklist_items{$current_file}{full_text} .= $line;
+    }
+    # Handling text/headers that fall outside the active items
+    else {
+        $current_file = undef;
+        if ($in_untouched_section) {
+            push @other_sections, $line;
+        } elsif ($has_seen_checklist) {
+            # Any non-indented text appearing AFTER the checklist block goes to the bottom
+            push @other_sections, $line;
+        } else {
+            # Text appearing BEFORE any checklist item is safely cataloged here
+            push @preceding_sections, $line;
+        }
+    }
+}
+close($fh);
+
+# 6. Merge incoming files into our tracked structure
+for my $file (@fresh_files) {
+    next if $file =~ /^\s*$/;
+    
+    if (!exists $checklist_items{$file}) {
+        $checklist_items{$file} = {
+            status    => ' ',
+            full_text => "- [ ] $file\n",
+        };
+    }
+}
+
+# 7. Rebuild the file safely swapping sections
+open(my $out_fh, '>', $files_md) or die "Could not open '$files_md' for writing: $!";
+
+# Write everything that came before the checklist (Status text, custom introduction sections, etc.)
+print $out_fh join('', @preceding_sections);
+
+# If the file didn't explicitly have a "# Review" title block header before, slide one in now
+if (!$has_review_header) {
+    # Ensure there is a clean line spacing split if the preceding block doesn't end with a newline
+    print $out_fh "\n" if @preceding_sections && $preceding_sections[-1] !~ /\n$/;
+    print $out_fh "# Review\n";
+}
+
+# Write the sorted primary PR diff files
+for my $file (sort keys %checklist_items) {
+    print $out_fh $checklist_items{$file}{full_text};
+}
+
+# Write back any independent footers, trailing notes, and the untouched files block
+print $out_fh join('', @other_sections);
+
+close($out_fh);
