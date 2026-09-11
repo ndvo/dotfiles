@@ -1,0 +1,237 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+CONFLICT_BRANCH=""
+CONFLICT_WORKTREE=""
+
+usage() {
+  cat <<'EOF'
+Usage: branch.sh [--help] [<branch>|<pr-number>]
+
+Show the current branch when no argument is provided.
+Checkout a pull request with gh when a number is provided.
+Checkout a branch with git when a non-number is provided.
+
+If the requested branch is already checked out in a different worktree,
+you will be asked whether to claim it for the current worktree.
+When claimed, the other worktree is switched to a branch named after its
+folder (created if needed), then this worktree checks out the requested target.
+EOF
+}
+
+is_yes() {
+  local response="$1"
+  [[ "$response" =~ ^([Yy]|[Yy][Ee][Ss])$ ]]
+}
+
+canonical_path() {
+  (
+    cd "$1" >/dev/null 2>&1
+    pwd -P
+  )
+}
+
+find_worktree_for_branch() {
+  local target_branch="$1"
+  local current_worktree="$2"
+  local line=""
+  local block_worktree=""
+  local block_branch=""
+
+  while IFS= read -r line; do
+    if [[ -z "$line" ]]; then
+      if [[ "$block_branch" == "refs/heads/$target_branch" ]]; then
+        local normalized
+        normalized="$(canonical_path "$block_worktree")"
+        if [[ "$normalized" != "$current_worktree" ]]; then
+          printf '%s\n' "$normalized"
+          return 0
+        fi
+      fi
+      block_worktree=""
+      block_branch=""
+      continue
+    fi
+
+    if [[ "$line" == worktree\ * ]]; then
+      block_worktree="${line#worktree }"
+    elif [[ "$line" == branch\ * ]]; then
+      block_branch="${line#branch }"
+    fi
+  done < <(git worktree list --porcelain; printf '\n')
+
+  return 1
+}
+
+parse_checkout_conflict() {
+  local output="$1"
+  local regex_checked_out="fatal: '([^']+)' is already checked out at '([^']+)'"
+  local regex_used_by_worktree="fatal: '([^']+)' is already used by worktree at '([^']+)'"
+  local regex_cannot_force="fatal: cannot force update the branch '([^']+)' checked out at '([^']+)'"
+
+  CONFLICT_BRANCH=""
+  CONFLICT_WORKTREE=""
+
+  if [[ "$output" =~ $regex_checked_out ]]; then
+    CONFLICT_BRANCH="${BASH_REMATCH[1]}"
+    CONFLICT_WORKTREE="${BASH_REMATCH[2]}"
+    return 0
+  fi
+
+  if [[ "$output" =~ $regex_used_by_worktree ]]; then
+    CONFLICT_BRANCH="${BASH_REMATCH[1]}"
+    CONFLICT_WORKTREE="${BASH_REMATCH[2]}"
+    return 0
+  fi
+
+  if [[ "$output" =~ $regex_cannot_force ]]; then
+    CONFLICT_BRANCH="${BASH_REMATCH[1]}"
+    CONFLICT_WORKTREE="${BASH_REMATCH[2]}"
+    return 0
+  fi
+
+  return 1
+}
+
+claim_branch_from_worktree() {
+  local target_branch="$1"
+  local other_worktree="$2"
+  local current_worktree="$3"
+
+  local normalized_other_worktree
+  if ! normalized_other_worktree="$(canonical_path "$other_worktree")"; then
+    printf "Error: could not access worktree at %s.\n" "$other_worktree" >&2
+    return 1
+  fi
+
+  if [[ "$normalized_other_worktree" == "$current_worktree" ]]; then
+    printf 'Error: branch appears to already belong to this worktree.\n' >&2
+    return 1
+  fi
+
+  printf "'%s' is already checked out in %s\n" "$target_branch" "$normalized_other_worktree"
+  printf 'Claim this branch for the current worktree? [y/N] '
+  read -r reply
+
+  if ! is_yes "$reply"; then
+    printf 'Canceled.\n'
+    return 2
+  fi
+
+  local replacement_branch
+  replacement_branch="$(basename "$normalized_other_worktree")"
+
+  if ! git check-ref-format --branch "$replacement_branch" >/dev/null 2>&1; then
+    printf "Error: '%s' is not a valid branch name (derived from worktree folder).\n" "$replacement_branch" >&2
+    return 1
+  fi
+
+  if [[ "$replacement_branch" == "$target_branch" ]]; then
+    printf "Error: cannot claim '%s' because other worktree folder name maps to the same branch.\n" "$target_branch" >&2
+    return 1
+  fi
+
+  if git show-ref --verify --quiet "refs/heads/$replacement_branch"; then
+    git -C "$normalized_other_worktree" checkout "$replacement_branch" || return 1
+  else
+    git -C "$normalized_other_worktree" checkout -b "$replacement_branch" || return 1
+  fi
+
+  return 0
+}
+
+if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
+  usage
+  exit 0
+fi
+
+if ! git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  printf 'Error: not inside a git worktree.\n' >&2
+  exit 1
+fi
+
+if [[ $# -eq 0 ]]; then
+  git branch --show-current
+  exit 0
+fi
+
+if [[ $# -gt 1 ]]; then
+  usage >&2
+  exit 1
+fi
+
+requested="$1"
+current_worktree="$(canonical_path "$(git rev-parse --show-toplevel)")"
+
+if [[ "$requested" =~ ^#?[0-9]+$ ]]; then
+  pr_number="${requested#\#}"
+
+  if ! command -v gh >/dev/null 2>&1; then
+    printf 'Error: gh is required for PR checkout.\n' >&2
+    exit 1
+  fi
+
+  checkout_output=""
+  if checkout_output="$(gh pr checkout "$pr_number" 2>&1)"; then
+    if [[ -n "$checkout_output" ]]; then
+      printf '%s\n' "$checkout_output"
+    fi
+    exit 0
+  fi
+
+  if parse_checkout_conflict "$checkout_output"; then
+    if claim_branch_from_worktree "$CONFLICT_BRANCH" "$CONFLICT_WORKTREE" "$current_worktree"; then
+      gh pr checkout "$pr_number"
+      exit 0
+    else
+      claim_status="$?"
+      if [[ "$claim_status" -eq 2 ]]; then
+        exit 0
+      fi
+      exit 1
+    fi
+  fi
+
+  printf '%s\n' "$checkout_output" >&2
+  exit 1
+fi
+
+target_branch="$requested"
+checkout_output=""
+
+other_worktree=""
+if other_worktree="$(find_worktree_for_branch "$target_branch" "$current_worktree")"; then
+  if claim_branch_from_worktree "$target_branch" "$other_worktree" "$current_worktree"; then
+    :
+  else
+    claim_status="$?"
+    if [[ "$claim_status" -eq 2 ]]; then
+      exit 0
+    fi
+    exit 1
+  fi
+fi
+
+if checkout_output="$(git checkout "$target_branch" 2>&1)"; then
+  if [[ -n "$checkout_output" ]]; then
+    printf '%s\n' "$checkout_output"
+  fi
+  exit 0
+fi
+
+if parse_checkout_conflict "$checkout_output"; then
+  if claim_branch_from_worktree "$CONFLICT_BRANCH" "$CONFLICT_WORKTREE" "$current_worktree"; then
+    git checkout "$target_branch"
+    exit 0
+  else
+    claim_status="$?"
+    if [[ "$claim_status" -eq 2 ]]; then
+      exit 0
+    fi
+    exit 1
+  fi
+fi
+
+printf '%s\n' "$checkout_output" >&2
+exit 1
