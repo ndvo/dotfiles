@@ -1,0 +1,201 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use JSON::PP;
+
+# Check for dry-run argument flag
+my $dry_run = 0;
+if (@ARGV && $ARGV[0] eq '--dry-run') {
+    $dry_run = 1;
+}
+
+# 1. Gather workspace targets
+my $branch    = `branch`;
+my $pr_number = `prnumber`;
+
+chomp($branch);
+chomp($pr_number);
+
+die "Error: Could not determine branch name.\n" unless $branch;
+die "Error: Could not determine PR number.\n"  unless $pr_number;
+
+my $files_md = "/home/nelson/subscribe-ndvo/reviews/$branch/files.md";
+die "Error: Review tracking file not found at $files_md\n" unless -e $files_md;
+
+# 2. Extract repository owner and name automatically
+my $repo_info = `gh repo view --json owner,name -q '.owner.login + "/" + .name' 2>/dev/null`;
+chomp($repo_info);
+if (!$repo_info) {
+    $repo_info = "owner/repo"; 
+    die "Error: Could not resolve git repository information via gh.\n" unless $dry_run;
+}
+my ($repo_owner, $repo_name) = split('/', $repo_info);
+
+# 3. Read the review tracking layout file
+open(my $fh, '<', $files_md) or die "Cannot open $files_md: $!";
+my @lines = <$fh>;
+close($fh);
+
+my $status_raw = "";
+my @summary_lines;
+my @comments_payload;
+
+my $current_file = undef;
+my $current_line_num = undef;
+my $current_start_line = undef;
+my @current_note_lines;
+
+my $in_review_section = 0;
+
+# Helper to flush an inline comment block when parsed
+sub flush_inline_comment {
+    if (defined $current_file && defined $current_line_num && @current_note_lines) {
+        my $note_body = join('', @current_note_lines);
+        $note_body =~ s/^\s+|\s+$//g; 
+
+        if ($note_body ne "") {
+            my $comment_item = {
+                path => $current_file,
+                body => $note_body,
+                line => int($current_line_num),
+                side => "RIGHT" 
+            };
+            if (defined $current_start_line) {
+                $comment_item->{start_line} = int($current_start_line);
+                $comment_item->{start_side} = "RIGHT";
+            }
+            push @comments_payload, $comment_item;
+        }
+    }
+    @current_note_lines = ();
+    $current_line_num = undef;
+    $current_start_line = undef;
+}
+
+# 4. Parse content structurally
+for my $line (@lines) {
+    # Isolate first non-empty line as status ONLY. It never goes into summary text arrays.
+    if (!$status_raw && $line =~ /\S/) {
+        $status_raw = $line;
+        chomp($status_raw);
+        $status_raw =~ s/^\s+|\s+$//g;
+        next; 
+    }
+
+    # Watch for the boundary indicating the start of file line checklists
+    if ($line =~ /^#+\s*Review/i) {
+        $in_review_section = 1;
+        flush_inline_comment();
+        next; 
+    }
+
+    if (!$in_review_section) {
+        # Keep any text/headers preceding "# Review" safe inside the summary text block
+        push @summary_lines, $line;
+    } else {
+        # Inside the file review block: Check for a parent file path
+        if ($line =~ /^-\s*\[[ x]\]\s*(.+)$/) {
+            flush_inline_comment();
+            my $path = $1; # Fixed group capture alignment
+            $path =~ s/\s+$//;
+            $current_file = $path;
+        }
+        # Check for individual line definitions (e.g., "- [ ] Line 45: Comment")
+        elsif ($line =~ /^\s+-\s*\[[ x]\]\s*Lines?\s+(\d+)(?:-(\d+))?:\s*(.*)$/i) {
+            flush_inline_comment();
+            my $start = $1;
+            my $end = $2;
+            my $immediate_note = $3;
+
+            if (defined $end) {
+                $current_start_line = $start;
+                $current_line_num = $end; 
+            } else {
+                $current_line_num = $start;
+                $current_start_line = undef;
+            }
+            push @current_note_lines, "$immediate_note\n" if $immediate_note =~ /\S/;
+        }
+        # Multi-line indented comment strings belonging to the line index block above
+        elsif (defined $current_line_num && ($line =~ /^\s{4,}/ || $line =~ /^\s*$/)) {
+            push @current_note_lines, $line;
+        }
+        # Break tracking loops if hitting another section boundary like Untouched files
+        elsif ($line =~ /^#+\s*/) {
+            flush_inline_comment();
+            $current_file = undef;
+        }
+    }
+}
+flush_inline_comment(); 
+
+my $summary_text = join('', @summary_lines);
+$summary_text =~ s/^\s+|\s+$//g;
+
+# 5. Format review action triggers natively
+my $event_type = "COMMENT";
+if ($status_raw =~ /^(APPROVE|APPROVED|APPROVAL)$/i) {
+    $event_type = "APPROVED";
+} elsif ($status_raw =~ /^(REQUEST_CHANGES|REQUIRE_CHANGES|CHANGES_REQUESTED|REJECT)$/i) {
+    $event_type = "CHANGES_REQUESTED";
+} elsif ($status_raw =~ /^(COMMENT)$/i) {
+    $event_type = "COMMENT";
+} else {
+    $event_type = "COMMENT";
+    $summary_text = "$status_raw\n\n$summary_text" if $status_raw =~ /\S/;
+    $summary_text =~ s/^\s+|\s+$//g;
+}
+
+# 6. Build structural API payload objects
+my $payload = {
+    body     => $summary_text,
+    event    => $event_type,
+    comments => \@comments_payload
+};
+
+# 7. Render Dry Run Preview OR dispatch live API transaction
+if ($dry_run) {
+    print "====================================================\n";
+    print "               DRY RUN REVIEW PREVIEW               \n";
+    print "====================================================\n";
+    print "PR TARGET : PR #$pr_number on branch '$branch'\n";
+    print "ACTION    : $event_type\n";
+    print "----------------------------------------------------\n";
+    print "GENERAL SUMMARY BODY:\n";
+    print ($summary_text ne "" ? "$summary_text\n" : "(Empty Summary)\n");
+    print "----------------------------------------------------\n";
+    print "INLINE LINE COMMENTS (" . scalar(@comments_payload) . "):\n";
+    
+    my $count = 1;
+    for my $comment (@comments_payload) {
+        my $lines_string = exists $comment->{start_line} 
+            ? "Lines " . $comment->{start_line} . "-" . $comment->{line}
+            : "Line " . $comment->{line};
+            
+        print "  $count. [$comment->{path}] ($lines_string):\n";
+        my @indented = split(/\n/, $comment->{body});
+        print "       > $_\n" for @indented;
+        print "\n";
+        $count++;
+    }
+    print "====================================================\n";
+    print "Dry run execution complete. No data sent to GitHub.\n";
+    exit 0;
+}
+
+# Live execution path
+my $json_payload = encode_json($payload);
+my $api_url = "repos/$repo_owner/$repo_name/pulls/$pr_number/reviews";
+
+open(my $api_fh, '|-', 'gh', 'api', $api_url, '--input', '-')
+    or die "Failed to execute gh api: $!";
+
+print $api_fh $json_payload;
+close($api_fh);
+
+if ($? == 0) {
+    print "Successfully submitted structural PR review changes ($event_type) with " . scalar(@comments_payload) . " inline comments.\n";
+} else {
+    die "Error: GitHub API compilation submission failed.\n";
+}
