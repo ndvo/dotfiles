@@ -1,0 +1,36 @@
+#!/bin/bash
+
+get_pr_json_cache() {
+  # 1. Ensure we are inside a Git repository
+  local git_dir=$(git rev-parse --git-dir 2>/dev/null)
+  if [ -z "$git_dir" ]; then
+    echo "Not a git repository." >&2; return 1
+  fi
+
+  local branch=$(git branch --show-current)
+  local cache_file="${git_dir}/branch-pr-map.json"
+
+  # 2. Create an empty JSON object if the file doesn't exist
+  if [ ! -f "$cache_file" ]; then
+    echo "{}" > "$cache_file"
+  fi
+
+  # 3. Try to read the PR number from the JSON file using jq
+  local pr_num=$(jq -r ".\"$branch\" // empty" "$cache_file")
+
+  # 4. If not cached, fetch via network and update the file
+  if [ -z "$pr_num" ]; then
+    pr_num=$(gh pr view --json number --jq '.number' 2>/dev/null)
+    if [ -n "$pr_num" ]; then
+      # Use jq to update the JSON file safely
+      local tmp=$(mktemp)
+      jq ".\"$branch\" = $pr_num" "$cache_file" > "$tmp" && mv "$tmp" "$cache_file"
+    else
+      echo "No PR found for this branch." >&2; return 1
+    fi
+  fi
+
+  echo "$pr_num"
+}
+
+get_pr_json_cache
