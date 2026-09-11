@@ -1,0 +1,80 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+my ($files_md, $target_file, $subitem_text, $optional_comment) = @ARGV;
+
+if (!$files_md || !$target_file || !$subitem_text) {
+    die "Usage: $0 <path_to_files.md> <target_file_path> <subitem_text> [optional_comment]\n";
+}
+
+# Append optional comment if provided from another tool
+if ($optional_comment && $optional_comment !~ /^\s*$/) {
+    $subitem_text .= ": $optional_comment";
+}
+
+if (! -e $files_md) {
+    die "Error: Review file not found at $files_md\n";
+}
+
+open(my $fh, '<', $files_md) or die "Cannot open $files_md: $!";
+my @lines = <$fh>;
+close($fh);
+
+my $content = join('', @lines);
+my $quoted_target = quotemeta($target_file);
+my $inserted_at_line = 0;
+
+# Scenario A: The file is already tracked in the main checklist block
+if ($content =~ /^-\s*\[[ x]\]\s*$quoted_target\s*$/m) {
+    for (my $i = 0; $i < @lines; $i++) {
+        push @lines, "" if $i == $#lines; 
+        if ($lines[$i] =~ /^-\s*\[[ x]\]\s*$quoted_target\s*$/) {
+            my $j = $i + 1;
+            while ($j < @lines && ($lines[$j] =~ /^\s/ || $lines[$j] =~ /^-\s[^\[]/ || $lines[$j] =~ /^\s*$/)) {
+                $j++;
+            }
+            splice(@lines, $j, 0, "$subitem_text\n");
+            $inserted_at_line = $j + 1; # 1-based indexing for Vim
+            last;
+        }
+    }
+    
+    if ($inserted_at_line) {
+        open(my $out, '>', $files_md) or die "Cannot write $files_md: $!";
+        print $out join('', @lines);
+        close($out);
+        print "$inserted_at_line\n"; # Output only the line number for Vim to consume
+        exit 0;
+    }
+}
+
+# Scenario B: File is NOT in the main checklist -> Place under "Untouched files" section
+my $untouched_header = "## Untouched files";
+
+if ($content !~ /^#+\s*Untouched files/m) {
+    $content .= "\n\n$untouched_header\n";
+}
+
+if ($content !~ /^-\s*\[[ x]\]\s*$quoted_target\s*$/m) {
+    $content =~ s/(^#+\s*Untouched files\s*\n)/$1- [ ] $target_file\n/m;
+}
+
+@lines = split(/(?<=\n)/, $content);
+for (my $i = 0; $i < @lines; $i++) {
+    if ($lines[$i] =~ /^-\s*\[[ x]\]\s*$quoted_target\s*$/) {
+        my $j = $i + 1;
+        while ($j < @lines && ($lines[$j] =~ /^\s/ || $lines[$j] =~ /^-\s[^\[]/ || $lines[$j] =~ /^\s*$/)) {
+            $j++;
+        }
+        splice(@lines, $j, 0, "$subitem_text\n");
+        $inserted_at_line = $j + 1;
+        last;
+    }
+}
+
+open(my $out, '>', $files_md) or die "Cannot write $files_md: $!";
+print $out join('', @lines);
+close($out);
+print "$inserted_at_line\n";
